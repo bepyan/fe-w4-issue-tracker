@@ -1,9 +1,12 @@
-import { Button, Logo, TextButton } from '@components';
+import * as icons from '@assets/svgs/icons';
+import { Button, Logo, TextButton, Icon, IconName } from '@components';
 import { globalStyles, styled } from '@styles';
 import React from 'react';
 
 const App = () => {
   globalStyles();
+
+  const iconNameList = Object.keys(icons) as IconName[];
 
   return (
     <Warpper>
@@ -49,6 +52,12 @@ const App = () => {
           버튼
         </TextButton>
       </div>
+
+      <IconContainer>
+        {iconNameList.map((name, index) => (
+          <Icon key={index} name={name} />
+        ))}
+      </IconContainer>
     </Warpper>
   );
 };
@@ -60,10 +69,16 @@ const Warpper = styled('div', {
   flexDirection: 'column',
   maxWidth: 720,
   margin: '0px auto',
-  '& > div': {
+  '& > *': {
     marginTop: '3rem',
   },
   '& > div > * + *': {
     marginTop: '0.25rem',
   },
+});
+
+const IconContainer = styled('section', {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(5, 1fr)',
+  rowGap: 48,
 });
