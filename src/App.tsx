@@ -1,4 +1,4 @@
-import { Button, TextButton } from '@components';
+import { Button, Logo, TextButton } from '@components';
 import { globalStyles, styled } from '@styles';
 import React from 'react';
 
@@ -7,6 +7,11 @@ const App = () => {
 
   return (
     <Warpper>
+      <div>
+        <Logo />
+        <Logo size="medium" />
+      </div>
+
       <div>
         <Button>standard 버튼</Button>
         <Button kind="secondary">secondary 버튼</Button>
@@ -19,7 +24,7 @@ const App = () => {
           secondary 버튼
         </Button>
         <Button size="medium" disabled={true}>
-          disabled 버튼
+          medium 버튼
         </Button>
       </div>
 
@@ -29,7 +34,7 @@ const App = () => {
           secondary 버튼
         </Button>
         <Button size="small" disabled={true}>
-          disabled 버튼
+          small 버튼
         </Button>
       </div>
 
@@ -55,7 +60,7 @@ const Warpper = styled('div', {
   flexDirection: 'column',
   maxWidth: 720,
   margin: '0px auto',
-  '& > div + div': {
+  '& > div': {
     marginTop: '3rem',
   },
   '& > div > * + *': {
