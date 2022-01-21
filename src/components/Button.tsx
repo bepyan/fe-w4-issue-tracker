@@ -46,7 +46,7 @@ export const Button = styled('button', {
           iconColor: '$primary500',
         },
         '&:focus': {
-          borderColor: '$primary300',
+          color: '$primary300',
           border: '4px solid $primary100',
         },
         '&:disabled': {

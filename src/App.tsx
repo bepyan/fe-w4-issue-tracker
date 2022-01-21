@@ -1,5 +1,5 @@
 import * as icons from '@assets/svgs/icons';
-import { Button, Logo, TextButton, Icon, IconName } from '@components';
+import { Button, Logo, TextButton, Icon, IconName, Label, IssueLabel } from '@components';
 import { globalStyles, styled } from '@styles';
 import React from 'react';
 
@@ -69,6 +69,17 @@ const App = () => {
           <Icon key={index} name={name} />
         ))}
       </IconContainer>
+
+      <RowContainer>
+        <Label>레이블 이름</Label>
+        <Label kind="dark">레이블 이름</Label>
+        <Label kind="line">작성자</Label>
+      </RowContainer>
+
+      <RowContainer>
+        <IssueLabel isOpen />
+        <IssueLabel isOpen={false} />
+      </RowContainer>
     </Warpper>
   );
 };
@@ -80,11 +91,18 @@ const Warpper = styled('div', {
   flexDirection: 'column',
   maxWidth: 720,
   margin: '0px auto',
+  paddingBottom: '20%',
   '& > *': {
     marginTop: '3rem',
   },
   '& > div > * + *': {
     marginTop: '0.25rem',
+  },
+});
+
+const RowContainer = styled('section', {
+  '& > * + *': {
+    marginLeft: '.5rem',
   },
 });
 
