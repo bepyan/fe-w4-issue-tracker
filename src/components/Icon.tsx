@@ -3,11 +3,8 @@ import * as icons from '@assets/svgs/icons';
 
 export type IconName = keyof typeof icons;
 
-export interface IconProps {
+export interface IconProps extends React.SVGProps<SVGElement> {
   name: IconName;
-  color?: string;
-  stroke?: string;
-  size?: string | number;
   className?: string;
 }
 

@@ -1,3 +1,4 @@
+import type * as Stitches from '@stitches/react';
 import { createStitches } from '@stitches/react';
 
 export const { styled, getCssText } = createStitches({
@@ -42,5 +43,14 @@ export const { styled, getCssText } = createStitches({
       error300: '#FF3B30',
       error500: '#C60B00',
     },
+  },
+  utils: {
+    iconColor: (color: Stitches.PropertyValue<'color'>) => ({
+      svg: {
+        path: {
+          stroke: color,
+        },
+      },
+    }),
   },
 });

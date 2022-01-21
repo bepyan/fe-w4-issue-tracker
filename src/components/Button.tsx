@@ -5,10 +5,13 @@ export const Button = styled('button', {
   justifyContent: 'center',
   alignItems: 'center',
   fontWeight: '$bold',
-  fontSize: 18,
+  fontSize: '18px',
   border: 'none',
-  borderRadius: 20,
+  borderRadius: '20px',
   cursor: 'pointer',
+  svg: {
+    marginRight: '4px',
+  },
   transition: 'all 200ms ease-in-out',
   defaultVariants: {
     kind: 'standard',
@@ -19,6 +22,7 @@ export const Button = styled('button', {
       standard: {
         color: '$off-white',
         backgroundColor: '$primary300',
+        iconColor: '$off-white',
         '&:hover': {
           backgroundColor: '$primary500',
         },
@@ -35,9 +39,11 @@ export const Button = styled('button', {
         color: '$primary300',
         backgroundColor: '$off-white',
         border: '2px solid $primary300',
+        iconColor: '$primary300',
         '&:hover': {
           color: '$primary500',
           borderColor: '$primary500',
+          iconColor: '$primary500',
         },
         '&:focus': {
           borderColor: '$primary300',

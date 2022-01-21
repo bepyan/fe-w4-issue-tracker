@@ -32,24 +32,35 @@ const App = () => {
       </div>
 
       <div>
-        <Button size="small">standard 버튼</Button>
+        <Button size="small">
+          <Icon name="plus" /> BUTTON
+        </Button>
         <Button size="small" kind="secondary">
-          secondary 버튼
+          <Icon name="plus" /> BUTTON
         </Button>
         <Button size="small" disabled={true}>
-          small 버튼
+          <Icon name="plus" /> BUTTON
+        </Button>
+        <Button size="small">
+          <Icon name="plus" /> BUTTON
         </Button>
       </div>
 
       <div>
-        <TextButton>버튼</TextButton>
-        <TextButton disabled={true}>버튼</TextButton>
+        <TextButton>
+          <Icon name="plus" /> 버튼
+        </TextButton>
+        <TextButton disabled={true}>
+          <Icon name="plus" /> 버튼
+        </TextButton>
       </div>
 
       <div>
-        <TextButton size="small">버튼</TextButton>
+        <TextButton size="small">
+          <Icon name="plus" /> 버튼
+        </TextButton>
         <TextButton size="small" disabled={true}>
-          버튼
+          <Icon name="plus" /> 버튼
         </TextButton>
       </div>
 

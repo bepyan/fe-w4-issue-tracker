@@ -32,7 +32,7 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     modules: [path.resolve(__dirname, './src'), './node_modules'],
     alias: {
       '@assets': path.resolve(__dirname, './src/assets'),

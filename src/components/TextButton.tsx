@@ -6,22 +6,28 @@ export const TextButton = styled('button', {
   alignItems: 'center',
   fontWeight: '$bold',
   border: 'none',
-  borderRadius: 20,
+  borderRadius: '20px',
   cursor: 'pointer',
-  backgroundColor: 'transparent',
-  transition: 'all 200ms ease-in-out',
-
   color: '$label',
+  backgroundColor: 'transparent',
+  svg: {
+    marginRight: '4px',
+  },
+  iconColor: '$label',
+  transition: 'all 200ms ease-in-out',
   '&:active': {
     color: '$title-active',
+    iconColor: '$title-active',
   },
   '&:hover': {
     color: '$body',
+    iconColor: '$body',
   },
   '&:disabled': {
     cursor: 'not-allowed',
-    color: '$body',
     opacity: 0.5,
+    color: '$body',
+    iconColor: '$body',
   },
   defaultVariants: {
     size: 'medium',
@@ -32,13 +38,11 @@ export const TextButton = styled('button', {
         width: 87,
         height: 32,
         fontSize: '$small',
-        padding: '0px 24px',
       },
       small: {
         width: 70,
         height: 32,
         fontSize: '$x-small',
-        padding: '0px 16px',
       },
     },
   },
