@@ -12,6 +12,7 @@ import {
   Dropdown,
   DropdownItem,
   DropdownCheckbox,
+  FilterBar,
 } from '@components';
 import { globalStyles, styled } from '@styles';
 import React from 'react';
@@ -128,6 +129,16 @@ const App = () => {
           <DropdownItem>선택한 이슈 닫기</DropdownItem>
         </Dropdown>
       </RowContainer>
+
+      <div>
+        <FilterBar label="필터" title="이슈 필터" onSubmit={(v) => console.log(v)}>
+          <DropdownCheckbox>열린 이슈</DropdownCheckbox>
+          <DropdownCheckbox>내가 작성한 이슈</DropdownCheckbox>
+          <DropdownCheckbox>나에게 할당된 이슈</DropdownCheckbox>
+          <DropdownCheckbox>내가 댓글을 남긴 이슈</DropdownCheckbox>
+          <DropdownCheckbox>닫힌 이슈</DropdownCheckbox>
+        </FilterBar>
+      </div>
     </Warpper>
   );
 };

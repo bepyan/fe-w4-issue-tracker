@@ -77,7 +77,7 @@ const Wrapper = styled('div', {
   position: 'relative',
 });
 
-const Indicator = styled('div', {
+export const Indicator = styled('div', {
   display: 'flex',
   alignItems: 'center',
   cursor: 'pointer',
@@ -87,6 +87,8 @@ const Indicator = styled('div', {
   iconColor: '$label',
   padding: '2px 0px',
   userSelect: 'none',
+  transition: 'all 200ms ease-in-out',
+
   span: {
     marginRight: '4px',
   },
