@@ -18,6 +18,20 @@ export const { styled, getCssText } = createStitches({
       medium: 500,
       regular: 400,
     },
+    lineHeights: {
+      display: '48px',
+      large: '40px',
+      medium: '32px',
+      small: '28px',
+      'x-small': '20px',
+    },
+    zIndices: {
+      1: '100',
+      2: '200',
+      3: '300',
+      4: '400',
+      max: '999',
+    },
 
     colors: {
       // greyscale

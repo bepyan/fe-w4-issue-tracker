@@ -6,6 +6,7 @@ export { default as check_box_disable } from './check-box-disable.svg';
 export { default as check_box_initial } from './check-box-initial.svg';
 export { default as check_off_circle } from './check-off-circle.svg';
 export { default as check_on_circle } from './check-on-circle.svg';
+export { default as chevron_down } from './chevron-down.svg';
 export { default as edit } from './edit.svg';
 export { default as milestone } from './milestone.svg';
 export { default as paperclip } from './paperclip.svg';

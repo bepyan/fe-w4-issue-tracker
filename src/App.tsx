@@ -1,5 +1,18 @@
 import * as icons from '@assets/svgs/icons';
-import { Button, Logo, Tap, Taps, TextButton, Icon, IconName, Label, IssueLabel } from '@components';
+import {
+  Button,
+  Logo,
+  Tap,
+  Taps,
+  TextButton,
+  Icon,
+  IconName,
+  Label,
+  IssueLabel,
+  Dropdown,
+  DropdownItem,
+  DropdownCheckbox,
+} from '@components';
 import { globalStyles, styled } from '@styles';
 import React from 'react';
 
@@ -95,6 +108,26 @@ const App = () => {
           </Tap>
         </Taps>
       </RowContainer>
+
+      <RowContainer>
+        <Dropdown label="드롭박스" title="상태 변경">
+          <DropdownItem>선택한 이슈 열기</DropdownItem>
+          <DropdownItem>선택한 이슈 닫기</DropdownItem>
+        </Dropdown>
+
+        <Dropdown label="체크박스" title="이슈필터">
+          <DropdownCheckbox>열린 이슈</DropdownCheckbox>
+          <DropdownCheckbox>내가 작성한 이슈</DropdownCheckbox>
+          <DropdownCheckbox>나에게 할당된 이슈</DropdownCheckbox>
+          <DropdownCheckbox>내가 댓글을 남긴 이슈</DropdownCheckbox>
+          <DropdownCheckbox>닫힌 이슈</DropdownCheckbox>
+        </Dropdown>
+
+        <Dropdown label="우측정렬" title="상태 변경" position="right">
+          <DropdownItem>선택한 이슈 열기</DropdownItem>
+          <DropdownItem>선택한 이슈 닫기</DropdownItem>
+        </Dropdown>
+      </RowContainer>
     </Warpper>
   );
 };
@@ -116,6 +149,7 @@ const Warpper = styled('div', {
 });
 
 const RowContainer = styled('section', {
+  display: 'flex',
   '& > * + *': {
     marginLeft: '.5rem',
   },

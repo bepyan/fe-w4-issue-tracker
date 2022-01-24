@@ -1,4 +1,7 @@
 export * from './Button';
+export * from './Dropdown';
+export * from './DropdownCheckbox';
+export * from './DropdownItem';
 export * from './Icon';
 export * from './IssueLabel';
 export * from './Label';
