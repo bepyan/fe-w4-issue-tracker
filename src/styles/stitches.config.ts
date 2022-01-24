@@ -46,11 +46,21 @@ export const { styled, getCssText } = createStitches({
     },
   },
   utils: {
+    flexCenter: (flexDirection?: Stitches.PropertyValue<'flexDirection'>) => ({
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: flexDirection || 'row',
+    }),
     iconColor: (color: Stitches.PropertyValue<'color'>) => ({
-      svg: {
-        path: {
-          stroke: color,
-        },
+      path: {
+        stroke: color,
+      },
+    }),
+    replaceIconStrokeToFill: (color: Stitches.PropertyValue<'color'>) => ({
+      path: {
+        stroke: 'none',
+        fill: color,
       },
     }),
   },

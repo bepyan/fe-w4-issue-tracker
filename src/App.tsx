@@ -1,5 +1,5 @@
 import * as icons from '@assets/svgs/icons';
-import { Button, Logo, TextButton, Icon, IconName, Label, IssueLabel } from '@components';
+import { Button, Logo, Tap, Taps, TextButton, Icon, IconName, Label, IssueLabel } from '@components';
 import { globalStyles, styled } from '@styles';
 import React from 'react';
 
@@ -80,6 +80,21 @@ const App = () => {
         <IssueLabel isOpen />
         <IssueLabel isOpen={false} />
       </RowContainer>
+
+      <RowContainer>
+        <Taps>
+          <Tap>
+            <Icon name="tag" />
+            <span>레이블</span>
+            <span>(0)</span>
+          </Tap>
+          <Tap>
+            <Milestone name="milestone" />
+            <span>마일스톤</span>
+            <span>(0)</span>
+          </Tap>
+        </Taps>
+      </RowContainer>
     </Warpper>
   );
 };
@@ -110,4 +125,8 @@ const IconContainer = styled('section', {
   display: 'grid',
   gridTemplateColumns: 'repeat(5, 1fr)',
   rowGap: 48,
+});
+
+const Milestone = styled(Icon, {
+  replaceIconStrokeToFill: '$label',
 });
