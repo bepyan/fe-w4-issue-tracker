@@ -31,7 +31,7 @@ export const DropdownCheckbox = ({
 };
 
 const Wrapper = styled(DropdownItemWrapper, {
-  svg: {
+  '& svg:last-child': {
     marginLeft: 'auto',
   },
 });

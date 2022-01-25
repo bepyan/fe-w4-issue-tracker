@@ -1,12 +1,11 @@
-import { styled } from '@styles';
+import { Table } from '@components';
 import React from 'react';
+import { IssueTableHeader } from './IssueTableHeader';
 
-type Props = {
-  onClick?: () => void;
+type IssueTableProps = {
+  children: React.ReactNode;
 };
 
-export const IssueTable = (props: Props) => {
-  return <Wrapper>열린이슈</Wrapper>;
+export const IssueTable = ({ children }: IssueTableProps) => {
+  return <Table header={<IssueTableHeader />}>{children}</Table>;
 };
-
-const Wrapper = styled('div', {});

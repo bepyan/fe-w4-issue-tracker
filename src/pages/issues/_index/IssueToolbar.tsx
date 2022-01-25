@@ -8,11 +8,7 @@ import {
 import { styled } from '@styles';
 import React from 'react';
 
-type Props = {
-  onClick?: () => void;
-};
-
-export const IssueToolbar = (props: Props) => {
+export const IssueToolbar = () => {
   return (
     <Wrapper>
       <LeftActionWrapper>
