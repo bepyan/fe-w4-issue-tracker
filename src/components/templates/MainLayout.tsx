@@ -1,13 +1,17 @@
 import { Icon, Logo } from '@components';
 import { styled } from '@styles';
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 export const MainLayout = () => {
+  const nav = useNavigate();
+
+  const navToLaddingPage = () => nav('/');
+
   return (
     <Wrapper>
       <Header>
-        <Logo size="medium" />
+        <HeaderLogo size="medium" onClick={navToLaddingPage} />
         <Icon name="user_image_large" />
       </Header>
 
@@ -32,6 +36,10 @@ const Header = styled('div', {
   svg: {
     marginLeft: 'auto',
   },
+});
+
+const HeaderLogo = styled(Logo, {
+  cursor: 'pointer',
 });
 
 const Content = styled('div', {
