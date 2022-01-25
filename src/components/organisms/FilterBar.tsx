@@ -1,7 +1,6 @@
 import { styled } from '@styles';
 import React, { useState } from 'react';
-import { Dropdown, Indicator } from './Dropdown';
-import { Icon } from './Icon';
+import { Dropdown, Icon, Indicator } from '../';
 
 type Props = {
   label: string;

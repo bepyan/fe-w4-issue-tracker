@@ -1,6 +1,6 @@
 import React from 'react';
-import LogotypeLarge from '../assets/svgs/LogotypeLarge.svg';
-import LogotypeMedium from '../assets/svgs/LogotypeMedium.svg';
+import LogotypeLarge from '@assets/svgs/LogotypeLarge.svg';
+import LogotypeMedium from '@assets/svgs/LogotypeMedium.svg';
 import { styled } from '@styles';
 
 interface ILogoProps {

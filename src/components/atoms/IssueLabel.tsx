@@ -2,6 +2,19 @@ import { styled } from '@styles';
 import React from 'react';
 import { Icon } from './Icon';
 
+type Props = {
+  isOpen: boolean;
+};
+
+export const IssueLabel = ({ isOpen }: Props) => {
+  return (
+    <ToggleLabel kind={isOpen ? 'open' : 'close'}>
+      <Icon name={isOpen ? 'alert_circle' : 'archive'} />
+      {isOpen ? '열린 이슈' : '닫힌 이슈'}
+    </ToggleLabel>
+  );
+};
+
 const ToggleLabel = styled('div', {
   display: 'inline-flex',
   alignItems: 'center',
@@ -31,16 +44,3 @@ const ToggleLabel = styled('div', {
     },
   },
 });
-
-type Props = {
-  isOpen: boolean;
-};
-
-export const IssueLabel = ({ isOpen }: Props) => {
-  return (
-    <ToggleLabel kind={isOpen ? 'open' : 'close'}>
-      <Icon name={isOpen ? 'alert_circle' : 'archive'} />
-      {isOpen ? '열린 이슈' : '닫힌 이슈'}
-    </ToggleLabel>
-  );
-};
