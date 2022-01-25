@@ -17,7 +17,9 @@
 
     "baseUrl": "./src",
     "paths": {
+      "@assets/*": ["./assets/*"],
       "@components": ["./components"],
+      "@hooks": ["./hooks"],
       "@pages": ["./pages"],
       "@services": ["./services"],
       "@stores": ["./stores"],
@@ -25,6 +27,6 @@
       "@utils": ["./utils"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["@types", "src/**/*"],
   "exclude": ["dist", "node_modules"]
 }
