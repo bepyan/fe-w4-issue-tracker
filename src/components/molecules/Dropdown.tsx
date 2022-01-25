@@ -1,7 +1,7 @@
 import { useClickOutside } from '@hooks';
 import { styled } from '@styles';
 import React, { useEffect, useRef, useState } from 'react';
-import { Icon } from './Icon';
+import { Icon } from '..';
 
 export type DropdownProps = {
   label: string;
@@ -37,6 +37,8 @@ export const Dropdown = ({ label, title, position, children }: DropdownProps) =>
   const onTransitionEnd = () => {
     if (!open) setHide(true);
   };
+
+  // hooks
 
   useEffect(() => {
     if (hide === false) setOpen(true);

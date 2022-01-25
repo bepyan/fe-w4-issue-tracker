@@ -1,7 +1,7 @@
 import { styled } from '@styles';
 import React, { useState } from 'react';
 import { DropdownItemWrapper } from './DropdownItem';
-import { Icon } from './Icon';
+import { Icon } from '..';
 
 type Props = {
   initSelected?: boolean;
