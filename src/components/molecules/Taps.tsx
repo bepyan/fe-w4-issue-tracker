@@ -2,13 +2,13 @@ import { styled } from '@styles';
 import React, { useState } from 'react';
 import { TapProps, TapView } from './Tap';
 
-type TapsProps = {
-  initIndex: number;
+export type TapsProps = {
+  initIndex?: number;
   children: React.ReactNode;
   onChange?: (index: number) => void;
 };
 
-export const Taps = ({ initIndex = 0, children, onChange }: TapsProps) => {
+export const Taps = ({ initIndex, children, onChange }: TapsProps) => {
   const [selectedIndex, setSelectedIndex] = useState(initIndex);
 
   const handleChildChange = (index: number) => {
@@ -19,7 +19,9 @@ export const Taps = ({ initIndex = 0, children, onChange }: TapsProps) => {
   return (
     <TapsView>
       {React.Children.map(children, (child, index) => {
-        const item = child as React.ReactElement<React.PropsWithChildren<TapProps>>;
+        const item = child as React.ReactElement<
+          React.PropsWithChildren<TapProps>
+        >;
 
         return React.cloneElement(item, {
           selected: index === selectedIndex,
@@ -31,10 +33,6 @@ export const Taps = ({ initIndex = 0, children, onChange }: TapsProps) => {
       })}
     </TapsView>
   );
-};
-
-Taps.defaultProps = {
-  initIndex: 0,
 };
 
 export const TapsView = styled('div', {
