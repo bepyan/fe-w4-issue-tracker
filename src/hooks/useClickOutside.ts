@@ -7,7 +7,9 @@ export const useClickOutside = (
   useEffect(() => {
     const onClickOutside = (ev: MouseEvent) => {
       const target = ev.target as Node;
-      const isOutside = exceptRefs.every((ref) => !ref?.current?.contains(target));
+      const isOutside = exceptRefs.every(
+        (ref) => !ref?.current?.contains(target),
+      );
       if (isOutside) callback();
     };
 

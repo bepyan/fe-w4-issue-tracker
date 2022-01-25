@@ -129,7 +129,11 @@ export const AboutPage = () => {
       </RowContainer>
 
       <div>
-        <FilterBar label="필터" title="이슈 필터" onSubmit={(v) => console.log(v)}>
+        <FilterBar
+          label="필터"
+          title="이슈 필터"
+          onSubmit={(v) => console.log(v)}
+        >
           <DropdownCheckbox>열린 이슈</DropdownCheckbox>
           <DropdownCheckbox>내가 작성한 이슈</DropdownCheckbox>
           <DropdownCheckbox>나에게 할당된 이슈</DropdownCheckbox>

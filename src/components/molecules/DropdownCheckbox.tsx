@@ -9,7 +9,11 @@ type Props = {
   onChange?: (selected: boolean) => void;
 };
 
-export const DropdownCheckbox = ({ initSelected, children, onChange }: Props) => {
+export const DropdownCheckbox = ({
+  initSelected,
+  children,
+  onChange,
+}: Props) => {
   const [selected, setSelected] = useState(!!initSelected);
 
   const onClick = () => {
