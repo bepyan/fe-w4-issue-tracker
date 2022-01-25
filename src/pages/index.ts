@@ -1,4 +1,1 @@
-export * from './about';
-export * from './home';
-export * from './login';
-export * from './404';
+export * as Page from './pages';
