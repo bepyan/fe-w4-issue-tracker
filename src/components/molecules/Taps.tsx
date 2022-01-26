@@ -1,47 +1,71 @@
+import { useIsPathMatch } from '@hooks';
 import { styled } from '@styles';
 import React, { useState } from 'react';
-import { TapProps, TapView } from './Tap';
+import { useMatch, useNavigate } from 'react-router-dom';
 
 export type TapsProps = {
-  initIndex?: number;
-  children: React.ReactNode;
-  onChange?: (index: number) => void;
+  tapList: TapItemProps[];
 };
 
-export const Taps = ({ initIndex, children, onChange }: TapsProps) => {
-  const [selectedIndex, setSelectedIndex] = useState(initIndex);
-
-  const handleChildChange = (index: number) => {
-    setSelectedIndex(index);
-    onChange && onChange(index);
-  };
-
-  return (
-    <TapsView>
-      {React.Children.map(children, (child, index) => {
-        const item = child as React.ReactElement<
-          React.PropsWithChildren<TapProps>
-        >;
-
-        return React.cloneElement(item, {
-          selected: index === selectedIndex,
-          onClick: () => {
-            handleChildChange(index);
-            item.props.onClick && item.props.onClick();
-          },
-        });
-      })}
-    </TapsView>
-  );
+export const Taps = ({ tapList }: TapsProps) => {
+  return <TapsWrapper>{tapList.map(TapItem)}</TapsWrapper>;
 };
 
-export const TapsView = styled('div', {
+const TapsWrapper = styled('div', {
   display: 'inline-flex',
   backgroundColor: '$background',
   border: '1px solid $line',
   borderRadius: '11px',
   overflow: 'hidden',
-  [`& ${TapView} + ${TapView}`]: {
+
+  '& > * + *': {
     borderLeft: '1px solid $line',
+  },
+});
+
+type TapItemProps = {
+  path: string;
+  children: React.ReactNode;
+};
+
+const TapItem = ({ path, children }: TapItemProps) => {
+  const nav = useNavigate();
+  const isMatch = useIsPathMatch(path);
+
+  const props = {
+    selected: isMatch,
+    onClick: () => nav(path),
+  };
+
+  return (
+    <TapItemWrapper role="tab" tabIndex={0} {...props}>
+      {children}
+    </TapItemWrapper>
+  );
+};
+
+const TapItemWrapper = styled('div', {
+  flexCenter: 'row',
+  width: '160px',
+  height: '40px',
+  color: '$label',
+  iconColor: '$label',
+  fontWeight: '$bold',
+  cursor: 'pointer',
+  '& > * + *': {
+    marginLeft: '8px',
+  },
+  '&:hover': {
+    backgroundColor: '$input-background',
+  },
+  variants: {
+    selected: {
+      true: {
+        backgroundColor: '$line',
+      },
+      false: {
+        backgroundColor: '$background',
+      },
+    },
   },
 });

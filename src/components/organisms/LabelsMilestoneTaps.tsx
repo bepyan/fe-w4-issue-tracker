@@ -1,32 +1,39 @@
-import { Icon, Tap, Taps } from '@components';
+import { Icon, Taps } from '@components';
 import { styled } from '@styles';
 import React from 'react';
+import { useNavigate, useResolvedPath } from 'react-router-dom';
 
 type Props = {
   labelCnt: number;
   milestoneCnt: number;
-  initIndex?: number;
-  onChange?: (index: number) => void;
 };
 
-export const LabelsMilestoneTaps = ({
-  labelCnt,
-  milestoneCnt,
-  ...tapsProps
-}: Props) => {
+export const LabelsMilestoneTaps = ({ labelCnt, milestoneCnt }: Props) => {
   return (
-    <Taps {...tapsProps}>
-      <Tap>
-        <Icon name="tag" />
-        <span>레이블</span>
-        <CountText>({labelCnt})</CountText>
-      </Tap>
-      <Tap>
-        <Milestone name="milestone" />
-        <span>마일스톤</span>
-        <CountText>({milestoneCnt})</CountText>
-      </Tap>
-    </Taps>
+    <Taps
+      tapList={[
+        {
+          path: '/labels',
+          children: (
+            <>
+              <Icon name="tag" />
+              <span>레이블</span>
+              <CountText>({labelCnt})</CountText>
+            </>
+          ),
+        },
+        {
+          path: '/milestones',
+          children: (
+            <>
+              <Milestone name="milestone" />
+              <span>마일스톤</span>
+              <CountText>({milestoneCnt})</CountText>
+            </>
+          ),
+        },
+      ]}
+    />
   );
 };
 

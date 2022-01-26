@@ -2,7 +2,6 @@ import * as icons from '@assets/svgs/icons';
 import {
   Button,
   Logo,
-  Tap,
   Taps,
   TextButton,
   Icon,
@@ -14,6 +13,7 @@ import {
   DropdownCheckbox,
   FilterBar,
   TextInput,
+  LabelsMilestoneTaps,
 } from '@components';
 import { styled } from '@styles';
 import React from 'react';
@@ -94,20 +94,22 @@ export const AboutPage = () => {
         <IssueLabel isOpen={false} />
       </RowContainer>
 
-      <RowContainer>
-        <Taps>
-          <Tap>
-            <Icon name="tag" />
-            <span>레이블</span>
-            <span>(0)</span>
-          </Tap>
-          <Tap>
-            <Milestone name="milestone" />
-            <span>마일스톤</span>
-            <span>(0)</span>
-          </Tap>
-        </Taps>
-      </RowContainer>
+      <div>
+        <Taps
+          tapList={[
+            {
+              path: '/about',
+              children: <span>about</span>,
+            },
+            {
+              path: '/issues',
+              children: <span>issue</span>,
+            },
+          ]}
+        />
+
+        <LabelsMilestoneTaps labelCnt={3} milestoneCnt={100} />
+      </div>
 
       <RowContainer>
         <Dropdown label="드롭박스" title="상태 변경">
@@ -189,8 +191,4 @@ const IconContainer = styled('section', {
   display: 'grid',
   gridTemplateColumns: 'repeat(5, 1fr)',
   rowGap: 48,
-});
-
-const Milestone = styled(Icon, {
-  replaceIconStrokeToFill: '$label',
 });
