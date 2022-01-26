@@ -34,6 +34,7 @@ const InputWrapper = styled('div', {
   display: 'flex',
   alignItems: 'center',
   boxSizing: 'border-box',
+  border: '1px solid transparent',
   backgroundColor: '$input-background',
   padding: '1rem 1.5rem',
 
@@ -48,6 +49,7 @@ const InputWrapper = styled('div', {
     color: '$title-active',
     zIndex: '$1',
     fontSize: '$medium',
+    paddingTop: '1rem',
   },
   span: {
     fontSize: '$x-small',
@@ -79,9 +81,6 @@ const InputWrapper = styled('div', {
     },
     isLabelFloat: {
       true: {
-        input: {
-          marginTop: '10px',
-        },
         label: {
           transform: 'translateY(-12px)',
         },

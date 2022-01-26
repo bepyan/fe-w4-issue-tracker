@@ -3,3 +3,4 @@ export * from './DropdownCheckbox';
 export * from './DropdownItem';
 export * from './Tap';
 export * from './Taps';
+export * from './TextArea';
