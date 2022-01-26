@@ -6,7 +6,7 @@ type Props = {
   labelCnt: number;
   milestoneCnt: number;
   initIndex?: number;
-  onChange: (index: number) => void;
+  onChange?: (index: number) => void;
 };
 
 export const LabelsMilestoneTaps = ({
