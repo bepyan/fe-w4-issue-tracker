@@ -13,6 +13,7 @@ import {
   DropdownItem,
   DropdownCheckbox,
   FilterBar,
+  TextInput,
 } from '@components';
 import { styled } from '@styles';
 import React from 'react';
@@ -140,6 +141,24 @@ export const AboutPage = () => {
           <DropdownCheckbox>내가 댓글을 남긴 이슈</DropdownCheckbox>
           <DropdownCheckbox>닫힌 이슈</DropdownCheckbox>
         </FilterBar>
+      </div>
+
+      <div>
+        <TextInput label="아이디" />
+        <TextInput label="아이디" disabled required />
+        <TextInput label="아이디" size="medium" />
+        <TextInput label="아이디" size="small" />
+
+        <TextInput
+          label="아이디"
+          status="success"
+          statusText="사용 가능한 아이디 입니다!"
+        />
+        <TextInput
+          label="아이디"
+          status="error"
+          statusText="이미 사용하고 있는 아이디 입니다!"
+        />
       </div>
     </Warpper>
   );

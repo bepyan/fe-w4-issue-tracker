@@ -5,3 +5,4 @@ export * from './Label';
 export * from './Logo';
 export * from './Table';
 export * from './TextButton';
+export * from './TextInput';
