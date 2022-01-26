@@ -16,8 +16,9 @@ export const globalStyles = globalCss({
   textarea: {
     whiteSpace: 'revert',
   },
-  input: {
+  'textarea, input': {
     border: 'none',
+    backgroundColor: 'transparent',
     '&::placeholder': {
       color: '$placeholder',
     },
