@@ -1,8 +1,13 @@
 import { Icon, Label } from '@components';
 import { styled } from '@styles';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const IssueTableItem = () => {
+  const nav = useNavigate();
+
+  const navToIssueDetail = () => nav('1');
+
   return (
     <Wrapper>
       <input type="checkbox" />
@@ -10,7 +15,7 @@ export const IssueTableItem = () => {
       <div>
         <TitleWrapper>
           <Icon name="alert_circle" />
-          <Title>이슈제목</Title>
+          <Title onClick={navToIssueDetail}>이슈제목</Title>
           <Label>레이블 이름</Label>
         </TitleWrapper>
 

@@ -1,8 +1,7 @@
 import {
   Button,
   Icon,
-  SideBar,
-  SideBarItem,
+  IssueSideBar,
   TextArea,
   TextButton,
   TextInput,
@@ -30,11 +29,7 @@ export const IssuesNew = () => {
           <TextArea label="코멘트를 입력하세요" />
         </InputWrapper>
 
-        <SideBar>
-          <SideBarItem title="담당자"></SideBarItem>
-          <SideBarItem title="레이블"></SideBarItem>
-          <SideBarItem title="마일스톤"></SideBarItem>
-        </SideBar>
+        <IssueSideBar />
       </Content>
 
       <Footer>
