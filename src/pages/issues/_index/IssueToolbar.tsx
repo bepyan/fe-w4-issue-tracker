@@ -7,8 +7,13 @@ import {
 } from '@components';
 import { styled } from '@styles';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const IssueToolbar = () => {
+  const nav = useNavigate();
+
+  const navToIssueNew = () => nav('new');
+
   return (
     <Wrapper>
       <LeftActionWrapper>
@@ -33,7 +38,7 @@ export const IssueToolbar = () => {
           milestoneCnt={2}
           onChange={(index) => console.log(index)}
         />
-        <Button size="small">
+        <Button size="small" onClick={navToIssueNew}>
           <Icon name="plus" />
           이슈 작성
         </Button>
