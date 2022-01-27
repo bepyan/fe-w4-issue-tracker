@@ -20,11 +20,7 @@ const App = () => {
           </Route>
 
           <Route path="/labels" element={<Page.Labels />} />
-
-          <Route path="/milestones">
-            <Route index element={<Page.Milestones />} />
-            <Route path="new" element={<Page.MilestonesNew />} />
-          </Route>
+          <Route path="/milestones" element={<Page.Milestones />} />
         </Route>
 
         <Route path="/login" element={<Page.Login />} />

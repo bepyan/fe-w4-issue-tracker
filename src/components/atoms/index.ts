@@ -1,4 +1,5 @@
 export * from './Button';
+export * from './HeaderLink';
 export * from './Icon';
 export * from './IssueLabel';
 export * from './Label';

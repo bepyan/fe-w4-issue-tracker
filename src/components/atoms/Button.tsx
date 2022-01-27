@@ -15,7 +15,7 @@ export const Button = styled('button', {
   transition: 'all 200ms ease-in-out',
   defaultVariants: {
     kind: 'standard',
-    size: 'large',
+    size: 'small',
   },
   variants: {
     kind: {

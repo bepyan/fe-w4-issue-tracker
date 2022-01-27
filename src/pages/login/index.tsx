@@ -9,14 +9,18 @@ export const Login = () => {
       <Logo size="large" />
 
       <Content>
-        <Button css={githubButtonStyle}>GitHub 계정으로 로그인</Button>
+        <Button size="large" css={githubButtonStyle}>
+          GitHub 계정으로 로그인
+        </Button>
 
         <TextSeparator>or</TextSeparator>
 
         <form>
           <TextInput label="아이디" />
           <TextInput label="비밀번호" type="password" />
-          <Button type="submit">아이디로 로그인</Button>
+          <Button size="large" type="submit">
+            아이디로 로그인
+          </Button>
           <TextButton type="button" size="small">
             회원가입
           </TextButton>

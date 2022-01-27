@@ -1,7 +1,23 @@
+import { Table, TextButton } from '@components';
+import { styled } from '@styles';
 import React from 'react';
+import { MilestoneHeader } from './MilestoneHeader';
+import { MilestoneTableItem } from './MilestoneTableItem';
+import { MilestonesToolbar } from './MilestoneToolbar';
 
 export const Milestones = () => {
-  return <div>Milestones Page</div>;
+  return (
+    <Wrapper>
+      <MilestonesToolbar />
+      <Table header={<MilestoneHeader />}>
+        <MilestoneTableItem />
+      </Table>
+    </Wrapper>
+  );
 };
 
-export * from './new';
+const Wrapper = styled('div', {
+  '& > * + *': {
+    marginTop: '1.5rem',
+  },
+});
