@@ -5,6 +5,7 @@ export const TextButton = styled('button', {
   justifyContent: 'center',
   alignItems: 'center',
   fontWeight: '$bold',
+  lineHeight: '$medium',
   border: 'none',
   borderRadius: '20px',
   cursor: 'pointer',
@@ -15,6 +16,7 @@ export const TextButton = styled('button', {
   },
   iconColor: '$label',
   transition: 'all 200ms ease-in-out',
+
   '&:active': {
     color: '$title-active',
     iconColor: '$title-active',
@@ -29,19 +31,16 @@ export const TextButton = styled('button', {
     color: '$body',
     iconColor: '$body',
   },
+
   defaultVariants: {
-    size: 'medium',
+    size: 'small',
   },
   variants: {
     size: {
       medium: {
-        width: 87,
-        height: 32,
         fontSize: '$small',
       },
       small: {
-        width: 70,
-        height: 32,
         fontSize: '$x-small',
       },
     },

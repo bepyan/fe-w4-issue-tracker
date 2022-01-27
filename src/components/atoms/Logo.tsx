@@ -5,10 +5,15 @@ import { styled } from '@styles';
 
 interface ILogoProps {
   size: 'large' | 'medium';
+  onClick?: () => void;
 }
 
-export const Logo = ({ size }: ILogoProps) => {
-  return <LogoWrapper>{size === 'large' ? <LogotypeLarge /> : <LogotypeMedium />}</LogoWrapper>;
+export const Logo = ({ size, ...props }: ILogoProps) => {
+  return (
+    <LogoWrapper {...props}>
+      {size === 'large' ? <LogotypeLarge /> : <LogotypeMedium />}
+    </LogoWrapper>
+  );
 };
 
 Logo.defaultProps = {
