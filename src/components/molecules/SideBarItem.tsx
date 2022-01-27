@@ -5,15 +5,19 @@ import React from 'react';
 export type SideBarItemProps = {
   title: string;
   children?: React.ReactNode;
-  onClick?: () => void;
+  onClickPlusIcon?: () => void;
 };
 
-export const SideBarItem = ({ title, children, onClick }: SideBarItemProps) => {
+export const SideBarItem = ({
+  title,
+  children,
+  onClickPlusIcon,
+}: SideBarItemProps) => {
   return (
     <Wrapper>
       <Header>
         <span>{title}</span>
-        <Icon name="plus" onClick={onClick} />
+        <Icon name="plus" onClick={onClickPlusIcon} />
       </Header>
 
       <Content>{children}</Content>

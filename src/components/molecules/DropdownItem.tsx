@@ -7,7 +7,7 @@ type Props = {
   onClick?: () => void;
 };
 
-export const DropdownItem = ({ ...props }: Props) => {
+export const DropdownItem = (props: Props) => {
   return <DropdownItemWrapper className={DROPDOWN_ITEM_CLASSNAME} {...props} />;
 };
 

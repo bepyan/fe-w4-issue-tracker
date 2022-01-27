@@ -16,14 +16,14 @@ export const DropdownCheckbox = ({
 }: Props) => {
   const [selected, setSelected] = useState(!!initSelected);
 
-  const onClick = () => {
+  const onClickCheckbox = () => {
     const newSelected = !selected;
     setSelected(newSelected);
     onChange && onChange(newSelected);
   };
 
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={onClickCheckbox}>
       {children}
       <Icon name={selected ? 'check_on_circle' : 'check_off_circle'} />
     </Wrapper>
