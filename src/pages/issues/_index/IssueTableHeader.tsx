@@ -1,4 +1,4 @@
-import { Dropdown, DropdownCheckbox, Icon } from '@components';
+import { Dropdown, DropdownCheckbox, HeaderLink, Icon } from '@components';
 import { styled } from '@styles';
 import React from 'react';
 
@@ -56,31 +56,6 @@ const Wrapper = styled('div', {
     marginLeft: 'auto',
     '& > * + *': {
       marginLeft: '2rem',
-    },
-  },
-});
-
-const HeaderLink = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  cursor: 'pointer',
-  color: '$label',
-  iconColor: '$label',
-
-  '& > * + * ': {
-    marginLeft: '4px',
-  },
-  '&:hover': {
-    color: '$body',
-    iconColor: '$body',
-  },
-  variants: {
-    selected: {
-      true: {
-        color: '$title-active',
-        iconColor: '$title-active',
-        fontWeight: '$bold',
-      },
     },
   },
 });

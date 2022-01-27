@@ -1,22 +1,23 @@
-import { styled } from '@styles';
 import React from 'react';
-import { IssueTable } from './IssueTable';
+import { Table } from '@components';
+import { styled } from '@styles';
 import { IssueToolbar } from './IssueToolbar';
 import { IssueTableItem } from './IssueTableItem';
+import { IssueTableHeader } from './IssueTableHeader';
 
 export const Issues = () => {
   return (
     <Wrapper>
       <IssueToolbar />
-      <IssueTable>
+      <Table header={<IssueTableHeader />}>
         <IssueTableItem />
-      </IssueTable>
+      </Table>
     </Wrapper>
   );
 };
 
 const Wrapper = styled('div', {
   '& > * + *': {
-    marginTop: '3rem',
+    marginTop: '1.5rem',
   },
 });
