@@ -6,7 +6,7 @@ import { styled } from '@styles';
 export type DropdownProps = {
   label: string;
   title: string | React.ReactNode;
-  position: 'left' | 'right';
+  position?: 'left' | 'right';
   children: React.ReactNode;
 };
 
@@ -15,7 +15,7 @@ export const DROPDOWN_ITEM_CLASSNAME = '__dorpdownItem__';
 export const Dropdown = ({
   label,
   title,
-  position,
+  position = 'left',
   children,
 }: DropdownProps) => {
   const indicatorRef = useRef<HTMLDivElement>(null);
@@ -39,9 +39,7 @@ export const Dropdown = ({
     if (isDropdownItem) closeDropdown();
   };
 
-  const onTransitionEnd = () => {
-    if (!open) setHide(true);
-  };
+  const onTransitionEnd = () => !open && setHide(true);
 
   // hooks
 
@@ -73,10 +71,6 @@ export const Dropdown = ({
       </Panel>
     </Wrapper>
   );
-};
-
-Dropdown.defaultProps = {
-  position: 'left',
 };
 
 const Wrapper = styled('div', {
