@@ -16,7 +16,7 @@ export const IssuesNew = () => {
   const navToIssue = () => nav('/issues');
 
   return (
-    <Wrapper>
+    <>
       <Header>
         <h5>새로운 이슈 작성</h5>
       </Header>
@@ -41,11 +41,9 @@ export const IssuesNew = () => {
           완료
         </Button>
       </Footer>
-    </Wrapper>
+    </>
   );
 };
-
-const Wrapper = styled('div', {});
 
 const Header = styled('div', {
   paddingBottom: '2rem',

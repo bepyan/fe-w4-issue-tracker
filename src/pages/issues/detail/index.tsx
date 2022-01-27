@@ -1,6 +1,7 @@
 import {
   Button,
   Comment,
+  DeleteButton,
   Icon,
   IssueLabel,
   IssueSideBar,
@@ -15,7 +16,7 @@ import React from 'react';
 
 export const IssuesDetail = () => {
   return (
-    <div>
+    <>
       <Header>
         <HeaderTitle>
           <h5>
@@ -59,23 +60,10 @@ export const IssuesDetail = () => {
 
         <SideBarWrapper>
           <IssueSideBar />
-          <TextButton
-            css={{
-              color: '$error300',
-              iconColor: '$error300',
-              marginRight: '1rem',
-
-              '&:hover': {
-                color: '$error500',
-                iconColor: '$error500',
-              },
-            }}
-          >
-            <Icon name="trash" /> 이슈 삭제
-          </TextButton>
+          <DeleteButton>이슈 삭제</DeleteButton>
         </SideBarWrapper>
       </Content>
-    </div>
+    </>
   );
 };
 

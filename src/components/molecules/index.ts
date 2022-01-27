@@ -1,4 +1,5 @@
 export * from './Comment';
+export * from './DeleteButton';
 export * from './Dropdown';
 export * from './DropdownCheckbox';
 export * from './DropdownItem';

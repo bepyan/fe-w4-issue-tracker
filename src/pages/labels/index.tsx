@@ -1,5 +1,6 @@
 import {
   Button,
+  DeleteButton,
   Icon,
   Label,
   LabelsMilestoneTaps,
@@ -33,9 +34,7 @@ export const Labels = () => {
               <Icon name="edit" /> 편집
             </TextButton>
 
-            <DelateButton size="small">
-              <Icon name="trash" /> 삭제
-            </DelateButton>
+            <DeleteButton>삭제</DeleteButton>
           </LabelActionWrapper>
         </TableItem>
 
@@ -51,9 +50,7 @@ export const Labels = () => {
               <Icon name="edit" /> 편집
             </TextButton>
 
-            <DelateButton size="small">
-              <Icon name="trash" /> 삭제
-            </DelateButton>
+            <DeleteButton>삭제</DeleteButton>
           </LabelActionWrapper>
         </TableItem>
       </Table>
@@ -103,15 +100,5 @@ const LabelActionWrapper = styled('div', {
 
   '& > * + *': {
     marginLeft: '1.5rem',
-  },
-});
-
-const DelateButton = styled(TextButton, {
-  color: '$red300',
-  iconColor: '$red300',
-
-  '&:hover': {
-    color: '$red500',
-    iconColor: '$red500',
   },
 });

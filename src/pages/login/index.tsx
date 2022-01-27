@@ -21,9 +21,7 @@ export const Login = () => {
           <Button size="large" type="submit">
             아이디로 로그인
           </Button>
-          <TextButton type="button" size="small">
-            회원가입
-          </TextButton>
+          <TextButton type="button">회원가입</TextButton>
         </form>
       </Content>
     </Wrapper>

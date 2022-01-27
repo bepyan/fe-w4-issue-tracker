@@ -33,7 +33,7 @@ export const AboutPage = () => {
         <Button size="large" kind="secondary">
           secondary 버튼
         </Button>
-        <Button size="large" disabled={true}>
+        <Button size="large" disabled>
           disabled 버튼
         </Button>
       </div>
@@ -43,7 +43,7 @@ export const AboutPage = () => {
         <Button size="medium" kind="secondary">
           secondary 버튼
         </Button>
-        <Button size="medium" disabled={true}>
+        <Button size="medium" disabled>
           medium 버튼
         </Button>
       </div>
@@ -55,7 +55,7 @@ export const AboutPage = () => {
         <Button size="small" kind="secondary">
           <Icon name="plus" /> BUTTON
         </Button>
-        <Button disabled={true}>
+        <Button disabled>
           <Icon name="plus" /> BUTTON
         </Button>
         <Button>
@@ -67,7 +67,7 @@ export const AboutPage = () => {
         <TextButton size="medium">
           <Icon name="plus" /> 버튼
         </TextButton>
-        <TextButton size="medium" disabled={true}>
+        <TextButton size="medium" disabled>
           <Icon name="plus" /> 버튼
         </TextButton>
       </div>
@@ -76,7 +76,7 @@ export const AboutPage = () => {
         <TextButton>
           <Icon name="plus" /> 버튼
         </TextButton>
-        <TextButton disabled={true}>
+        <TextButton disabled>
           <Icon name="plus" /> 버튼
         </TextButton>
       </div>
@@ -173,7 +173,7 @@ export const AboutPage = () => {
 const Warpper = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  maxWidth: 720,
+  maxWidth: '720px',
   margin: '0px auto',
   paddingBottom: '20%',
   '& > *': {
@@ -194,5 +194,5 @@ const RowContainer = styled('section', {
 const IconContainer = styled('section', {
   display: 'grid',
   gridTemplateColumns: 'repeat(5, 1fr)',
-  rowGap: 48,
+  rowGap: '48px',
 });
