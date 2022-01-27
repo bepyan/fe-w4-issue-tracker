@@ -25,13 +25,13 @@ export const MilestoneTableItem = ({}: Props) => {
 
       <ActionWrapper>
         <ActionButtonWrapper>
-          <TextButton size="small">
+          <TextButton>
             <Icon name="archive" /> 닫기
           </TextButton>
-          <TextButton size="small">
+          <TextButton>
             <Icon name="edit" /> 편집
           </TextButton>
-          <TextButton size="small">
+          <TextButton>
             <Icon name="trash" /> 삭제
           </TextButton>
         </ActionButtonWrapper>

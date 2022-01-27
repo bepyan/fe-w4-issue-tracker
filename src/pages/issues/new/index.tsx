@@ -33,9 +33,8 @@ export const IssuesNew = () => {
       </Content>
 
       <Footer>
-        <TextButton onClick={navToIssue}>
-          <Icon name="x_square" />
-          작성 취소
+        <TextButton size="medium" onClick={navToIssue}>
+          <Icon name="x_square" /> 작성 취소
         </TextButton>
 
         <Button size="medium" disabled>

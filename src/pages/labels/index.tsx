@@ -29,7 +29,7 @@ export const Labels = () => {
           <LabelDescText>레이블에 대한 설명</LabelDescText>
 
           <LabelActionWrapper>
-            <TextButton size="small">
+            <TextButton>
               <Icon name="edit" /> 편집
             </TextButton>
 
@@ -47,7 +47,7 @@ export const Labels = () => {
           <LabelDescText>레이블에 대한 설명</LabelDescText>
 
           <LabelActionWrapper>
-            <TextButton size="small">
+            <TextButton>
               <Icon name="edit" /> 편집
             </TextButton>
 

@@ -16,11 +16,11 @@ export const Comment = (props: Props) => {
 
           <HeaderRightActionWrapper>
             <Label kind="line">작성자</Label>
-            <TextButton size="small">
+            <TextButton>
               <Icon name="edit" /> 편집
             </TextButton>
 
-            <TextButton size="small">
+            <TextButton>
               <Icon name="smile" />
             </TextButton>
           </HeaderRightActionWrapper>

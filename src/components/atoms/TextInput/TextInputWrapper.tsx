@@ -56,6 +56,9 @@ const InputWrapper = styled('div', {
     fontWeight: '$medium',
   },
 
+  defaultVariants: {
+    size: 'large',
+  },
   variants: {
     focused: {
       true: {
@@ -127,9 +130,5 @@ const InputWrapper = styled('div', {
         },
       },
     },
-  },
-
-  defaultVariants: {
-    size: 'large',
   },
 });

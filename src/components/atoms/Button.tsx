@@ -9,10 +9,12 @@ export const Button = styled('button', {
   border: 'none',
   borderRadius: '20px',
   cursor: 'pointer',
+  transition: 'all 200ms ease-in-out',
+
   svg: {
     marginRight: '4px',
   },
-  transition: 'all 200ms ease-in-out',
+
   defaultVariants: {
     kind: 'standard',
     size: 'small',

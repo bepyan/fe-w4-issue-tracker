@@ -29,9 +29,13 @@ export const AboutPage = () => {
       </div>
 
       <div>
-        <Button>standard 버튼</Button>
-        <Button kind="secondary">secondary 버튼</Button>
-        <Button disabled={true}>disabled 버튼</Button>
+        <Button size="large">standard 버튼</Button>
+        <Button size="large" kind="secondary">
+          secondary 버튼
+        </Button>
+        <Button size="large" disabled={true}>
+          disabled 버튼
+        </Button>
       </div>
 
       <div>
@@ -45,18 +49,27 @@ export const AboutPage = () => {
       </div>
 
       <div>
-        <Button size="small">
+        <Button>
           <Icon name="plus" /> BUTTON
         </Button>
         <Button size="small" kind="secondary">
           <Icon name="plus" /> BUTTON
         </Button>
-        <Button size="small" disabled={true}>
+        <Button disabled={true}>
           <Icon name="plus" /> BUTTON
         </Button>
-        <Button size="small">
+        <Button>
           <Icon name="plus" /> BUTTON
         </Button>
+      </div>
+
+      <div>
+        <TextButton size="medium">
+          <Icon name="plus" /> 버튼
+        </TextButton>
+        <TextButton size="medium" disabled={true}>
+          <Icon name="plus" /> 버튼
+        </TextButton>
       </div>
 
       <div>
@@ -64,15 +77,6 @@ export const AboutPage = () => {
           <Icon name="plus" /> 버튼
         </TextButton>
         <TextButton disabled={true}>
-          <Icon name="plus" /> 버튼
-        </TextButton>
-      </div>
-
-      <div>
-        <TextButton size="small">
-          <Icon name="plus" /> 버튼
-        </TextButton>
-        <TextButton size="small" disabled={true}>
           <Icon name="plus" /> 버튼
         </TextButton>
       </div>

@@ -60,7 +60,6 @@ export const IssuesDetail = () => {
         <SideBarWrapper>
           <IssueSideBar />
           <TextButton
-            size="small"
             css={{
               color: '$error300',
               iconColor: '$error300',
