@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const NotFoundPage = () => {
+export const NotFound = () => {
   return <div>페이지를 찾을 수 없습니다.</div>;
 };

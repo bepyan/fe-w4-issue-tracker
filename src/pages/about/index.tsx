@@ -2,7 +2,6 @@ import * as icons from '@assets/svgs/icons';
 import {
   Button,
   Logo,
-  Tap,
   Taps,
   TextButton,
   Icon,
@@ -13,6 +12,8 @@ import {
   DropdownItem,
   DropdownCheckbox,
   FilterBar,
+  TextInput,
+  LabelsMilestoneTaps,
 } from '@components';
 import { styled } from '@styles';
 import React from 'react';
@@ -28,9 +29,13 @@ export const AboutPage = () => {
       </div>
 
       <div>
-        <Button>standard 버튼</Button>
-        <Button kind="secondary">secondary 버튼</Button>
-        <Button disabled={true}>disabled 버튼</Button>
+        <Button size="large">standard 버튼</Button>
+        <Button size="large" kind="secondary">
+          secondary 버튼
+        </Button>
+        <Button size="large" disabled>
+          disabled 버튼
+        </Button>
       </div>
 
       <div>
@@ -38,40 +43,40 @@ export const AboutPage = () => {
         <Button size="medium" kind="secondary">
           secondary 버튼
         </Button>
-        <Button size="medium" disabled={true}>
+        <Button size="medium" disabled>
           medium 버튼
         </Button>
       </div>
 
       <div>
-        <Button size="small">
+        <Button>
           <Icon name="plus" /> BUTTON
         </Button>
         <Button size="small" kind="secondary">
           <Icon name="plus" /> BUTTON
         </Button>
-        <Button size="small" disabled={true}>
+        <Button disabled>
           <Icon name="plus" /> BUTTON
         </Button>
-        <Button size="small">
+        <Button>
           <Icon name="plus" /> BUTTON
         </Button>
+      </div>
+
+      <div>
+        <TextButton size="medium">
+          <Icon name="plus" /> 버튼
+        </TextButton>
+        <TextButton size="medium" disabled>
+          <Icon name="plus" /> 버튼
+        </TextButton>
       </div>
 
       <div>
         <TextButton>
           <Icon name="plus" /> 버튼
         </TextButton>
-        <TextButton disabled={true}>
-          <Icon name="plus" /> 버튼
-        </TextButton>
-      </div>
-
-      <div>
-        <TextButton size="small">
-          <Icon name="plus" /> 버튼
-        </TextButton>
-        <TextButton size="small" disabled={true}>
+        <TextButton disabled>
           <Icon name="plus" /> 버튼
         </TextButton>
       </div>
@@ -93,20 +98,22 @@ export const AboutPage = () => {
         <IssueLabel isOpen={false} />
       </RowContainer>
 
-      <RowContainer>
-        <Taps>
-          <Tap>
-            <Icon name="tag" />
-            <span>레이블</span>
-            <span>(0)</span>
-          </Tap>
-          <Tap>
-            <Milestone name="milestone" />
-            <span>마일스톤</span>
-            <span>(0)</span>
-          </Tap>
-        </Taps>
-      </RowContainer>
+      <div>
+        <Taps
+          tapList={[
+            {
+              path: '/about',
+              children: <span>about</span>,
+            },
+            {
+              path: '/issues',
+              children: <span>issue</span>,
+            },
+          ]}
+        />
+
+        <LabelsMilestoneTaps labelCnt={3} milestoneCnt={100} />
+      </div>
 
       <RowContainer>
         <Dropdown label="드롭박스" title="상태 변경">
@@ -129,13 +136,35 @@ export const AboutPage = () => {
       </RowContainer>
 
       <div>
-        <FilterBar label="필터" title="이슈 필터" onSubmit={(v) => console.log(v)}>
+        <FilterBar
+          label="필터"
+          title="이슈 필터"
+          onSubmit={(v) => console.log(v)}
+        >
           <DropdownCheckbox>열린 이슈</DropdownCheckbox>
           <DropdownCheckbox>내가 작성한 이슈</DropdownCheckbox>
           <DropdownCheckbox>나에게 할당된 이슈</DropdownCheckbox>
           <DropdownCheckbox>내가 댓글을 남긴 이슈</DropdownCheckbox>
           <DropdownCheckbox>닫힌 이슈</DropdownCheckbox>
         </FilterBar>
+      </div>
+
+      <div>
+        <TextInput label="아이디" />
+        <TextInput label="아이디" disabled required />
+        <TextInput label="아이디" size="medium" />
+        <TextInput label="아이디" size="small" />
+
+        <TextInput
+          label="아이디"
+          status="success"
+          statusText="사용 가능한 아이디 입니다!"
+        />
+        <TextInput
+          label="아이디"
+          status="error"
+          statusText="이미 사용하고 있는 아이디 입니다!"
+        />
       </div>
     </Warpper>
   );
@@ -144,7 +173,7 @@ export const AboutPage = () => {
 const Warpper = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  maxWidth: 720,
+  maxWidth: '720px',
   margin: '0px auto',
   paddingBottom: '20%',
   '& > *': {
@@ -165,9 +194,5 @@ const RowContainer = styled('section', {
 const IconContainer = styled('section', {
   display: 'grid',
   gridTemplateColumns: 'repeat(5, 1fr)',
-  rowGap: 48,
-});
-
-const Milestone = styled(Icon, {
-  replaceIconStrokeToFill: '$label',
+  rowGap: '48px',
 });

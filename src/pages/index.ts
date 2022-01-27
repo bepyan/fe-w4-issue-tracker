@@ -1,4 +1,3 @@
-export * from './about';
-export * from './home';
-export * from './login';
-export * from './404';
+import * as Page from './pages';
+
+export default Page;

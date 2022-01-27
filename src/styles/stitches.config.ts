@@ -45,6 +45,10 @@ export const { styled, getCssText } = createStitches({
       'title-active': '#14142B',
 
       // colors
+      red100: '#FFD1CF',
+      red300: '#FF3B30',
+      red500: '#C60B00',
+
       primary100: '#C7EBFF',
       primary300: '#007AFF',
       primary500: '#004DE3',
@@ -54,9 +58,9 @@ export const { styled, getCssText } = createStitches({
       success100: '#DDFFE6',
       success300: '#34C759',
       success500: '#00A028',
-      error100: '#FFD1CF',
-      error300: '#FF3B30',
-      error500: '#C60B00',
+      error100: '$red100',
+      error300: '$red300',
+      error500: '$red500',
     },
   },
   utils: {

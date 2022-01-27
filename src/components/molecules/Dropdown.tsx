@@ -12,7 +12,12 @@ export type DropdownProps = {
 
 export const DROPDOWN_ITEM_CLASSNAME = '__dorpdownItem__';
 
-export const Dropdown = ({ label, title, position, children }: DropdownProps) => {
+export const Dropdown = ({
+  label,
+  title,
+  position,
+  children,
+}: DropdownProps) => {
   const indicatorRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 

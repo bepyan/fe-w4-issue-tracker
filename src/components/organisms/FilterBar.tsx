@@ -74,6 +74,7 @@ const Wrapper = styled('div', {
       marginRight: '10px',
     },
     input: {
+      flex: 1,
       backgroundColor: 'transparent',
     },
   },

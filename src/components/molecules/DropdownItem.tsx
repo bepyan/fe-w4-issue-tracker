@@ -18,8 +18,12 @@ export const DropdownItemWrapper = styled('div', {
   color: '$body',
   backgroundColor: '$off-white',
   padding: '0.5rem 1rem',
+
   '&:hover': {
     color: '$title-active',
     backgroundColor: '$background',
+  },
+  '& > * + *': {
+    marginLeft: '0.5rem',
   },
 });
