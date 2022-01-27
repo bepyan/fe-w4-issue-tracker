@@ -8,7 +8,13 @@ export type TapsProps = {
 };
 
 export const Taps = ({ tapList }: TapsProps) => {
-  return <TapsWrapper>{tapList.map(TapItem)}</TapsWrapper>;
+  return (
+    <TapsWrapper>
+      {tapList.map((itemProps, index) => (
+        <TapItem key={index} {...itemProps} />
+      ))}
+    </TapsWrapper>
+  );
 };
 
 const TapsWrapper = styled('div', {
