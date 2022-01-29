@@ -1,6 +1,5 @@
 import { Dropdown, DropdownCheckbox, HeaderLink, Icon } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
 export const IssueTableHeader = () => {
   return (

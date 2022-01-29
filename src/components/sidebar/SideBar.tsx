@@ -1,5 +1,4 @@
 import { styled } from '@styles';
-import React from 'react';
 
 export const SideBar = styled('div', {
   width: '300px',

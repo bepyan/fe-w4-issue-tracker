@@ -1,7 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import { useIsPathMatch } from '@hooks';
 import { styled } from '@styles';
-import React, { useState } from 'react';
-import { useMatch, useNavigate } from 'react-router-dom';
 
 export type TapsProps = {
   tapList: TapItemProps[];

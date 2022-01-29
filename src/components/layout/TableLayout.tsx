@@ -1,12 +1,11 @@
 import { styled } from '@styles';
-import React from 'react';
 
-export type TableProps = {
+export type TableLayoutProps = {
   header: React.ReactNode;
   children: React.ReactNode;
 };
 
-export const Table = ({ header, children }: TableProps) => {
+export const TableLayout = ({ header, children }: TableLayoutProps) => {
   return (
     <Wrapper>
       <Header>{header}</Header>

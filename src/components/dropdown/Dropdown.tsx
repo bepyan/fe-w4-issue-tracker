@@ -1,7 +1,7 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { Icon } from '@components';
 import { useClickOutside } from '@hooks';
 import { styled } from '@styles';
-import React, { useEffect, useRef, useState } from 'react';
-import { Icon } from '..';
 
 export type DropdownProps = {
   label: string;

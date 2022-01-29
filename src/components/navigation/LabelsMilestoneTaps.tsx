@@ -1,7 +1,5 @@
 import { Icon, Taps } from '@components';
 import { styled } from '@styles';
-import React from 'react';
-import { useNavigate, useResolvedPath } from 'react-router-dom';
 
 type Props = {
   labelCnt: number;

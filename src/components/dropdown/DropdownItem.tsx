@@ -1,5 +1,4 @@
 import { styled } from '@styles';
-import React from 'react';
 import { DROPDOWN_ITEM_CLASSNAME } from './Dropdown';
 
 type Props = {

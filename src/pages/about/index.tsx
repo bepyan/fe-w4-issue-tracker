@@ -16,7 +16,6 @@ import {
   LabelsMilestoneTaps,
 } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
 export const AboutPage = () => {
   const iconNameList = Object.keys(icons) as IconName[];

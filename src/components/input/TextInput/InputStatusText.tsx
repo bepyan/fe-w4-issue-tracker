@@ -1,15 +1,14 @@
 import { styled } from '@styles';
-import React from 'react';
 
-export type TextInputStatusTextProps = {
+export type InputStatusTextProps = {
   status?: 'success' | 'error';
   statusText?: string;
 };
 
-export const TextInputStatusText = ({
+export const InputStatusText = ({
   status,
   statusText,
-}: TextInputStatusTextProps) => {
+}: InputStatusTextProps) => {
   if (!status || !statusText) return null;
 
   return <StatusText status={status}>{statusText}</StatusText>;

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
   Icon,
@@ -7,8 +8,6 @@ import {
   TextInput,
 } from '@components';
 import { styled } from '@styles';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const IssuesNew = () => {
   const nav = useNavigate();

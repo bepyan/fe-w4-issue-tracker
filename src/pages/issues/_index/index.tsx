@@ -1,5 +1,4 @@
-import React from 'react';
-import { Table } from '@components';
+import { TableLayout } from '@components';
 import { styled } from '@styles';
 import { IssueToolbar } from './IssueToolbar';
 import { IssueTableItem } from './IssueTableItem';
@@ -9,9 +8,9 @@ export const Issues = () => {
   return (
     <Wrapper>
       <IssueToolbar />
-      <Table header={<IssueTableHeader />}>
+      <TableLayout header={<IssueTableHeader />}>
         <IssueTableItem />
-      </Table>
+      </TableLayout>
     </Wrapper>
   );
 };

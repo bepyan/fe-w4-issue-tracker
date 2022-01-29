@@ -1,5 +1,4 @@
 import { styled } from '@styles';
-import React from 'react';
 
 export type InputWrapperProps = {
   label: string;
@@ -15,21 +14,17 @@ type Props = InputWrapperProps & {
   children: React.ReactNode;
 };
 
-export const TextInputWrapper = ({
-  label,
-  children,
-  ...wrapperProps
-}: Props) => {
+export const InputWrapper = ({ label, children, ...wrapperProps }: Props) => {
   return (
-    <InputWrapper {...wrapperProps}>
+    <Wrapper {...wrapperProps}>
       <label>{label}</label>
       {children}
-      {status && <span>{status}</span>}
-    </InputWrapper>
+      {wrapperProps.status && <span>{wrapperProps.status}</span>}
+    </Wrapper>
   );
 };
 
-const InputWrapper = styled('div', {
+const Wrapper = styled('div', {
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
@@ -107,6 +102,9 @@ const InputWrapper = styled('div', {
           position: 'static',
           marginRight: '0.5rem',
           width: '80px',
+        },
+        input: {
+          paddingTop: '0px',
         },
       },
     },

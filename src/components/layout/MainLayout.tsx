@@ -1,7 +1,6 @@
+import { Outlet, useNavigate } from 'react-router-dom';
 import { Icon, Logo } from '@components';
 import { styled } from '@styles';
-import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
 
 export const MainLayout = () => {
   const nav = useNavigate();

@@ -1,9 +1,8 @@
 import { SideBar, SideBarItem } from '@components';
-import React from 'react';
 
 type Props = {};
 
-export const IssueSideBar = (props: Props) => {
+export const IssueSideBar = ({}: Props) => {
   return (
     <SideBar>
       <SideBarItem title="담당자"></SideBarItem>

@@ -4,11 +4,10 @@ import {
   Icon,
   Label,
   LabelsMilestoneTaps,
-  Table,
+  TableLayout,
   TextButton,
 } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
 export const Labels = () => {
   return (
@@ -21,7 +20,7 @@ export const Labels = () => {
         </Button>
       </Toolbar>
 
-      <Table header={<Header>3개의 레이블</Header>}>
+      <TableLayout header={<Header>3개의 레이블</Header>}>
         <TableItem>
           <LabelWrapper>
             <Label>레이블 이름</Label>
@@ -53,7 +52,7 @@ export const Labels = () => {
             <DeleteButton>삭제</DeleteButton>
           </LabelActionWrapper>
         </TableItem>
-      </Table>
+      </TableLayout>
     </Wrapper>
   );
 };

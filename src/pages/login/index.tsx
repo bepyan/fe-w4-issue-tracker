@@ -1,7 +1,6 @@
-import { Button, Logo, TextButton, TextInput } from '@components';
 import { CSS } from '@stitches/react';
+import { Button, Logo, TextButton, TextInput } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
 export const Login = () => {
   return (

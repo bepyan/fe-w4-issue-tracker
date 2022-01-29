@@ -1,6 +1,5 @@
 import { Icon } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
 export type SideBarItemProps = {
   title: string;

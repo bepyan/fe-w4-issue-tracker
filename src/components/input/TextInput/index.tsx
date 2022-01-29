@@ -1,13 +1,10 @@
-import { styled } from '@styles';
 import React, { useState } from 'react';
-import {
-  TextInputStatusText,
-  TextInputStatusTextProps,
-} from './TextInputStatusText';
-import { InputWrapperProps, TextInputWrapper } from './TextInputWrapper';
+import { styled } from '@styles';
+import { InputStatusText, InputStatusTextProps } from './InputStatusText';
+import { InputWrapperProps, InputWrapper } from './InputWrapper';
 
 type Props = Omit<React.HTMLProps<HTMLInputElement>, 'size'> &
-  TextInputStatusTextProps &
+  InputStatusTextProps &
   InputWrapperProps;
 
 export const TextInput = React.forwardRef<HTMLInputElement, Props>(
@@ -54,17 +51,17 @@ export const TextInput = React.forwardRef<HTMLInputElement, Props>(
       onChange: inputChangeHandler,
     };
 
-    const statusTextProps: TextInputStatusTextProps = {
+    const statusTextProps: InputStatusTextProps = {
       status,
       statusText,
     };
 
     return (
       <Wrapper>
-        <TextInputWrapper {...inputWrapperProps}>
+        <InputWrapper {...inputWrapperProps}>
           <input ref={ref} type="text" {...inputProps} />
-        </TextInputWrapper>
-        <TextInputStatusText {...statusTextProps} />
+        </InputWrapper>
+        <InputStatusText {...statusTextProps} />
       </Wrapper>
     );
   },

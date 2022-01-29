@@ -1,14 +1,13 @@
-import { Icon, Label, Table, TextButton } from '@components';
+import { Icon, Label, TableLayout, TextButton } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
 type Props = {
   status?: 'inital' | 'closed' | 'reopen';
 };
 
-export const Comment = (props: Props) => {
+export const Comment = ({}: Props) => {
   return (
-    <Wrapper
+    <TableLayout
       header={
         <Header>
           <UserName>Oni</UserName>
@@ -31,13 +30,9 @@ export const Comment = (props: Props) => {
         처음부터 전부 구현하려고 하지 말고 필수적인 기능부터 만든 후, 차근차근
         완성도를 높여보세요.
       </div>
-    </Wrapper>
+    </TableLayout>
   );
 };
-
-const Wrapper = styled(Table, {
-  padding: '1.5rem 1rem',
-});
 
 const Header = styled('div', {
   flex: 1,

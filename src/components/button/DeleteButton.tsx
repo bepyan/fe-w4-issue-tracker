@@ -1,7 +1,7 @@
-import { Icon, TextButton } from '@components';
 import type * as Stitches from '@stitches/react';
+import { Icon } from '@components';
 import { styled } from '@styles';
-import React from 'react';
+import { TextButton } from './TextButton';
 
 type Props = Stitches.VariantProps<typeof TextButton> & {
   children: React.ReactNode;

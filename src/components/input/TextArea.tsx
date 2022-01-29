@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import { Icon } from '@components';
 import { styled } from '@styles';
-import React, { useState } from 'react';
 
 type TextAreaProps = React.HTMLProps<HTMLTextAreaElement> & {
   label: string;

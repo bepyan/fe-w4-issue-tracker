@@ -1,6 +1,5 @@
 import { Button, Icon, LabelsMilestoneTaps } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
 export const MilestonesToolbar = () => {
   return (

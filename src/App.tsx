@@ -1,8 +1,7 @@
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { MainLayout } from '@components';
 import Page from '@pages';
 import { globalStyles } from '@styles';
-import React from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 const App = () => {
   globalStyles();

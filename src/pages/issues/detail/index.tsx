@@ -5,14 +5,9 @@ import {
   Icon,
   IssueLabel,
   IssueSideBar,
-  Label,
-  SideBarItem,
-  Table,
   TextArea,
-  TextButton,
 } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
 export const IssuesDetail = () => {
   return (

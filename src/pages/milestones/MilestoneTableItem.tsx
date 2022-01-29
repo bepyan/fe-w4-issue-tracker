@@ -1,10 +1,7 @@
-import { Button, Icon, Table, TextButton } from '@components';
+import { Icon, TextButton } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
-type Props = {};
-
-export const MilestoneTableItem = ({}: Props) => {
+export const MilestoneTableItem = () => {
   return (
     <Wrapper>
       <div>

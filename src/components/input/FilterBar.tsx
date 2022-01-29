@@ -1,6 +1,6 @@
+import { useState } from 'react';
+import { Dropdown, Icon, Indicator } from '@components';
 import { styled } from '@styles';
-import React, { useState } from 'react';
-import { Dropdown, Icon, Indicator } from '../';
 
 type Props = {
   label: string;

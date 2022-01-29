@@ -1,7 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import { Icon, Label } from '@components';
 import { styled } from '@styles';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const IssueTableItem = () => {
   const nav = useNavigate();
