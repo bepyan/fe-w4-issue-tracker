@@ -1,8 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { Icon, Label } from '@components';
 import { styled } from '@styles';
+import { IIssue } from '@types';
 
-export const IssueTableItem = () => {
+interface Props {
+  issue: IIssue;
+}
+
+export const IssueTableItem = ({ issue }: Props) => {
   const nav = useNavigate();
 
   const navToIssueDetail = () => nav('1');
@@ -14,16 +19,22 @@ export const IssueTableItem = () => {
       <div>
         <TitleWrapper>
           <Icon name="alert_circle" />
-          <Title onClick={navToIssueDetail}>이슈제목</Title>
-          <Label>레이블 이름</Label>
+          <Title onClick={navToIssueDetail}>{issue.title}</Title>
+          {issue.labels.map((item, i) => (
+            <Label key={i}>{item.name}</Label>
+          ))}
         </TitleWrapper>
 
         <DescWrapper>
-          <span>#이슈번호</span>
-          <span>작성자 및 타임스탬프 정조</span>
+          <span>#{issue.num}</span>
           <span>
-            <Icon name="milestone" /> 마스터즈 코스
+            {issue.writer.name} 및 {issue.timestamp}
           </span>
+          {issue.milestone && (
+            <span>
+              <Icon name="milestone" /> {issue.milestone.name}
+            </span>
+          )}
         </DescWrapper>
       </div>
     </Wrapper>

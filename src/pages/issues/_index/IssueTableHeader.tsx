@@ -1,17 +1,30 @@
 import { Dropdown, DropdownCheckbox, HeaderLink, Icon } from '@components';
+import { issueFilterStore } from '@stores';
 import { styled } from '@styles';
+import { useRecoilState } from 'recoil';
 
-export const IssueTableHeader = () => {
+type Props = {};
+
+export const IssueTableHeader = ({}: Props) => {
+  const [issueFilter, setIssueFilter] = useRecoilState(issueFilterStore);
+
+  const filterOpenIssue = () => {
+    setIssueFilter((state) => ({ ...state, isclose: false }));
+  };
+  const filterCloseIssue = () => {
+    setIssueFilter((state) => ({ ...state, isclose: true }));
+  };
+
   return (
     <Wrapper>
       <div className="wrapper__left">
         <input type="checkbox" />
 
-        <HeaderLink selected={true}>
+        <HeaderLink selected={!issueFilter.isclose} onClick={filterOpenIssue}>
           <Icon name="alert_circle" />
           <span>열린 이슈(2)</span>
         </HeaderLink>
-        <HeaderLink>
+        <HeaderLink selected={issueFilter.isclose} onClick={filterCloseIssue}>
           <Icon name="archive" />
           <span>닫힌 이슈(0)</span>
         </HeaderLink>

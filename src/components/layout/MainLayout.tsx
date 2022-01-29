@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Icon, Logo } from '@components';
 import { styled } from '@styles';
@@ -15,7 +16,9 @@ export const MainLayout = () => {
       </Header>
 
       <Content>
-        <Outlet />
+        <React.Suspense fallback={<h1>로딩중</h1>}>
+          <Outlet />
+        </React.Suspense>
       </Content>
     </Wrapper>
   );
