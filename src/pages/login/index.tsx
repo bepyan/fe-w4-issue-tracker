@@ -4,8 +4,10 @@ import { styled } from '@styles';
 import { useMutation } from 'react-query';
 import { API } from '@services';
 import { useAuthStore } from '@stores';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
+  const nav = useNavigate();
   const { signin } = useAuthStore();
 
   const loginMutation = useMutation(API.login_user, {
@@ -13,6 +15,8 @@ export const Login = () => {
       signin(data);
     },
   });
+
+  const navToRegister = () => nav('/register');
 
   const onSubmitLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -52,10 +56,14 @@ export const Login = () => {
             type="password"
             {...inputErrorProps}
           />
-          <Button size="large" type="submit">
+          <Button size="large" type="submit" disabled={loginMutation.isLoading}>
             아이디로 로그인
           </Button>
-          <TextButton type="button" disabled={loginMutation.isLoading}>
+          <TextButton
+            type="button"
+            disabled={loginMutation.isLoading}
+            onClick={navToRegister}
+          >
             회원가입
           </TextButton>
         </form>

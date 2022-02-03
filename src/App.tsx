@@ -34,6 +34,15 @@ const App = () => {
             </AuthRestricted>
           }
         />
+        <Route
+          path="/register"
+          element={
+            <AuthRestricted>
+              <Page.Register />
+            </AuthRestricted>
+          }
+        />
+
         <Route path="/about" element={<Page.AboutPage />} />
         <Route path="*" element={<Page.NotFound />} />
       </Routes>
