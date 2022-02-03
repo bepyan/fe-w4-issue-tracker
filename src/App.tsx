@@ -1,12 +1,19 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { MainLayout } from '@components';
+import { AuthRequired, AuthRestricted, MainLayout } from '@components';
 import Page from '@pages';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route
+          path="/"
+          element={
+            <AuthRequired>
+              <MainLayout />
+            </AuthRequired>
+          }
+        >
           <Route index element={<Navigate to="/issues" />} />
 
           <Route path="/issues">
@@ -19,7 +26,14 @@ const App = () => {
           <Route path="/milestones" element={<Page.Milestones />} />
         </Route>
 
-        <Route path="/login" element={<Page.Login />} />
+        <Route
+          path="/login"
+          element={
+            <AuthRestricted>
+              <Page.Login />
+            </AuthRestricted>
+          }
+        />
         <Route path="/about" element={<Page.AboutPage />} />
         <Route path="*" element={<Page.NotFound />} />
       </Routes>

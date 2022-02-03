@@ -1,19 +1,12 @@
 import React from 'react';
-import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { Icon, Logo } from '@components';
 import { styled } from '@styles';
-import { useAuthStore } from '@stores';
 
 export const MainLayout = () => {
   const nav = useNavigate();
-  const location = useLocation();
-  const { auth } = useAuthStore();
 
   const navToLaddingPage = () => nav('/');
-
-  if (!auth) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
 
   return (
     <Wrapper>
