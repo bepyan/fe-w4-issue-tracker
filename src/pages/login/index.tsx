@@ -1,8 +1,38 @@
 import { CSS } from '@stitches/react';
 import { Button, Logo, TextButton, TextInput } from '@components';
 import { styled } from '@styles';
+import { useMutation } from 'react-query';
+import { API } from '@services';
+import { useAuthStore } from '@stores';
 
 export const Login = () => {
+  const { signin } = useAuthStore();
+
+  const loginMutation = useMutation(API.login_user, {
+    onSuccess: ({ data }) => {
+      signin(data);
+    },
+  });
+
+  const onSubmitLogin = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    if (loginMutation.isLoading) return;
+
+    const target = e.target as typeof e.target & {
+      id: { value: string };
+      pw: { value: string };
+    };
+
+    loginMutation.mutate({ id: target.id.value, pw: target.pw.value });
+  };
+
+  const inputErrorProps = loginMutation.isError
+    ? {
+        status: 'error' as const,
+        statusText: '비번 확인점..',
+      }
+    : {};
+
   return (
     <Wrapper>
       <Logo size="large" />
@@ -14,13 +44,20 @@ export const Login = () => {
 
         <TextSeparator>or</TextSeparator>
 
-        <form>
-          <TextInput label="아이디" />
-          <TextInput label="비밀번호" type="password" />
+        <form onSubmit={onSubmitLogin}>
+          <TextInput id="id" label="아이디" />
+          <TextInput
+            id="pw"
+            label="비밀번호"
+            type="password"
+            {...inputErrorProps}
+          />
           <Button size="large" type="submit">
             아이디로 로그인
           </Button>
-          <TextButton type="button">회원가입</TextButton>
+          <TextButton type="button" disabled={loginMutation.isLoading}>
+            회원가입
+          </TextButton>
         </form>
       </Content>
     </Wrapper>
