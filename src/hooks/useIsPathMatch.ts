@@ -1,4 +1,3 @@
-import React from 'react';
 import { useMatch, useResolvedPath } from 'react-router-dom';
 
 export const useIsPathMatch = (path: string) => {
