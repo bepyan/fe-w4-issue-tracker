@@ -1,10 +1,10 @@
-import { useAuthStore } from '@stores';
+import { useUserStore } from '@stores';
 import { Navigate, Outlet } from 'react-router-dom';
 
 export const AuthRestricted = () => {
-  const { auth } = useAuthStore();
+  const { user } = useUserStore();
 
-  if (auth) {
+  if (user) {
     return <Navigate to="/" replace />;
   }
 

@@ -2,16 +2,16 @@ import { Button, Logo, TextButton, TextInput } from '@components';
 import { styled } from '@styles';
 import { useMutation } from 'react-query';
 import { API } from '@services';
-import { useAuthStore } from '@stores';
+import { useUserStore } from '@stores';
 import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
   const nav = useNavigate();
-  const { signin } = useAuthStore();
+  const { signin } = useUserStore();
 
   const registerMutation = useMutation(API.register_user, {
     onSuccess: ({ data }) => {
-      signin(data);
+      // signin(data);
     },
   });
 

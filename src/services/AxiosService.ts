@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { StorageService } from './StorageService';
+import AuthService from './AuthService';
 
 /**
  * axios 인스턴스 설정
@@ -15,7 +15,7 @@ instance.interceptors.request.use(
     ...config,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: StorageService.getItem('token'),
+      ...AuthService.getAxiosHeader(),
       ...config.headers,
     },
   }),
@@ -32,17 +32,18 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      // 잘못된 토큰
       if (error.response.status === 401) {
-        StorageService.removeItem('token');
+        // TODO: refresh 작업
+
+        AuthService.removeAuth();
+        alert('인증이 만료되었습니다. 다시 로그인 해주세요.');
+        location.reload();
 
         return Promise.reject('잘못된 인증입니다.');
-        // refresh 작업 필요
       }
     }
 
-    console.log(error.response.data);
-    console.log(`[ Error ] ${error.message}`, error.config); // 디버깅용 콘솔
+    console.log(`[ Error ] ${error.message}`, error.config);
     return Promise.reject(error.response.data);
   },
 );
@@ -51,13 +52,11 @@ instance.interceptors.response.use(
  * axios 통신 코드
  */
 
-interface APIResponse<T> {
+type APIResponse<T> = Promise<{
   data: T;
   message?: string;
-}
+}>;
 
-export const _axios = <T>(
-  props: AxiosRequestConfig,
-): Promise<APIResponse<T>> => {
+export const _axios = <T>(props: AxiosRequestConfig): APIResponse<T> => {
   return instance(props);
 };

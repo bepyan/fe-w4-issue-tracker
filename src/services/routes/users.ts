@@ -1,5 +1,5 @@
 import { _axios } from '@services';
-import { UserDTO, UserLoginDTO, UserRegistDTO } from '@types';
+import { AuthDTO, UserDTO, UserLoginDTO, UserRegistDTO } from '@types';
 
 const baseRoute = '/users';
 
@@ -14,7 +14,7 @@ export const register_user = (data: UserRegistDTO) => {
 };
 
 export const login_user = (data: UserLoginDTO) => {
-  return _axios<UserDTO>({
+  return _axios<AuthDTO>({
     url: `${baseRoute}/login`,
     method: 'POST',
     data,

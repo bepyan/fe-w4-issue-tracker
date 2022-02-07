@@ -1,8 +1,18 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthRequired, AuthRestricted, MainLayout } from '@components';
 import Page from '@pages';
+import { useUserStore } from '@stores';
+import { useMutation } from 'react-query';
+import { useEffect } from 'react';
 
 const App = () => {
+  const { checkAuth } = useUserStore();
+  const authMutate = useMutation(checkAuth);
+
+  useEffect(() => authMutate.mutate(), []);
+
+  if (authMutate.isLoading) return <h1>로딩중...</h1>;
+
   return (
     <BrowserRouter>
       <Routes>
@@ -24,7 +34,7 @@ const App = () => {
         <Route element={<AuthRestricted />}>
           <Route path="/login" element={<Page.Login />} />
           <Route path="/register" element={<Page.Register />} />
-          <Route path="/github/callback" element={<Page.GithubCallback />} />
+          <Route path="/auth/callback" element={<Page.GithubCallback />} />
         </Route>
 
         <Route path="/about" element={<Page.AboutPage />} />

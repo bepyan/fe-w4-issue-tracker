@@ -2,17 +2,19 @@ import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Icon, Logo } from '@components';
 import { styled } from '@styles';
+import { useUserStore } from '@stores';
 
 export const MainLayout = () => {
   const nav = useNavigate();
+  const { signout } = useUserStore();
 
-  const navToLaddingPage = () => nav('/');
+  const navToLaddingPage = () => nav('/issues');
 
   return (
     <Wrapper>
       <Header>
         <HeaderLogo size="medium" onClick={navToLaddingPage} />
-        <Icon name="user_image_large" />
+        <Icon name="user_image_large" onClick={signout} />
       </Header>
 
       <Content>
@@ -36,6 +38,7 @@ const Header = styled('div', {
   padding: '1.75rem 5rem',
 
   svg: {
+    cursor: 'pointer',
     marginLeft: 'auto',
   },
 });

@@ -1,11 +1,11 @@
-import { useAuthStore } from '@stores';
+import { useUserStore } from '@stores';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 export const AuthRequired = () => {
   const location = useLocation();
-  const { auth } = useAuthStore();
+  const { user } = useUserStore();
 
-  if (!auth) {
+  if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

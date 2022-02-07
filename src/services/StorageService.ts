@@ -2,9 +2,9 @@
  * LocalStorage에 저장할 데이터의 키들
  */
 export type StorageFlags = {
-  token: {
-    access: string;
-    refresh: string;
+  auth: {
+    accessToken: string;
+    refreshToken: string;
   };
 };
 

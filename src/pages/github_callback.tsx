@@ -1,25 +1,22 @@
 import { useEffect } from 'react';
 import qs from 'qs';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { API } from '@services';
+import { AuthService } from '@services';
+import { useUserStore } from '@stores';
 
 export const GithubCallback = () => {
   const nav = useNavigate();
   const location = useLocation();
+  const { checkAuth } = useUserStore();
 
   useEffect(() => {
     const getToken = async () => {
-      const { code } = qs.parse(location.search, {
-        ignoreQueryPrefix: true,
-      });
+      const query = qs.parse(location.search, { ignoreQueryPrefix: true });
+      const accessToken = query.accessToken as string;
+      AuthService.saveAuth({ accessToken, refreshToken: accessToken });
 
       try {
-        const res = await API.check_account(code + '');
-
-        console.log(code);
-        console.log(res);
-        // 20e8602e7ee4519fbc83
-
+        await checkAuth();
         nav('/');
       } catch (error) {
         console.log(error);

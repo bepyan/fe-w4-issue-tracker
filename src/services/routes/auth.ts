@@ -1,14 +1,12 @@
 import { _axios } from '@services';
+import { UserDTO } from '@types';
 
 const baseRoute = '/auth';
 
-export const check_account = (token: string) => {
-  return _axios<void>({
+export const check_account = () => {
+  return _axios<UserDTO>({
     url: `${baseRoute}/account`,
     method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
   });
 };
 

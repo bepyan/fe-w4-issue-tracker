@@ -14,4 +14,13 @@ declare module '@types' {
     pw: string;
     name: string;
   }
+
+  interface IAuth {
+    accessToken: string;
+    refreshToken: string;
+  }
+
+  interface AuthDTO extends IAuth {
+    user: UserDTO;
+  }
 }
