@@ -6,7 +6,7 @@ declare module '@types' {
     title: string;
     description: string;
     deadline: string;
-    issues: IssueJSON[];
+    issues: IssueDTO[];
     status: MilestoneStatus;
   }
 
