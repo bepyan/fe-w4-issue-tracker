@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { Icon, Label } from '@components';
 import { styled } from '@styles';
-import { IIssue } from '@types';
+import { IssueDTO } from '@types';
 
 interface Props {
-  issue: IIssue;
+  issue: IssueDTO;
 }
 
 export const IssueTableItem = ({ issue }: Props) => {
@@ -32,7 +32,7 @@ export const IssueTableItem = ({ issue }: Props) => {
           </span>
           {issue.milestone && (
             <span>
-              <Icon name="milestone" /> {issue.milestone.name}
+              <Icon name="milestone" /> {issue.milestone.title}
             </span>
           )}
         </DescWrapper>

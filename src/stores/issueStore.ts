@@ -1,22 +1,22 @@
 import { atom, selector } from 'recoil';
-import { IIssue } from '@types';
-import { sleep } from '@utils';
-import { getIssueList } from './issueMockup';
+import { IssueDTO, IssueStatus } from '@types';
 
-export const issueQuery = selector<IIssue[]>({
+export const issueQuery = selector<IssueDTO[]>({
   key: 'issueQuery',
   get: async () => {
-    await sleep(1000);
-    console.log('fetching');
-    return getIssueList();
+    return [];
   },
 });
 
-export const issueFilterStore = atom({
+export const issueFilterStore = atom<{
+  status: IssueStatus;
+  assignee?: string;
+  milstone?: string;
+}>({
   key: 'issueFilterStore',
   default: {
-    isclose: false,
-    assignner: undefined,
+    status: 'open',
+    assignee: undefined,
     milstone: undefined,
   },
 });
@@ -28,7 +28,7 @@ export const issueStore = selector({
     const list = get(issueQuery);
 
     return list.filter((v) => {
-      return v.isclose === filter.isclose;
+      return v.status === filter.status;
     });
   },
 });

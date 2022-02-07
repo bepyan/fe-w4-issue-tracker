@@ -1,12 +1,12 @@
 import { _axios } from '@services';
-import { IMilestone, MilestoneRequestDTO } from '@types';
+import { MilestoneDTO, MilestoneRequestDTO } from '@types';
 
 const baseRoute = '/milestones';
 
 // POST
 
 export const create_milestone = (data: MilestoneRequestDTO) => {
-  return _axios<void>({
+  return _axios<MilestoneRequestDTO>({
     url: `${baseRoute}`,
     method: 'POST',
     data,
@@ -16,28 +16,35 @@ export const create_milestone = (data: MilestoneRequestDTO) => {
 // GET
 
 export const read_all_milestones = () => {
-  return _axios<IMilestone[]>({
+  return _axios<MilestoneDTO[]>({
     url: `${baseRoute}`,
     method: 'GET',
   });
 };
 
-// PUT
+export const read_milestone_by_id = (milestoneId: string) => {
+  return _axios<MilestoneDTO>({
+    url: `${baseRoute}/${milestoneId}`,
+    method: 'GET',
+  });
+};
+
+// PATCH
 
 export const update_milestone = (
-  labelId: number,
+  milestone: string,
   data: MilestoneRequestDTO,
 ) => {
-  return _axios<void>({
-    url: `${baseRoute}/${labelId}`,
-    method: 'PUT',
+  return _axios<MilestoneDTO>({
+    url: `${baseRoute}/${milestone}`,
+    method: 'PATCH',
     data,
   });
 };
 
 // DELETE
 
-export const delete_milestone = (milestoneId: number) => {
+export const delete_milestone = (milestoneId: string) => {
   return _axios<void>({
     url: `${baseRoute}/${milestoneId}`,
     method: 'DELETE',

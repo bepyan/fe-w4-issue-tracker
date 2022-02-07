@@ -1,7 +1,7 @@
 import { useAuthStore } from '@stores';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-export const AuthRequired = ({ children }: { children: React.ReactNode }) => {
+export const AuthRequired = () => {
   const location = useLocation();
   const { auth } = useAuthStore();
 
@@ -9,5 +9,5 @@ export const AuthRequired = ({ children }: { children: React.ReactNode }) => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  return <>{children}</>;
+  return <Outlet />;
 };

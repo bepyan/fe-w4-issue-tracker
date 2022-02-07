@@ -6,7 +6,7 @@ const baseRoute = '/labels';
 // POST
 
 export const create_label = (data: LabelRequestDTO) => {
-  return _axios<void>({
+  return _axios<LabelDTO>({
     url: `${baseRoute}`,
     method: 'POST',
     data,
@@ -22,19 +22,26 @@ export const read_all_labels = () => {
   });
 };
 
-// PUT
+export const read_label_by_id = (labelId: string) => {
+  return _axios<LabelDTO>({
+    url: `${baseRoute}/${labelId}`,
+    method: 'GET',
+  });
+};
 
-export const update_label = (labelId: number, data: LabelRequestDTO) => {
+// PATCH
+
+export const update_label = (labelId: string, data: LabelRequestDTO) => {
   return _axios<void>({
     url: `${baseRoute}/${labelId}`,
-    method: 'PUT',
+    method: 'PATCH',
     data,
   });
 };
 
 // DELETE
 
-export const delete_label = (labelId: number) => {
+export const delete_label = (labelId: string) => {
   return _axios<void>({
     url: `${baseRoute}/${labelId}`,
     method: 'DELETE',

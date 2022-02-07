@@ -8,4 +8,10 @@ declare module '@types' {
     id: string;
     pw: string;
   }
+
+  interface UserRegistDTO {
+    id: string;
+    pw: string;
+    name: string;
+  }
 }

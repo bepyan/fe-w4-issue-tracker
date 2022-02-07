@@ -53,6 +53,7 @@ instance.interceptors.response.use(
 
 interface APIResponse<T> {
   data: T;
+  message?: string;
 }
 
 export const _axios = <T>(

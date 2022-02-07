@@ -42,7 +42,12 @@ export const Login = () => {
       <Logo size="large" />
 
       <Content>
-        <Button size="large" css={githubButtonStyle}>
+        <Button
+          as="a"
+          href={API.GithubAuthHref}
+          size="large"
+          css={githubButtonStyle}
+        >
           GitHub 계정으로 로그인
         </Button>
 
@@ -96,6 +101,7 @@ const TextSeparator = styled('span', {
 
 const githubButtonStyle: CSS = {
   color: '$off-white',
+  padding: '0px',
   backgroundColor: '$title-active',
   '&:hover': {
     backgroundColor: '$body',

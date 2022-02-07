@@ -1,12 +1,12 @@
 import { useAuthStore } from '@stores';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
-export const AuthRestricted = ({ children }: { children: React.ReactNode }) => {
+export const AuthRestricted = () => {
   const { auth } = useAuthStore();
 
   if (auth) {
     return <Navigate to="/" replace />;
   }
 
-  return <>{children}</>;
+  return <Outlet />;
 };

@@ -9,10 +9,10 @@ export const IssueTableHeader = ({}: Props) => {
   const [issueFilter, setIssueFilter] = useRecoilState(issueFilterStore);
 
   const filterOpenIssue = () => {
-    setIssueFilter((state) => ({ ...state, isclose: false }));
+    setIssueFilter((state) => ({ ...state, status: 'open' }));
   };
   const filterCloseIssue = () => {
-    setIssueFilter((state) => ({ ...state, isclose: true }));
+    setIssueFilter((state) => ({ ...state, status: 'close' }));
   };
 
   return (
@@ -20,11 +20,17 @@ export const IssueTableHeader = ({}: Props) => {
       <div className="wrapper__left">
         <input type="checkbox" />
 
-        <HeaderLink selected={!issueFilter.isclose} onClick={filterOpenIssue}>
+        <HeaderLink
+          selected={issueFilter.status === 'open'}
+          onClick={filterOpenIssue}
+        >
           <Icon name="alert_circle" />
           <span>열린 이슈(2)</span>
         </HeaderLink>
-        <HeaderLink selected={issueFilter.isclose} onClick={filterCloseIssue}>
+        <HeaderLink
+          selected={issueFilter.status === 'close'}
+          onClick={filterCloseIssue}
+        >
           <Icon name="archive" />
           <span>닫힌 이슈(0)</span>
         </HeaderLink>

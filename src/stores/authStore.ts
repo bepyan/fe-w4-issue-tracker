@@ -3,7 +3,8 @@ import { atom, useRecoilState } from 'recoil';
 
 export const authStore = atom<UserDTO | undefined>({
   key: 'authStore',
-  default: { id: 'edward', pw: 'asdf', name: 'edward' },
+  // default: { id: 'edward', pw: 'asdf', name: 'edward' },
+  default: undefined,
 });
 
 export const useAuthStore = () => {

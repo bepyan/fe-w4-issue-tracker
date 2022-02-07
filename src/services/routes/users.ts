@@ -1,23 +1,30 @@
 import { _axios } from '@services';
-import { UserDTO } from '@types';
+import { UserDTO, UserLoginDTO, UserRegistDTO } from '@types';
 
 const baseRoute = '/users';
 
 // POST
 
-export const register_user = (data: UserDTO) => {
+export const register_user = (data: UserRegistDTO) => {
   return _axios<UserDTO>({
-    url: `${baseRoute}`,
+    url: `${baseRoute}/register`,
     method: 'POST',
     data,
   });
 };
 
-export const login_user = (data: { id: string; pw: string }) => {
+export const login_user = (data: UserLoginDTO) => {
   return _axios<UserDTO>({
-    url: `${baseRoute}`,
+    url: `${baseRoute}/login`,
     method: 'POST',
     data,
+  });
+};
+
+export const github_login = () => {
+  return _axios({
+    url: `/auth/github/callback`,
+    method: 'GET',
   });
 };
 
@@ -34,9 +41,9 @@ export const read_all_users = () => {
 
 // DELELE
 
-export const delete_user = () => {
-  return _axios<UserDTO[]>({
-    url: `${baseRoute}`,
+export const withdrawal_user = () => {
+  return _axios<void>({
+    url: `${baseRoute}/withdrawal`,
     method: 'DELETE',
   });
 };
