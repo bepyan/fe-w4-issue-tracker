@@ -19,6 +19,8 @@ export const MilestoneTableItem = ({ milestone }: Props) => {
   }, [milestone]);
 
   const percentage = useMemo(() => {
+    if (openCnt + closeCnt === 0) return 0;
+
     return Math.floor((openCnt * 100) / (openCnt + closeCnt));
   }, [openCnt, closeCnt]);
 
