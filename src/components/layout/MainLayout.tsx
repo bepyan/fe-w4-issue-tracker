@@ -2,11 +2,11 @@ import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Icon, Logo } from '@components';
 import { styled } from '@styles';
-import { useUserStore } from '@stores';
+import { useAuthStore } from '@stores';
 
 export const MainLayout = () => {
   const nav = useNavigate();
-  const { signout } = useUserStore();
+  const { signout } = useAuthStore();
 
   const navToLaddingPage = () => nav('/issues');
 

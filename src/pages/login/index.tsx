@@ -1,14 +1,14 @@
 import { styled } from '@styles';
 import { useMutation } from 'react-query';
 import { API } from '@services';
-import { useUserStore } from '@stores';
+import { useAuthStore } from '@stores';
 import { useNavigate } from 'react-router-dom';
 import { Logo } from '@components';
 import { LoginContent, LoginContentProps } from './LoginContent';
 
 export const Login = () => {
   const nav = useNavigate();
-  const { signin } = useUserStore();
+  const { signin } = useAuthStore();
 
   const loginMutation = useMutation(API.login_user, {
     onSuccess: ({ data }) => {

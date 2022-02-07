@@ -1,31 +1,19 @@
 import { API } from '@services';
-import { AuthDTO, UserDTO } from '@types';
+import { UserDTO } from '@types';
+import { useQuery } from 'react-query';
 import { atom, useRecoilState } from 'recoil';
-import AuthService from 'services/AuthService';
 
-export const userStore = atom<UserDTO | undefined>({
+export const userStore = atom<UserDTO[]>({
   key: 'userStore',
-  default: undefined,
+  default: [],
 });
 
 export const useUserStore = () => {
-  const [user, setUser] = useRecoilState(userStore);
+  const [userList, setUserList] = useRecoilState(userStore);
 
-  return {
-    user,
-    checkAuth: async () => {
-      if (!AuthService.hasAuth()) return;
+  useQuery('read_all_users', API.read_all_users, {
+    onSuccess: ({ data }) => setUserList(data),
+  });
 
-      const { data } = await API.check_account();
-      setUser(data);
-    },
-    signin: ({ user, ...auth }: AuthDTO) => {
-      AuthService.saveAuth(auth);
-      setUser(user);
-    },
-    signout: () => {
-      AuthService.removeAuth();
-      setUser(undefined);
-    },
-  };
+  return { userList, setUserList };
 };

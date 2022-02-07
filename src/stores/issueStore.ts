@@ -1,5 +1,7 @@
 import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 import { IssueDTO, IssueStatus } from '@types';
+import { useQuery } from 'react-query';
+import { API } from '@services';
 
 export const issueStore = atom<IssueDTO[]>({
   key: 'issueStore',
@@ -35,6 +37,10 @@ export const useIssueStore = () => {
   const filterdIssueList = useRecoilValue(filterdIssueStore);
   const [issueList, setIssueList] = useRecoilState(issueStore);
   const [issueFilter, setIssueFilter] = useRecoilState(issueFilterStore);
+
+  useQuery('read_all_issues', API.read_all_issues, {
+    onSuccess: ({ data }) => setIssueList(data),
+  });
 
   return {
     issueList,

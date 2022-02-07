@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import qs from 'qs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthService } from '@services';
-import { useUserStore } from '@stores';
+import { useAuthStore } from '@stores';
 
 export const GithubCallback = () => {
   const nav = useNavigate();
   const location = useLocation();
-  const { checkAuth } = useUserStore();
+  const { checkAuth } = useAuthStore();
 
   useEffect(() => {
     const getToken = async () => {

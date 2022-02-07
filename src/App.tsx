@@ -1,21 +1,12 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthRequired, AuthRestricted, MainLayout } from '@components';
 import Page from '@pages';
-import { useUserStore } from '@stores';
-import { useQuery, useQueryClient } from 'react-query';
-import { API } from '@services';
+import { useAuthStore } from '@stores';
+import { useQuery } from 'react-query';
 
 const App = () => {
-  const queryClient = useQueryClient();
-  const { checkAuth } = useUserStore();
-  const { isLoading } = useQuery('checkAuth', checkAuth, {
-    onSuccess: () => {
-      queryClient.prefetchQuery('read_all_issues', API.read_all_issues);
-      queryClient.prefetchQuery('read_all_labels', API.read_all_labels);
-      queryClient.prefetchQuery('read_all_milestones', API.read_all_milestones);
-      queryClient.prefetchQuery('read_all_users', API.read_all_users);
-    },
-  });
+  const { checkAuth } = useAuthStore();
+  const { isLoading } = useQuery('checkAuth', checkAuth);
 
   if (isLoading) return <h1>로딩중...</h1>;
 
