@@ -1,11 +1,9 @@
-import { atom, selector } from 'recoil';
+import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 import { IssueDTO, IssueStatus } from '@types';
 
-export const issueQuery = selector<IssueDTO[]>({
-  key: 'issueQuery',
-  get: async () => {
-    return [];
-  },
+export const issueStore = atom<IssueDTO[]>({
+  key: 'issueStore',
+  default: [],
 });
 
 export const issueFilterStore = atom<{
@@ -21,14 +19,28 @@ export const issueFilterStore = atom<{
   },
 });
 
-export const issueStore = selector({
-  key: 'issueStore',
+export const filterdIssueStore = selector({
+  key: 'filterdIssueStore',
   get: ({ get }) => {
+    const list = get(issueStore);
     const filter = get(issueFilterStore);
-    const list = get(issueQuery);
 
     return list.filter((v) => {
       return v.status === filter.status;
     });
   },
 });
+
+export const useIssueStore = () => {
+  const filterdIssueList = useRecoilValue(filterdIssueStore);
+  const [issueList, setIssueList] = useRecoilState(issueStore);
+  const [issueFilter, setIssueFilter] = useRecoilState(issueFilterStore);
+
+  return {
+    issueList,
+    filterdIssueList,
+    issueFilter,
+    setIssueList,
+    setIssueFilter,
+  };
+};

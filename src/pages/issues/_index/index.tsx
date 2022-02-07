@@ -1,21 +1,34 @@
-import { useRecoilValue } from 'recoil';
+import { useMutation } from 'react-query';
 import { TableLayout } from '@components';
+import { API } from '@services';
 import { styled } from '@styles';
-import { issueStore } from '@stores';
+import { useIssueStore } from '@stores';
 import { IssueToolbar } from './IssueToolbar';
 import { IssueTableItem } from './IssueTableItem';
 import { IssueTableHeader } from './IssueTableHeader';
 import { IssueTableEmptyView } from './IssueTableEmptyView';
+import { useEffect } from 'react';
 
 export const Issues = () => {
-  const issueList = useRecoilValue(issueStore);
+  const { filterdIssueList, setIssueList } = useIssueStore();
+
+  const issueMutation = useMutation(API.read_all_issues, {
+    onSuccess: ({ data }) => {
+      setIssueList(data);
+    },
+  });
+
+  useEffect(() => {
+    issueMutation.mutate();
+  }, []);
 
   return (
     <Wrapper>
       <IssueToolbar />
+
       <TableLayout header={<IssueTableHeader />}>
-        {issueList.length ? (
-          issueList.map((item, index) => (
+        {filterdIssueList.length ? (
+          filterdIssueList.map((item, index) => (
             <IssueTableItem key={index} issue={item} />
           ))
         ) : (
