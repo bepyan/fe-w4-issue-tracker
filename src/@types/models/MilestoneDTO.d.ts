@@ -2,11 +2,11 @@ declare module '@types' {
   type MilestoneStatus = 'open' | 'closed';
 
   interface MilestoneDTO {
-    id: number;
+    id: string;
     title: string;
     description: string;
     deadline: string;
-    issues: IssueDTO[];
+    issues: IssueJSON[];
     status: MilestoneStatus;
   }
 

@@ -1,16 +1,17 @@
 declare module '@types' {
   interface LabelDTO {
-    id: number;
+    id: string;
     name: string;
     description: string;
-    color: string;
+    color: 'light' | 'dark';
     backgroundColor: string;
+    userId: string;
   }
 
   interface LabelRequestDTO {
     name: string;
     description: string;
-    color: string;
+    color: 'light' | 'dark';
     backgroundColor: string;
   }
 }

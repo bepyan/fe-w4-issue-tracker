@@ -2,24 +2,23 @@ declare module '@types' {
   type IssueStatus = 'open' | 'close';
 
   interface IssueDTO {
-    id: number;
+    id: string;
     num: number;
     title: string;
     comments: CommentDTO[];
-    labels: ILabel[];
-    assigneers?: IUser[];
-    milestone?: IMilestone;
-    writer: IUser;
+    labels: LabelDTO[];
+    assignees: UserDTO[];
+    milestone?: MilestoneDTO;
+    writer: UserDTO;
     status: IssueStatus;
     timestamp: string;
   }
 
   interface IssueRequestDTO {
-    num: number;
     title: string;
     comment: string;
-    labels: ILabel[];
-    assigneers: IUser[];
-    milestone?: IMilestone;
+    labels: string[];
+    assignees: string[];
+    milestone?: string | null;
   }
 }
