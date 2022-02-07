@@ -1,57 +1,31 @@
-import {
-  Button,
-  DeleteButton,
-  Icon,
-  Label,
-  LabelsMilestoneTaps,
-  TableLayout,
-  TextButton,
-} from '@components';
+import { TableLayout } from '@components';
+import { API } from '@services';
+import { useLabelStore } from '@stores';
 import { styled } from '@styles';
+import { useQuery } from 'react-query';
+
+import { LabelTableEmptyView } from './LabelTableEmptyView';
+import { LabelTableItem } from './LabelTableItem';
+import { LabelToolbar } from './LabelToolbar';
 
 export const Labels = () => {
+  const { labelList, setLabelList } = useLabelStore();
+
+  useQuery('read_all_labels', API.read_all_labels, {
+    onSuccess: ({ data }) => {
+      setLabelList(data);
+    },
+  });
+
   return (
     <Wrapper>
-      <Toolbar>
-        <LabelsMilestoneTaps labelCnt={3} milestoneCnt={2} />
+      <LabelToolbar />
 
-        <Button size="small">
-          <Icon name="plus" /> 추가
-        </Button>
-      </Toolbar>
-
-      <TableLayout header={<Header>3개의 레이블</Header>}>
-        <TableItem>
-          <LabelWrapper>
-            <Label>레이블 이름</Label>
-          </LabelWrapper>
-
-          <LabelDescText>레이블에 대한 설명</LabelDescText>
-
-          <LabelActionWrapper>
-            <TextButton>
-              <Icon name="edit" /> 편집
-            </TextButton>
-
-            <DeleteButton>삭제</DeleteButton>
-          </LabelActionWrapper>
-        </TableItem>
-
-        <TableItem>
-          <LabelWrapper>
-            <Label>레이블 이름</Label>
-          </LabelWrapper>
-
-          <LabelDescText>레이블에 대한 설명</LabelDescText>
-
-          <LabelActionWrapper>
-            <TextButton>
-              <Icon name="edit" /> 편집
-            </TextButton>
-
-            <DeleteButton>삭제</DeleteButton>
-          </LabelActionWrapper>
-        </TableItem>
+      <TableLayout header={<Header>{labelList.length}개의 레이블</Header>}>
+        {labelList.map((item, index) => (
+          <LabelTableItem key={index} label={item} />
+        ))}
+        {!labelList.length && <LabelTableEmptyView />}
       </TableLayout>
     </Wrapper>
   );
@@ -63,41 +37,7 @@ const Wrapper = styled('div', {
   },
 });
 
-const Toolbar = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-
-  '& > :last-child': {
-    marginLeft: 'auto',
-  },
-});
-
 const Header = styled('div', {
   color: '$label',
   fontWeight: '$bold',
-});
-
-const TableItem = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  padding: '2rem',
-});
-
-const LabelWrapper = styled('div', {
-  flex: 1,
-});
-
-const LabelDescText = styled('div', {
-  color: '$label',
-  flex: 3,
-});
-
-const LabelActionWrapper = styled('div', {
-  marginLeft: 'auto',
-  display: 'flex',
-  alignItems: 'center',
-
-  '& > * + *': {
-    marginLeft: '1.5rem',
-  },
 });

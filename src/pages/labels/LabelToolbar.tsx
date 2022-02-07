@@ -1,12 +1,12 @@
 import { Button, Icon, LabelsMilestoneTaps } from '@components';
 import { styled } from '@styles';
 
-export const MilestonesToolbar = () => {
+export const LabelToolbar = () => {
   return (
     <Toolbar>
       <LabelsMilestoneTaps />
 
-      <Button>
+      <Button size="small">
         <Icon name="plus" /> 추가
       </Button>
     </Toolbar>
@@ -17,7 +17,7 @@ const Toolbar = styled('div', {
   display: 'flex',
   alignItems: 'center',
 
-  '& > *:last-child': {
+  '& > :last-child': {
     marginLeft: 'auto',
   },
 });

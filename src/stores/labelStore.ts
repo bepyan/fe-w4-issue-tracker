@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom, useRecoilState } from 'recoil';
 import { LabelDTO } from '@types';
 
 export const labelStore = atom<LabelDTO[]>({
@@ -6,10 +6,8 @@ export const labelStore = atom<LabelDTO[]>({
   default: [],
 });
 
-export const labelQuery = selector<LabelDTO[]>({
-  key: 'labelQuery',
-  get: async () => {
-    return [];
-  },
-  set: ({ set }, newValue) => set(labelStore, newValue),
-});
+export const useLabelStore = () => {
+  const [labelList, setLabelList] = useRecoilState(labelStore);
+
+  return { labelList, setLabelList };
+};

@@ -32,7 +32,7 @@ export const IssueToolbar = () => {
       <Blank />
 
       <RightActionWrapper>
-        <LabelsMilestoneTaps labelCnt={3} milestoneCnt={2} />
+        <LabelsMilestoneTaps />
         <Button size="small" onClick={navToIssueNew}>
           <Icon name="plus" />
           이슈 작성

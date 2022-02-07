@@ -2,16 +2,22 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthRequired, AuthRestricted, MainLayout } from '@components';
 import Page from '@pages';
 import { useUserStore } from '@stores';
-import { useMutation } from 'react-query';
-import { useEffect } from 'react';
+import { useQuery, useQueryClient } from 'react-query';
+import { API } from '@services';
 
 const App = () => {
+  const queryClient = useQueryClient();
   const { checkAuth } = useUserStore();
-  const authMutate = useMutation(checkAuth);
+  const { isLoading } = useQuery('checkAuth', checkAuth, {
+    onSuccess: () => {
+      queryClient.prefetchQuery('read_all_issues', API.read_all_issues);
+      queryClient.prefetchQuery('read_all_labels', API.read_all_labels);
+      queryClient.prefetchQuery('read_all_milestones', API.read_all_milestones);
+      queryClient.prefetchQuery('read_all_users', API.read_all_users);
+    },
+  });
 
-  useEffect(() => authMutate.mutate(), []);
-
-  if (authMutate.isLoading) return <h1>로딩중...</h1>;
+  if (isLoading) return <h1>로딩중...</h1>;
 
   return (
     <BrowserRouter>

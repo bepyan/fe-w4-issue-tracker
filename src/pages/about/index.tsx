@@ -111,7 +111,7 @@ export const AboutPage = () => {
           ]}
         />
 
-        <LabelsMilestoneTaps labelCnt={3} milestoneCnt={100} />
+        <LabelsMilestoneTaps />
       </div>
 
       <RowContainer>

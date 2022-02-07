@@ -1,12 +1,11 @@
 import { Icon, Taps } from '@components';
+import { useLabelStore, useMilestoneStore } from '@stores';
 import { styled } from '@styles';
 
-type Props = {
-  labelCnt: number;
-  milestoneCnt: number;
-};
+export const LabelsMilestoneTaps = () => {
+  const { labelList } = useLabelStore();
+  const { milestoneList } = useMilestoneStore();
 
-export const LabelsMilestoneTaps = ({ labelCnt, milestoneCnt }: Props) => {
   return (
     <Taps
       tapList={[
@@ -16,7 +15,7 @@ export const LabelsMilestoneTaps = ({ labelCnt, milestoneCnt }: Props) => {
             <>
               <Icon name="tag" />
               <span>레이블</span>
-              <CountText>({labelCnt})</CountText>
+              <CountText>({labelList.length})</CountText>
             </>
           ),
         },
@@ -26,7 +25,7 @@ export const LabelsMilestoneTaps = ({ labelCnt, milestoneCnt }: Props) => {
             <>
               <Milestone name="milestone" />
               <span>마일스톤</span>
-              <CountText>({milestoneCnt})</CountText>
+              <CountText>({milestoneList.length})</CountText>
             </>
           ),
         },
