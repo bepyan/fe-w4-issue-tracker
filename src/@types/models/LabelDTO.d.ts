@@ -1,9 +1,11 @@
 declare module '@types' {
+  type LabelColor = 'light' | 'dark' | 'line';
+
   interface LabelDTO {
     id: string;
     name: string;
     description: string;
-    color: 'light' | 'dark';
+    color: LabelColor;
     backgroundColor: string;
     userId: string;
   }
@@ -11,7 +13,7 @@ declare module '@types' {
   interface LabelRequestDTO {
     name: string;
     description: string;
-    color: 'light' | 'dark';
+    color: LabelColor;
     backgroundColor: string;
   }
 }

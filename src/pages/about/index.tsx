@@ -87,9 +87,9 @@ export const AboutPage = () => {
       </IconContainer>
 
       <RowContainer>
-        <Label>레이블 이름</Label>
-        <Label kind="dark">레이블 이름</Label>
-        <Label kind="line">작성자</Label>
+        <Label name="레이블 이름" />
+        <Label color="dark" name="레이블 이름" />
+        <Label color="line" name="작성자" />
       </RowContainer>
 
       <RowContainer>

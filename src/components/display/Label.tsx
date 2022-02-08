@@ -1,11 +1,13 @@
 import { styled } from '@styles';
+import { LabelColor } from '@types';
 
-export const Label = styled('div', {
+const LabelBase = styled('div', {
   display: 'inline-flex',
   padding: '4px 16px',
   borderRadius: '30px',
   fontSize: '$x-small',
   fontWeight: '$medium',
+  alignSelf: 'flex-start',
 
   defaultVariants: {
     kind: 'light',
@@ -29,3 +31,19 @@ export const Label = styled('div', {
     },
   },
 });
+
+export const Label = ({
+  color,
+  backgroundColor,
+  name,
+}: {
+  name: string;
+  color?: LabelColor;
+  backgroundColor?: string;
+}) => {
+  return (
+    <LabelBase kind={color} css={{ backgroundColor }}>
+      {name}
+    </LabelBase>
+  );
+};

@@ -10,12 +10,7 @@ export const LabelTableItem = ({ label }: LabelTableItemProps) => {
   return (
     <TableItem>
       <LabelWrapper>
-        <Label
-          kind={label.color}
-          css={{ backgroundColor: label.backgroundColor }}
-        >
-          {label.name}
-        </Label>
+        <Label {...label} />
       </LabelWrapper>
 
       <LabelDescText>{label.description}</LabelDescText>

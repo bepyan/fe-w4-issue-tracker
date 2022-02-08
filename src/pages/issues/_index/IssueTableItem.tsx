@@ -21,7 +21,7 @@ export const IssueTableItem = ({ issue }: Props) => {
           <Icon name="alert_circle" />
           <Title onClick={navToIssueDetail}>{issue.title}</Title>
           {issue.labels.map((item, i) => (
-            <Label key={i}>{item.name}</Label>
+            <Label key={i} {...item} />
           ))}
         </TitleWrapper>
 

@@ -1,4 +1,4 @@
-import { Icon, TextButton } from '@components';
+import { Icon, Prograss, TextButton } from '@components';
 import { styled } from '@styles';
 import { MilestoneDTO } from '@types';
 import { useMemo } from 'react';
@@ -12,7 +12,7 @@ export const MilestoneTableItem = ({ milestone }: Props) => {
     return milestone.issues.reduce(
       ([openCnt, closeCnt], issue) => {
         if (issue.status === 'open') return [openCnt + 1, closeCnt];
-        return [openCnt, closeCnt];
+        return [openCnt, closeCnt + 1];
       },
       [0, 0],
     );
@@ -21,7 +21,7 @@ export const MilestoneTableItem = ({ milestone }: Props) => {
   const percentage = useMemo(() => {
     if (openCnt + closeCnt === 0) return 0;
 
-    return Math.floor((openCnt * 100) / (openCnt + closeCnt));
+    return Math.floor((closeCnt * 100) / (openCnt + closeCnt));
   }, [openCnt, closeCnt]);
 
   return (
@@ -56,7 +56,7 @@ export const MilestoneTableItem = ({ milestone }: Props) => {
         </ActionButtonWrapper>
 
         <PrograssIndicator>
-          <progress value={percentage} max="100" />
+          <Prograss value={percentage} max="100" />
 
           <DetailInfo>
             <span>{percentage}%</span>
@@ -130,20 +130,6 @@ const PrograssIndicator = styled('div', {
   display: 'flex',
   flexDirection: 'column',
 
-  progress: {
-    appearance: 'none',
-    width: '100%',
-    height: '0.5rem',
-
-    '&::-webkit-progress-bar': {
-      backgroundColor: '$input-background',
-      borderRadius: '10px',
-    },
-    '&::-webkit-progress-value': {
-      backgroundColor: '$primary300',
-      borderRadius: '10px',
-    },
-  },
   '& > * + *': {
     marginTop: '0.5rem',
   },

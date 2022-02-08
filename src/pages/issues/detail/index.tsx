@@ -7,7 +7,7 @@ import {
   IssueSideBar,
   TextArea,
 } from '@components';
-import { useInput } from '@hooks';
+import { useInput, useIssueSideBar } from '@hooks';
 import { API } from '@services';
 import { useIssueDetailStore } from '@stores';
 import { styled } from '@styles';
@@ -17,6 +17,8 @@ export const IssuesDetail = () => {
   const queryClient = useQueryClient();
   const { issue } = useIssueDetailStore();
   const { setValue, ...commentProps } = useInput();
+
+  const issueSideBarProps = useIssueSideBar();
 
   const commentMutaion = useMutation(
     async () => {
@@ -65,7 +67,7 @@ export const IssuesDetail = () => {
         </CommentContainer>
 
         <SideBarWrapper>
-          <IssueSideBar />
+          <IssueSideBar {...issueSideBarProps} />
           <DeleteButton>이슈 삭제</DeleteButton>
         </SideBarWrapper>
       </Content>

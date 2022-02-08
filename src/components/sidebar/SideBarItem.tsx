@@ -1,22 +1,31 @@
-import { Icon } from '@components';
+import { DropdownBase, Icon } from '@components';
 import { styled } from '@styles';
 
 export type SideBarItemProps = {
   title: string;
+  panelHeader: string;
+  dropdownChildren: React.ReactNode;
   children?: React.ReactNode;
-  onClickPlusIcon?: () => void;
 };
 
 export const SideBarItem = ({
   title,
   children,
-  onClickPlusIcon,
+  dropdownChildren,
+  ...dropdownProps
 }: SideBarItemProps) => {
   return (
     <Wrapper>
       <Header>
         <span>{title}</span>
-        <Icon name="plus" onClick={onClickPlusIcon} />
+
+        <DropdownBase
+          position="right"
+          {...dropdownProps}
+          indicator={<Icon name="plus" />}
+        >
+          {dropdownChildren}
+        </DropdownBase>
       </Header>
 
       <Content>{children}</Content>
@@ -28,6 +37,10 @@ const Wrapper = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   padding: '2rem',
+
+  '& > * + *': {
+    marginTop: '1rem',
+  },
 });
 
 const Header = styled('div', {
@@ -37,13 +50,8 @@ const Header = styled('div', {
   iconColor: '$label',
   fontWeight: '$bold',
 
-  svg: {
+  '& > :last-child': {
     marginLeft: 'auto',
-    cursor: 'pointer',
-
-    '&:hover': {
-      iconColor: '$body',
-    },
   },
 });
 

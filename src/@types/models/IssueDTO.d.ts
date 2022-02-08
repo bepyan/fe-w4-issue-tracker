@@ -14,6 +14,14 @@ declare module '@types' {
     timestamp: string;
   }
 
+  interface IssueFormDTO {
+    title: string;
+    comment: string;
+    labels: LabelDTO[];
+    assignees: UserDTO[];
+    milestone?: MilestoneDTO;
+  }
+
   interface IssueRequestDTO {
     title: string;
     comment: string;

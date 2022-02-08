@@ -20,7 +20,7 @@ export const Comment = ({ comment }: Props) => {
           <HeaderRightActionWrapper>
             {comment.author === auth?.id && (
               <>
-                <Label kind="line">작성자</Label>
+                <Label color="line" name="작성자" />
                 <TextButton>
                   <Icon name="edit" /> 편집
                 </TextButton>
