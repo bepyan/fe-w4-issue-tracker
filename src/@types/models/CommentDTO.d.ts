@@ -6,6 +6,7 @@ declare module '@types' {
     content: string;
     author: string;
     status: CommentStatus;
+    timestamp: string;
   }
 
   interface CommentRequestDTO {

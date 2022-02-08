@@ -41,7 +41,7 @@ export const LabelNewForm = () => {
           <TextInput
             label="레이블 이름"
             size="small"
-            value={label.name}
+            defaultValue={label.name}
             onChange={(e) => setName(e.currentTarget.value)}
             status={!error ? undefined : 'error'}
             statusText={error}
@@ -49,12 +49,13 @@ export const LabelNewForm = () => {
           <TextInput
             label="설명 (선택)"
             size="small"
+            defaultValue={label.description}
             onChange={(e) => setDescription(e.currentTarget.value)}
           />
           <InlineInputWrapper>
             <ColorCodeInput
               label="배경 색상"
-              value={label.backgroundColor}
+              defaultValue={label.backgroundColor}
               onReset={resetBackgroundColor}
               onChange={(e) => setBackgroundColor(e.currentTarget.value)}
             />

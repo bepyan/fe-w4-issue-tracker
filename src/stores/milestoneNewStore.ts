@@ -5,12 +5,12 @@ import { useMutation, useQueryClient } from 'react-query';
 import { atom, useRecoilState, useResetRecoilState } from 'recoil';
 
 export const milestoneNewVisibleStore = atom<boolean>({
-  key: 'labelNewVisibleStore',
+  key: 'milestoneNewVisibleStore',
   default: false,
 });
 
 export const milestoneNewStore = atom<MilestoneRequestDTO>({
-  key: 'labelNewStore',
+  key: 'milestoneNewStore',
   default: {
     title: '',
     deadline: '',

@@ -29,11 +29,11 @@ export const useLabelNewVisibleStore = () => {
 
 export const useLabelNewStore = () => {
   const queryClient = useQueryClient();
-  const { setVisible } = useLabelNewVisibleStore();
   const [error, setError] = useState('');
 
   const [label, setLabel] = useRecoilState(labelNewStore);
   const reset = useResetRecoilState(labelNewStore);
+  const { setVisible } = useLabelNewVisibleStore();
 
   const submitMutation = useMutation(
     async () => {

@@ -37,7 +37,7 @@ export const MilestoneNewForm = () => {
             statusText={error}
           />
           <TextInput
-            value={milestone.description}
+            value={milestone.deadline}
             onChange={(e) => setDeadline(e.currentTarget.value)}
             label="완료일(선택)"
             placeholder="ex. YYYY-MM-DD"

@@ -7,7 +7,7 @@ import { MilestoneTableItem } from './MilestoneTableItem';
 import { MilestonesToolbar } from './MilestoneToolbar';
 
 export const Milestones = () => {
-  const { milestoneList } = useMilestoneStore();
+  const { filteredMilestoneList } = useMilestoneStore();
 
   return (
     <Wrapper>
@@ -15,10 +15,10 @@ export const Milestones = () => {
       <MilestoneNewForm />
 
       <TableLayout header={<MilestoneHeader />}>
-        {milestoneList.map((item, index) => (
+        {filteredMilestoneList.map((item, index) => (
           <MilestoneTableItem key={index} milestone={item} />
         ))}
-        {!milestoneList.length && <div>마일스톤이 없습니다.</div>}
+        {!filteredMilestoneList.length && <div>마일스톤이 없습니다.</div>}
       </TableLayout>
     </Wrapper>
   );

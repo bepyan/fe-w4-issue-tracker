@@ -1,4 +1,10 @@
-import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
+import {
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+} from 'recoil';
 import { useMutation } from 'react-query';
 import { API } from '@services';
 import { IssueFormDTO, LabelDTO, MilestoneDTO, UserDTO } from '@types';
@@ -27,6 +33,7 @@ export const canSubmitIssueStore = selector({
 export const useIssueNewStore = () => {
   const nav = useNavigate();
   const [issue, setIssue] = useRecoilState(issueNewStore);
+  const resetIssue = useResetRecoilState(issueNewStore);
 
   const submitMutation = useMutation(
     async () => {
@@ -39,7 +46,10 @@ export const useIssueNewStore = () => {
       });
     },
     {
-      onSuccess: () => nav('/issues'),
+      onSuccess: () => {
+        nav('/issues');
+        resetIssue();
+      },
     },
   );
 
