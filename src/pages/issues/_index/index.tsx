@@ -1,17 +1,27 @@
-import React from 'react';
-import { Table } from '@components';
+import { TableLayout } from '@components';
 import { styled } from '@styles';
+import { useIssueStore } from '@stores';
 import { IssueToolbar } from './IssueToolbar';
 import { IssueTableItem } from './IssueTableItem';
 import { IssueTableHeader } from './IssueTableHeader';
+import { IssueTableEmptyView } from './IssueTableEmptyView';
 
 export const Issues = () => {
+  const { filterdIssueList } = useIssueStore();
+
   return (
     <Wrapper>
       <IssueToolbar />
-      <Table header={<IssueTableHeader />}>
-        <IssueTableItem />
-      </Table>
+
+      <TableLayout header={<IssueTableHeader />}>
+        {filterdIssueList.length ? (
+          filterdIssueList.map((item, index) => (
+            <IssueTableItem key={index} issue={item} />
+          ))
+        ) : (
+          <IssueTableEmptyView />
+        )}
+      </TableLayout>
     </Wrapper>
   );
 };

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
   DropdownCheckbox,
@@ -6,8 +7,6 @@ import {
   LabelsMilestoneTaps,
 } from '@components';
 import { styled } from '@styles';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const IssueToolbar = () => {
   const nav = useNavigate();
@@ -33,7 +32,7 @@ export const IssueToolbar = () => {
       <Blank />
 
       <RightActionWrapper>
-        <LabelsMilestoneTaps labelCnt={3} milestoneCnt={2} />
+        <LabelsMilestoneTaps />
         <Button size="small" onClick={navToIssueNew}>
           <Icon name="plus" />
           이슈 작성

@@ -1,29 +1,39 @@
-import { MainLayout } from '@components';
-import Page from '@pages';
-import { globalStyles } from '@styles';
-import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { AuthRequired, AuthRestricted, MainLayout } from '@components';
+import Page from '@pages';
+import { useAuthStore } from '@stores';
+import { useQuery } from 'react-query';
 
 const App = () => {
-  globalStyles();
+  const { checkAuth } = useAuthStore();
+  const { isLoading } = useQuery('checkAuth', checkAuth);
+
+  if (isLoading) return <h1>로딩중...</h1>;
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route element={<AuthRequired />}>
           <Route index element={<Navigate to="/issues" />} />
 
-          <Route path="/issues">
-            <Route index element={<Page.Issues />} />
-            <Route path=":issuesId" element={<Page.IssuesDetail />} />
-            <Route path="new" element={<Page.IssuesNew />} />
-          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="/issues">
+              <Route index element={<Page.Issues />} />
+              <Route path=":issueId" element={<Page.IssuesDetail />} />
+              <Route path="new" element={<Page.IssuesNew />} />
+            </Route>
 
-          <Route path="/labels" element={<Page.Labels />} />
-          <Route path="/milestones" element={<Page.Milestones />} />
+            <Route path="/labels" element={<Page.Labels />} />
+            <Route path="/milestones" element={<Page.Milestones />} />
+          </Route>
         </Route>
 
-        <Route path="/login" element={<Page.Login />} />
+        <Route element={<AuthRestricted />}>
+          <Route path="/login" element={<Page.Login />} />
+          <Route path="/register" element={<Page.Register />} />
+          <Route path="/auth/callback" element={<Page.GithubCallback />} />
+        </Route>
+
         <Route path="/about" element={<Page.AboutPage />} />
         <Route path="*" element={<Page.NotFound />} />
       </Routes>

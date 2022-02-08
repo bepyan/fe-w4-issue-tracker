@@ -1,17 +1,22 @@
-import { Table, TextButton } from '@components';
+import { TableLayout } from '@components';
+import { useMilestoneStore } from '@stores';
 import { styled } from '@styles';
-import React from 'react';
 import { MilestoneHeader } from './MilestoneHeader';
 import { MilestoneTableItem } from './MilestoneTableItem';
 import { MilestonesToolbar } from './MilestoneToolbar';
 
 export const Milestones = () => {
+  const { milestoneList } = useMilestoneStore();
+
   return (
     <Wrapper>
       <MilestonesToolbar />
-      <Table header={<MilestoneHeader />}>
-        <MilestoneTableItem />
-      </Table>
+      <TableLayout header={<MilestoneHeader />}>
+        {milestoneList.map((item, index) => (
+          <MilestoneTableItem key={index} milestone={item} />
+        ))}
+        {!milestoneList.length && <div>마일스톤이 없습니다.</div>}
+      </TableLayout>
     </Wrapper>
   );
 };

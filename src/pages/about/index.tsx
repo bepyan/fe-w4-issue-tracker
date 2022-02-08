@@ -16,7 +16,6 @@ import {
   LabelsMilestoneTaps,
 } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
 export const AboutPage = () => {
   const iconNameList = Object.keys(icons) as IconName[];
@@ -88,14 +87,14 @@ export const AboutPage = () => {
       </IconContainer>
 
       <RowContainer>
-        <Label>레이블 이름</Label>
-        <Label kind="dark">레이블 이름</Label>
-        <Label kind="line">작성자</Label>
+        <Label name="레이블 이름" />
+        <Label color="dark" name="레이블 이름" />
+        <Label color="line" name="작성자" />
       </RowContainer>
 
       <RowContainer>
-        <IssueLabel isOpen />
-        <IssueLabel isOpen={false} />
+        <IssueLabel status="open" />
+        <IssueLabel status="close" />
       </RowContainer>
 
       <div>
@@ -112,7 +111,7 @@ export const AboutPage = () => {
           ]}
         />
 
-        <LabelsMilestoneTaps labelCnt={3} milestoneCnt={100} />
+        <LabelsMilestoneTaps />
       </div>
 
       <RowContainer>

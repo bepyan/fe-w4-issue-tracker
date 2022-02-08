@@ -1,26 +1,45 @@
-import { Button, Icon, Table, TextButton } from '@components';
+import { Icon, Prograss, TextButton } from '@components';
 import { styled } from '@styles';
-import React from 'react';
+import { MilestoneDTO } from '@types';
+import { useMemo } from 'react';
 
-type Props = {};
+interface Props {
+  milestone: MilestoneDTO;
+}
 
-export const MilestoneTableItem = ({}: Props) => {
+export const MilestoneTableItem = ({ milestone }: Props) => {
+  const [openCnt, closeCnt] = useMemo(() => {
+    return milestone.issues.reduce(
+      ([openCnt, closeCnt], issue) => {
+        if (issue.status === 'open') return [openCnt + 1, closeCnt];
+        return [openCnt, closeCnt + 1];
+      },
+      [0, 0],
+    );
+  }, [milestone]);
+
+  const percentage = useMemo(() => {
+    if (openCnt + closeCnt === 0) return 0;
+
+    return Math.floor((closeCnt * 100) / (openCnt + closeCnt));
+  }, [openCnt, closeCnt]);
+
   return (
     <Wrapper>
       <div>
         <TitleWrapper>
           <Title>
             <Icon name="milestone" />
-            <span>마일스톤 제목</span>
+            <span>{milestone.title}</span>
           </Title>
 
           <CompletionDate>
             <Icon name="calendar" />
-            <span>완료일 일정</span>
+            <span>{milestone.deadline}</span>
           </CompletionDate>
         </TitleWrapper>
 
-        <Description>레이블에 대한 설명</Description>
+        <Description>{milestone.description}</Description>
       </div>
 
       <ActionWrapper>
@@ -37,13 +56,13 @@ export const MilestoneTableItem = ({}: Props) => {
         </ActionButtonWrapper>
 
         <PrograssIndicator>
-          <progress value="50" max="100" />
+          <Prograss value={percentage} max="100" />
 
           <DetailInfo>
-            <span>50%</span>
+            <span>{percentage}%</span>
             <div>
-              <span>열린 이슈 1</span>
-              <span>닫힌 이슈 1</span>
+              <span>열린 이슈 {openCnt}</span>
+              <span>닫힌 이슈 {closeCnt}</span>
             </div>
           </DetailInfo>
         </PrograssIndicator>
@@ -111,20 +130,6 @@ const PrograssIndicator = styled('div', {
   display: 'flex',
   flexDirection: 'column',
 
-  progress: {
-    appearance: 'none',
-    width: '100%',
-    height: '0.5rem',
-
-    '&::-webkit-progress-bar': {
-      backgroundColor: '$input-background',
-      borderRadius: '10px',
-    },
-    '&::-webkit-progress-value': {
-      backgroundColor: '$primary300',
-      borderRadius: '10px',
-    },
-  },
   '& > * + *': {
     marginTop: '0.5rem',
   },

@@ -1,29 +1,41 @@
-import { Button, Logo, TextButton, TextInput } from '@components';
-import { CSS } from '@stitches/react';
 import { styled } from '@styles';
-import React from 'react';
+import { useMutation } from 'react-query';
+import { API } from '@services';
+import { useAuthStore } from '@stores';
+import { useNavigate } from 'react-router-dom';
+import { Logo } from '@components';
+import { LoginContent, LoginContentProps } from './LoginContent';
 
 export const Login = () => {
+  const nav = useNavigate();
+  const { signin } = useAuthStore();
+
+  const loginMutation = useMutation(API.login_user, {
+    onSuccess: ({ data }) => {
+      signin(data);
+    },
+  });
+
+  const contentProps: LoginContentProps = {
+    isLoading: loginMutation.isLoading,
+    onSubmitLogin: (e) => {
+      e.preventDefault();
+      if (loginMutation.isLoading) return;
+
+      const target = e.target as typeof e.target & {
+        id: { value: string };
+        pw: { value: string };
+      };
+
+      loginMutation.mutate({ id: target.id.value, pw: target.pw.value });
+    },
+    navToRegister: () => nav('/register'),
+  };
+
   return (
     <Wrapper>
       <Logo size="large" />
-
-      <Content>
-        <Button size="large" css={githubButtonStyle}>
-          GitHub 계정으로 로그인
-        </Button>
-
-        <TextSeparator>or</TextSeparator>
-
-        <form>
-          <TextInput label="아이디" />
-          <TextInput label="비밀번호" type="password" />
-          <Button size="large" type="submit">
-            아이디로 로그인
-          </Button>
-          <TextButton type="button">회원가입</TextButton>
-        </form>
-      </Content>
+      <LoginContent {...contentProps} />
     </Wrapper>
   );
 };
@@ -32,32 +44,3 @@ const Wrapper = styled('div', {
   height: '100vh',
   flexCenter: 'column',
 });
-
-const Content = styled('div', {
-  flexCenter: 'column',
-  marginTop: '5rem',
-  form: {
-    flexCenter: 'column',
-    '& > * + *': {
-      marginTop: '1.5rem',
-    },
-  },
-});
-
-const TextSeparator = styled('span', {
-  color: '$placeholder',
-  fontWeight: '$bold',
-  margin: '2rem 0px',
-});
-
-const githubButtonStyle: CSS = {
-  color: '$off-white',
-  backgroundColor: '$title-active',
-  '&:hover': {
-    backgroundColor: '$body',
-  },
-  '&:focus': {
-    border: '4px solid $label',
-    backgroundColor: '$title-active',
-  },
-};

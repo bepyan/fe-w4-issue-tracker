@@ -1,6 +1,5 @@
 import { HeaderLink, Icon } from '@components';
 import { styled } from '@styles';
-import React from 'react';
 
 type Props = {};
 

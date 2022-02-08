@@ -27,6 +27,6 @@
       "@utils": ["./utils"]
     }
   },
-  "include": ["@types", "src/**/*"],
+  "include": ["@types/**/*", "src/**/*"],
   "exclude": ["dist", "node_modules"]
 }

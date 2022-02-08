@@ -23,6 +23,9 @@
   },
   "plugins": ["react", "prettier", "@typescript-eslint"],
   "rules": {
-    "react/prop-types": false
+    "react/react-in-jsx-scope": 0,
+    "react/prop-types": 0,
+    "no-empty-pattern": 0,
+    "@typescript-eslint/ban-types": 0
   }
 }
