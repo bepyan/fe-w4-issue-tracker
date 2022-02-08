@@ -7,7 +7,6 @@ const LabelBase = styled('div', {
   borderRadius: '30px',
   fontSize: '$x-small',
   fontWeight: '$medium',
-  alignSelf: 'flex-start',
 
   defaultVariants: {
     kind: 'light',
@@ -15,12 +14,10 @@ const LabelBase = styled('div', {
   variants: {
     kind: {
       light: {
-        color: '$title-active',
-        backgroundColor: '$background',
+        color: '$off-white',
       },
       dark: {
-        color: '$off-white',
-        backgroundColor: '$body',
+        color: '$title-active',
       },
       line: {
         color: '$label',

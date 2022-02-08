@@ -1,3 +1,5 @@
 export * from './TextInput';
-export * from './TextArea';
+export * from './ColorCodeInput';
 export * from './FilterBar';
+export * from './RadioOptionSelection';
+export * from './TextArea';

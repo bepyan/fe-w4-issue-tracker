@@ -58,4 +58,5 @@ const Header = styled('div', {
 const Content = styled('div', {
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'flex-start',
 });

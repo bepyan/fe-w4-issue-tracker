@@ -19,7 +19,6 @@ export const InputWrapper = ({ label, children, ...wrapperProps }: Props) => {
     <Wrapper {...wrapperProps}>
       <label>{label}</label>
       {children}
-      {wrapperProps.status && <span>{wrapperProps.status}</span>}
     </Wrapper>
   );
 };
@@ -32,8 +31,9 @@ const Wrapper = styled('div', {
   border: '1px solid transparent',
   backgroundColor: '$input-background',
   padding: '1rem 1.5rem',
+  color: '$title-active',
 
-  label: {
+  '& > label': {
     color: '$placeholder',
     pointerEvents: 'none',
     transition: 'all 200ms ease-in-out',
@@ -41,26 +41,22 @@ const Wrapper = styled('div', {
   },
   input: {
     flex: 1,
-    color: '$title-active',
     zIndex: '$1',
     fontSize: '$medium',
     paddingTop: '1rem',
   },
-  span: {
-    fontSize: '$x-small',
-    fontWeight: '$medium',
+  svg: {
+    cursor: 'pointer',
+  },
+  '&:focus-within': {
+    border: '1px solid $title-active',
+    backgroundColor: '$off-white',
   },
 
   defaultVariants: {
     size: 'large',
   },
   variants: {
-    focused: {
-      true: {
-        border: '1px solid $title-active',
-        backgroundColor: '$off-white',
-      },
-    },
     disabled: {
       true: {
         opacity: 0.5,
@@ -98,7 +94,7 @@ const Wrapper = styled('div', {
         borderRadius: '11px',
         padding: '0px 1.5rem',
 
-        label: {
+        '& > label': {
           position: 'static',
           marginRight: '0.5rem',
           width: '80px',

@@ -35,7 +35,6 @@ export const TextInput = React.forwardRef<HTMLInputElement, Props>(
 
     const inputWrapperProps: InputWrapperProps = {
       label,
-      focused: focused && !status,
       disabled,
       isLabelSmaller: hasContent || focused,
       isLabelFloat: size !== 'small' && (hasContent || focused),

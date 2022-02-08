@@ -135,6 +135,7 @@ export const IssueSideBar = ({
 };
 
 const MilestoneItem = styled('div', {
+  width: '100%',
   span: {
     display: 'block',
     color: '$label',
