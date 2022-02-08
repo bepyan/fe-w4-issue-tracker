@@ -1,15 +1,16 @@
 import { styled } from '@styles';
+import { IssueStatus } from '@types';
 import { Icon } from './Icon';
 
 type Props = {
-  isOpen: boolean;
+  status: IssueStatus;
 };
 
-export const IssueLabel = ({ isOpen }: Props) => {
+export const IssueLabel = ({ status }: Props) => {
   return (
-    <ToggleLabel kind={isOpen ? 'open' : 'close'}>
-      <Icon name={isOpen ? 'alert_circle' : 'archive'} />
-      {isOpen ? '열린 이슈' : '닫힌 이슈'}
+    <ToggleLabel kind={status}>
+      <Icon name={status === 'open' ? 'alert_circle' : 'archive'} />
+      {status === 'open' ? '열린 이슈' : '닫힌 이슈'}
     </ToggleLabel>
   );
 };

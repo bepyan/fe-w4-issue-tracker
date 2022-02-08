@@ -19,7 +19,7 @@ const App = () => {
           <Route element={<MainLayout />}>
             <Route path="/issues">
               <Route index element={<Page.Issues />} />
-              <Route path=":issuesId" element={<Page.IssuesDetail />} />
+              <Route path=":issueId" element={<Page.IssuesDetail />} />
               <Route path="new" element={<Page.IssuesNew />} />
             </Route>
 

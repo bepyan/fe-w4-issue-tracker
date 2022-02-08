@@ -1,23 +1,31 @@
 import { Icon, Label, TableLayout, TextButton } from '@components';
+import { useAuthStore } from '@stores';
 import { styled } from '@styles';
+import { CommentDTO } from '@types';
 
 type Props = {
-  status?: 'inital' | 'closed' | 'reopen';
+  comment: CommentDTO;
 };
 
-export const Comment = ({}: Props) => {
+export const Comment = ({ comment }: Props) => {
+  const { auth } = useAuthStore();
+
   return (
     <TableLayout
       header={
         <Header>
-          <UserName>Oni</UserName>
+          <UserName>{comment.author}</UserName>
           <TimeStamp>20분 전</TimeStamp>
 
           <HeaderRightActionWrapper>
-            <Label kind="line">작성자</Label>
-            <TextButton>
-              <Icon name="edit" /> 편집
-            </TextButton>
+            {comment.author === auth?.id && (
+              <>
+                <Label kind="line">작성자</Label>
+                <TextButton>
+                  <Icon name="edit" /> 편집
+                </TextButton>
+              </>
+            )}
 
             <TextButton>
               <Icon name="smile" />
@@ -26,10 +34,7 @@ export const Comment = ({}: Props) => {
         </Header>
       }
     >
-      <div>
-        처음부터 전부 구현하려고 하지 말고 필수적인 기능부터 만든 후, 차근차근
-        완성도를 높여보세요.
-      </div>
+      <div>{comment.content}</div>
     </TableLayout>
   );
 };

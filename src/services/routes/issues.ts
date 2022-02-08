@@ -1,5 +1,5 @@
 import { _axios } from '@services';
-import { IssueDTO, IssueRequestDTO } from '@types';
+import { CommentRequestDTO, IssueDTO, IssueRequestDTO } from '@types';
 
 const baseRoute = '/issues';
 
@@ -8,6 +8,17 @@ const baseRoute = '/issues';
 export const create_issue = (data: IssueRequestDTO) => {
   return _axios<IssueDTO>({
     url: `${baseRoute}`,
+    method: 'POST',
+    data,
+  });
+};
+
+export const create_issue_comment = (
+  issueId: string,
+  data: CommentRequestDTO,
+) => {
+  return _axios<IssueDTO>({
+    url: `${baseRoute}/${issueId}/comment`,
     method: 'POST',
     data,
   });

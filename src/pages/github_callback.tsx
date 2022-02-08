@@ -17,7 +17,7 @@ export const GithubCallback = () => {
 
       try {
         await checkAuth();
-        nav('/');
+        nav('/issues');
       } catch (error) {
         console.log(error);
       }

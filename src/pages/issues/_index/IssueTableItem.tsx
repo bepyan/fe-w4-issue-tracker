@@ -10,7 +10,7 @@ interface Props {
 export const IssueTableItem = ({ issue }: Props) => {
   const nav = useNavigate();
 
-  const navToIssueDetail = () => nav('1');
+  const navToIssueDetail = () => nav(issue.id);
 
   return (
     <Wrapper>

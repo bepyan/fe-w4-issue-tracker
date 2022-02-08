@@ -27,8 +27,16 @@ export const filterdIssueStore = selector({
     const list = get(issueStore);
     const filter = get(issueFilterStore);
 
-    return list.filter((v) => {
-      return v.status === filter.status;
+    return list.filter((issue) => {
+      if (
+        filter.assignee &&
+        issue.assignees.every((v) => v.id !== filter.assignee)
+      )
+        return false;
+      if (filter.milstone && issue.milestone?.id !== filter.milstone)
+        return false;
+
+      return issue.status === filter.status;
     });
   },
 });

@@ -93,8 +93,8 @@ export const AboutPage = () => {
       </RowContainer>
 
       <RowContainer>
-        <IssueLabel isOpen />
-        <IssueLabel isOpen={false} />
+        <IssueLabel status="open" />
+        <IssueLabel status="close" />
       </RowContainer>
 
       <div>

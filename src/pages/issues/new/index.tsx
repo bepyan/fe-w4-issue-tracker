@@ -24,8 +24,8 @@ export const IssuesNew = () => {
         <Icon name="user_image_large" />
 
         <InputWrapper>
-          <TextInput label="제목" size="medium" />
-          <TextArea label="코멘트를 입력하세요" />
+          <TextInput id="title" label="제목" size="medium" />
+          <TextArea id="comment" label="코멘트를 입력하세요" />
         </InputWrapper>
 
         <IssueSideBar />
