@@ -97,7 +97,7 @@ const Wrapper = styled('div', {
         '& > label': {
           position: 'static',
           marginRight: '0.5rem',
-          width: '80px',
+          minWidth: '80px',
         },
         input: {
           paddingTop: '0px',

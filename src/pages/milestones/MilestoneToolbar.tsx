@@ -1,14 +1,18 @@
-import { Button, Icon, LabelsMilestoneTaps } from '@components';
+import { LabelsMilestoneTaps, VisibleToggleButton } from '@components';
 import { styled } from '@styles';
+import { useMilestoneNewVisibleStore } from 'stores/milestoneNewStore';
 
 export const MilestonesToolbar = () => {
+  const { visible, setVisible } = useMilestoneNewVisibleStore();
+
   return (
     <Toolbar>
       <LabelsMilestoneTaps />
 
-      <Button>
-        <Icon name="plus" /> 추가
-      </Button>
+      <VisibleToggleButton
+        visible={visible}
+        onClick={() => setVisible(!visible)}
+      />
     </Toolbar>
   );
 };

@@ -1,4 +1,4 @@
-import { Icon, Prograss, TextButton } from '@components';
+import { DeleteButton, Icon, Prograss, TextButton } from '@components';
 import { styled } from '@styles';
 import { MilestoneDTO } from '@types';
 import { useMemo } from 'react';
@@ -33,10 +33,12 @@ export const MilestoneTableItem = ({ milestone }: Props) => {
             <span>{milestone.title}</span>
           </Title>
 
-          <CompletionDate>
-            <Icon name="calendar" />
-            <span>{milestone.deadline}</span>
-          </CompletionDate>
+          {milestone.deadline && (
+            <CompletionDate>
+              <Icon name="calendar" />
+              <span>{milestone.deadline}</span>
+            </CompletionDate>
+          )}
         </TitleWrapper>
 
         <Description>{milestone.description}</Description>
@@ -50,9 +52,7 @@ export const MilestoneTableItem = ({ milestone }: Props) => {
           <TextButton>
             <Icon name="edit" /> 편집
           </TextButton>
-          <TextButton>
-            <Icon name="trash" /> 삭제
-          </TextButton>
+          <DeleteButton>삭제</DeleteButton>
         </ActionButtonWrapper>
 
         <PrograssIndicator>

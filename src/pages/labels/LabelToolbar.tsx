@@ -1,4 +1,4 @@
-import { Button, Icon, LabelsMilestoneTaps } from '@components';
+import { LabelsMilestoneTaps, VisibleToggleButton } from '@components';
 import { useLabelNewVisibleStore } from '@stores';
 import { styled } from '@styles';
 
@@ -9,14 +9,10 @@ export const LabelToolbar = () => {
     <Toolbar>
       <LabelsMilestoneTaps />
 
-      <Button
-        size="small"
-        kind={visible ? 'secondary' : 'standard'}
+      <VisibleToggleButton
+        visible={visible}
         onClick={() => setVisible(!visible)}
-      >
-        <Icon name={visible ? 'x_square' : 'plus'} />{' '}
-        {visible ? '닫기' : '추가'}
-      </Button>
+      />
     </Toolbar>
   );
 };

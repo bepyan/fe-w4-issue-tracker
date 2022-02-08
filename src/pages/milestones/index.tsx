@@ -2,6 +2,7 @@ import { TableLayout } from '@components';
 import { useMilestoneStore } from '@stores';
 import { styled } from '@styles';
 import { MilestoneHeader } from './MilestoneHeader';
+import { MilestoneNewForm } from './MilestoneNewForm';
 import { MilestoneTableItem } from './MilestoneTableItem';
 import { MilestonesToolbar } from './MilestoneToolbar';
 
@@ -11,6 +12,8 @@ export const Milestones = () => {
   return (
     <Wrapper>
       <MilestonesToolbar />
+      <MilestoneNewForm />
+
       <TableLayout header={<MilestoneHeader />}>
         {milestoneList.map((item, index) => (
           <MilestoneTableItem key={index} milestone={item} />
