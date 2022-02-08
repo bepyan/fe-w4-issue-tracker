@@ -1,6 +1,7 @@
 import { Button, Icon, IssueLabel } from '@components';
 import { styled } from '@styles';
 import { IssueDTO } from '@types';
+import { toTimeDuration } from '@utils';
 
 export interface IssueDetailHeaderProps {
   issue: IssueDTO;
@@ -27,7 +28,8 @@ export const IssueDetailHeader = ({ issue }: IssueDetailHeaderProps) => {
       <HeaderDesc>
         <IssueLabel status={issue.status} />
         <span>
-          이 이슈가 {issue.timestamp}에 {issue.writer.name}님에 의해 열렸습니다
+          이 이슈가 {toTimeDuration(issue.timestamp)}에 {issue.writer.name}님에
+          의해 열렸습니다
         </span>
         <span> ∙ </span>
         <span>코멘트 {issue.comments.length}개</span>

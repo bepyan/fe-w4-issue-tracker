@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Icon, Label } from '@components';
 import { styled } from '@styles';
 import { IssueDTO } from '@types';
+import { toTimeDuration } from '@utils';
 
 interface Props {
   issue: IssueDTO;
@@ -28,7 +29,7 @@ export const IssueTableItem = ({ issue }: Props) => {
         <DescWrapper>
           <span>#{issue.num}</span>
           <span>
-            {issue.writer.name} 및 {issue.timestamp}
+            {issue.writer.name} 및 {toTimeDuration(issue.timestamp)}
           </span>
           {issue.milestone && (
             <span>

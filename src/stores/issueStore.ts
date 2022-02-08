@@ -47,7 +47,13 @@ export const useIssueStore = () => {
   const [issueFilter, setIssueFilter] = useRecoilState(issueFilterStore);
 
   useQuery('read_all_issues', API.read_all_issues, {
-    onSuccess: ({ data }) => setIssueList(data),
+    onSuccess: ({ data }) =>
+      setIssueList(
+        data.sort(
+          (a, b) =>
+            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+        ),
+      ),
   });
 
   return {
