@@ -1,9 +1,10 @@
-import { Comment, DeleteButton, Icon, IssueSideBar } from '@components';
+import { Comment, Icon, IssueSideBar } from '@components';
 import { useIssueSideBar } from '@hooks';
 import { useIssueDetailStore } from '@stores';
 import { styled } from '@styles';
 import { IssueDetailHeader } from './IssueDetailHeader';
 import { IssueDetailCommentForm } from './IssueDetailCommentForm';
+import { IssueDetailDeleteButton } from './IssueDetailDeleteButton';
 
 export const IssuesDetail = () => {
   const { issue } = useIssueDetailStore();
@@ -31,7 +32,7 @@ export const IssuesDetail = () => {
 
         <SideBarWrapper>
           <IssueSideBar {...issueSideBarProps} />
-          <DeleteButton>이슈 삭제</DeleteButton>
+          <IssueDetailDeleteButton issue={issue} />
         </SideBarWrapper>
       </Content>
     </>
