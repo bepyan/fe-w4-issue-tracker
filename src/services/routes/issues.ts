@@ -42,7 +42,10 @@ export const read_issue_by_id = (issueId: string) => {
 
 // PATCH
 
-export const update_issue_title = (issueId: string, data: IssueRequestDTO) => {
+export const update_issue_title = (
+  issueId: string,
+  data: { title: string },
+) => {
   return _axios<void>({
     url: `${baseRoute}/${issueId}`,
     method: 'PATCH',

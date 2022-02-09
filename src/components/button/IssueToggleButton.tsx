@@ -9,7 +9,7 @@ interface Props {
 
 export const IssueToggleButton = ({ status, onToggle }: Props) => {
   return (
-    <Button kind="secondary" size="small" onClick={onToggle}>
+    <Button type="button" kind="secondary" size="small" onClick={onToggle}>
       <Icon name={status === 'open' ? 'archive' : 'alert_circle'} />
       <span>{status === 'open' ? '이슈 닫기' : '다시 열기'}</span>
     </Button>

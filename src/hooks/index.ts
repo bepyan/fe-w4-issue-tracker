@@ -3,3 +3,4 @@ export * from './useInput';
 export * from './useIsPathMatch';
 export * from './useIssueSideBar';
 export * from './usePrefetchStores';
+export * from './useToggle';

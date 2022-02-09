@@ -1,45 +1,47 @@
-import { Button, Icon, IssueLabel, IssueToggleButton } from '@components';
+import { useToggle } from '@hooks';
+import { API } from '@services';
 import { styled } from '@styles';
 import { IssueDTO } from '@types';
-import { toTimeDuration } from '@utils';
+import { useMutation, useQueryClient } from 'react-query';
+import { IssueDetailHeaderDesc } from './IssueDetailHeaderDesc';
+import {
+  IssueDetailHeaderTitle,
+  IssueDetailHeaderTitleProps,
+} from './IssueDetailHeaderTitle';
 
 export interface IssueDetailHeaderProps {
   issue: IssueDTO;
-  onToggleIssueStatus: () => void;
 }
 
-export const IssueDetailHeader = ({
-  issue,
-  onToggleIssueStatus,
-}: IssueDetailHeaderProps) => {
+export const IssueDetailHeader = ({ issue }: IssueDetailHeaderProps) => {
+  const titleToggleProps = useToggle();
+
+  const queryClient = useQueryClient();
+  const updateTitle = useMutation(
+    (title: string) => API.update_issue_title(issue.id, { title }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('read_issue_by_id');
+        titleToggleProps.close();
+      },
+    },
+  );
+
+  const toggleStatus = useMutation(() => API.update_issue_status(issue.id), {
+    onSuccess: () => queryClient.invalidateQueries('read_issue_by_id'),
+  });
+
+  const headerTitleProps: IssueDetailHeaderTitleProps = {
+    issue,
+    ...titleToggleProps,
+    onToggleIssueStatus: toggleStatus.mutate,
+    onEditTitle: updateTitle.mutate,
+  };
+
   return (
     <Header>
-      <HeaderTitle>
-        <h5>
-          {issue.title} <span>#{issue.num}</span>
-        </h5>
-
-        <div>
-          <Button kind="secondary" size="small">
-            <Icon name="edit" /> 제목 편집
-          </Button>
-
-          <IssueToggleButton
-            status={issue.status}
-            onToggle={onToggleIssueStatus}
-          />
-        </div>
-      </HeaderTitle>
-
-      <HeaderDesc>
-        <IssueLabel status={issue.status} />
-        <span>
-          이 이슈가 {toTimeDuration(issue.timestamp)}에 {issue.writer.name}님에
-          의해 열렸습니다
-        </span>
-        <span> ∙ </span>
-        <span>코멘트 {issue.comments.length}개</span>
-      </HeaderDesc>
+      <IssueDetailHeaderTitle {...headerTitleProps} />
+      <IssueDetailHeaderDesc issue={issue} />
     </Header>
   );
 };
@@ -49,43 +51,11 @@ const Header = styled('div', {
   flexDirection: 'column',
   paddingBottom: '2rem',
 
-  '& > div': {
+  '& > *': {
     display: 'flex',
     alignItems: 'center',
   },
   '& > * + *': {
     marginTop: '1rem',
-  },
-});
-
-const HeaderTitle = styled('div', {
-  h5: {
-    color: '$title-active',
-    fontSize: '$display',
-    fontWeight: '$regular',
-
-    span: {
-      color: '$label',
-      marginLeft: '0.5rem',
-    },
-  },
-
-  '& > div:last-child': {
-    display: 'flex',
-    marginLeft: 'auto',
-
-    '& > * + *': {
-      marginLeft: '0.5rem',
-    },
-  },
-});
-
-const HeaderDesc = styled('div', {
-  span: {
-    color: '$body',
-  },
-
-  '& > * + *': {
-    marginLeft: '0.5rem',
   },
 });

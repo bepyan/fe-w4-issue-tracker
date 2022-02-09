@@ -1,50 +1,13 @@
-import { useMutation, useQueryClient } from 'react-query';
-import {
-  Button,
-  Comment,
-  DeleteButton,
-  Icon,
-  IssueSideBar,
-  TextArea,
-} from '@components';
-import { useInput, useIssueSideBar } from '@hooks';
-import { API } from '@services';
+import { Comment, DeleteButton, Icon, IssueSideBar } from '@components';
+import { useIssueSideBar } from '@hooks';
 import { useIssueDetailStore } from '@stores';
 import { styled } from '@styles';
 import { IssueDetailHeader } from './IssueDetailHeader';
+import { IssueDetailCommentForm } from './IssueDetailCommentForm';
 
 export const IssuesDetail = () => {
-  const queryClient = useQueryClient();
   const { issue } = useIssueDetailStore();
-  const { setValue, ...commentProps } = useInput();
-
   const issueSideBarProps = useIssueSideBar();
-
-  const commentMutaion = useMutation(
-    async () => {
-      if (!issue) return;
-
-      await API.create_issue_comment(issue.id, {
-        status: 'initial',
-        content: commentProps.value,
-      });
-      setValue('');
-    },
-    {
-      onSuccess: () => queryClient.invalidateQueries('read_issue_by_id'),
-    },
-  );
-
-  const statusMutaion = useMutation(
-    async () => {
-      if (!issue) return;
-
-      await API.update_issue_status(issue.id);
-    },
-    {
-      onSuccess: () => queryClient.invalidateQueries('read_issue_by_id'),
-    },
-  );
 
   if (!issue) {
     return <>로딩중...</>;
@@ -52,10 +15,7 @@ export const IssuesDetail = () => {
 
   return (
     <>
-      <IssueDetailHeader
-        issue={issue}
-        onToggleIssueStatus={statusMutaion.mutate}
-      />
+      <IssueDetailHeader issue={issue} />
 
       <Content>
         <CommentContainer>
@@ -66,18 +26,7 @@ export const IssuesDetail = () => {
             </CommentWrapper>
           ))}
 
-          <CommentWrapper>
-            <Icon name="user_image_large" />
-            <TextArea label="코멘트를 입력하세요" {...commentProps} />
-          </CommentWrapper>
-
-          <Button
-            size="small"
-            css={{ marginLeft: 'auto' }}
-            onClick={() => commentMutaion.mutate()}
-          >
-            <Icon name="plus" /> 코멘트 작성
-          </Button>
+          <IssueDetailCommentForm issue={issue} />
         </CommentContainer>
 
         <SideBarWrapper>
@@ -109,8 +58,7 @@ const CommentContainer = styled('div', {
   },
 });
 
-const CommentWrapper = styled('div', {
-  flex: 1,
+export const CommentWrapper = styled('div', {
   display: 'flex',
 
   '& > * + *': {
