@@ -1,6 +1,6 @@
 import { LabelsMilestoneTaps, VisibleToggleButton } from '@components';
 import { styled } from '@styles';
-import { useMilestoneNewVisibleStore } from 'stores/milestoneNewStore';
+import { useMilestoneNewVisibleStore } from '@stores';
 
 export const MilestonesToolbar = () => {
   const { visible, setVisible } = useMilestoneNewVisibleStore();

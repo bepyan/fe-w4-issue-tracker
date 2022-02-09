@@ -47,3 +47,14 @@ export const useMilestoneStore = () => {
       setMilestoneFilter((state) => ({ ...state, status })),
   };
 };
+
+export const milestoneNewVisibleStore = atom<boolean>({
+  key: 'milestoneNewVisibleStore',
+  default: false,
+});
+
+export const useMilestoneNewVisibleStore = () => {
+  const [visible, setVisible] = useRecoilState(milestoneNewVisibleStore);
+
+  return { visible, setVisible };
+};

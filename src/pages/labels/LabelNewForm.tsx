@@ -1,8 +1,9 @@
-import { Button, Icon } from '@components';
-import { useLabelNewQuery, useLabelNewVisibleStore } from '@stores';
+import { API } from '@services';
+import { useLabelNewVisibleStore } from '@stores';
 import { styled } from '@styles';
 import { LabelRequestDTO } from '@types';
 import { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import { LabelForm, LabelFormProps } from './LabelForm';
 
 const DEFAULT_NEW_LABEL: LabelRequestDTO = {
@@ -13,11 +14,21 @@ const DEFAULT_NEW_LABEL: LabelRequestDTO = {
 };
 
 export const LabelNewForm = () => {
-  const { visible } = useLabelNewVisibleStore();
+  const queryClient = useQueryClient();
+  const { visible, setVisible } = useLabelNewVisibleStore();
   const [label, setLabel] = useState<LabelRequestDTO>(DEFAULT_NEW_LABEL);
-  const { error, onSubmit } = useLabelNewQuery(() =>
-    setLabel(DEFAULT_NEW_LABEL),
-  );
+  const [error, setError] = useState('');
+
+  const submitMutation = useMutation(() => API.create_label(label), {
+    onSuccess: () => {
+      setVisible(false);
+      queryClient.invalidateQueries('read_all_labels');
+      setLabel(DEFAULT_NEW_LABEL);
+    },
+    onError: ({ message }) => {
+      setError(message);
+    },
+  });
 
   if (!visible) return null;
 
@@ -25,17 +36,8 @@ export const LabelNewForm = () => {
     label,
     error,
     header: <h1>새로운 레이블 추가</h1>,
-    footer: (
-      <Button type="submit" size="small">
-        <Icon name="plus" /> 완료
-      </Button>
-    ),
-    onSubmit: () => onSubmit(label),
-    setName: (name) => setLabel({ ...label, name }),
-    setDescription: (description) => setLabel({ ...label, description }),
-    //prettier-ignore
-    setBackgroundColor: (backgroundColor) => setLabel({ ...label, backgroundColor }),
-    setColor: (color) => setLabel({ ...label, color }),
+    setLabel,
+    onSubmit: submitMutation.mutate,
   };
 
   return (

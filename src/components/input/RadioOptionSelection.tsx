@@ -42,7 +42,7 @@ export const RadioOptionSelection = ({
 };
 
 const RadioItem = styled('div', {
-  marginLeft: '0.5rem',
+  marginLeft: '1rem',
 
   label: {
     display: 'flex',

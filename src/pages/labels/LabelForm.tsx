@@ -1,104 +1,88 @@
 import {
   ColorCodeInput,
+  FormLayout,
+  InlineInputWrapper,
   Label,
   RadioOptionSelection,
   TextInput,
 } from '@components';
 import { styled } from '@styles';
 import { LabelColor, LabelRequestDTO } from '@types';
+import { getFormChangeHandler } from '@utils';
 
 export interface LabelFormProps {
   label: LabelRequestDTO;
   error?: string;
   header?: React.ReactNode;
-  footer?: React.ReactNode;
   onSubmit: () => void;
-  setName: (name: string) => void;
-  setDescription: (description: string) => void;
-  setBackgroundColor: (backgroundColor: string) => void;
-  setColor: (color: LabelColor) => void;
+  onCancel?: () => void;
+  setLabel: React.Dispatch<React.SetStateAction<LabelRequestDTO>>;
 }
 
 export const LabelForm = ({
   label,
   error,
-  header,
-  footer,
-  onSubmit,
-  setName,
-  setDescription,
-  setBackgroundColor,
-  setColor,
+  setLabel,
+  ...formProps
 }: LabelFormProps) => {
-  const onSubmitLabel = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit();
+  const onChange = getFormChangeHandler(setLabel);
+
+  const onChangeColor = (value: string) => {
+    setLabel((state) => ({ ...state, color: value as LabelColor }));
   };
 
   return (
-    <Wrapper>
-      {header && <HeaderWrapper>{header}</HeaderWrapper>}
+    <FormLayout
+      {...formProps}
+      form={
+        <FormWrapper>
+          <LabelWrapper>
+            <Label {...label} />
+          </LabelWrapper>
 
-      <ContentWrapper>
-        <LabelWrapper>
-          <Label {...label} />
-        </LabelWrapper>
-        <FormWrapper onSubmit={onSubmitLabel}>
-          <TextInput
-            label="레이블 이름"
-            size="small"
-            defaultValue={label.name}
-            onChange={(e) => setName(e.currentTarget.value)}
-            status={!error ? undefined : 'error'}
-            statusText={error}
-          />
-          <TextInput
-            label="설명 (선택)"
-            size="small"
-            defaultValue={label.description}
-            onChange={(e) => setDescription(e.currentTarget.value)}
-          />
-          <InlineInputWrapper>
-            <ColorCodeInput
-              label="배경 색상"
-              defaultValue={label.backgroundColor}
-              onChange={(e) => setBackgroundColor(e.currentTarget.value)}
+          <ContentWrapper>
+            <TextInput
+              label="레이블 이름"
+              size="small"
+              value={label.name}
+              name="name"
+              onChange={onChange}
+              status={!error ? undefined : 'error'}
+              statusText={error}
             />
-            <RadioOptionSelection
-              name="color-group"
-              label="택스트 색상"
-              defaultValue={label.color}
-              radios={[
-                { label: '어두운 색', value: 'dark' },
-                { label: '밝은 색', value: 'light' },
-              ]}
-              onChange={(value) => setColor(value as LabelColor)}
+            <TextInput
+              label="설명 (선택)"
+              size="small"
+              value={label.description}
+              name="description"
+              onChange={onChange}
             />
-          </InlineInputWrapper>
-
-          <FooterWrapper>{footer}</FooterWrapper>
+            <InlineInputWrapper>
+              <ColorCodeInput
+                label="배경 색상"
+                value={label.backgroundColor}
+                name="backgroundColor"
+                onChange={onChange}
+              />
+              <RadioOptionSelection
+                name="color-group"
+                label="택스트 색상"
+                defaultValue={label.color}
+                radios={[
+                  { label: '어두운 색', value: 'dark' },
+                  { label: '밝은 색', value: 'light' },
+                ]}
+                onChange={onChangeColor}
+              />
+            </InlineInputWrapper>
+          </ContentWrapper>
         </FormWrapper>
-      </ContentWrapper>
-    </Wrapper>
+      }
+    />
   );
 };
 
-const Wrapper = styled('div', {
-  padding: '2rem',
-
-  '& > * + *': {
-    marginTop: '1.5rem',
-  },
-});
-
-const HeaderWrapper = styled('div', {
-  h1: {
-    fontSize: '$large',
-    fontWeight: '$regular',
-  },
-});
-
-const ContentWrapper = styled('div', {
+const FormWrapper = styled('div', {
   display: 'flex',
 
   '& > * + *': {
@@ -113,29 +97,9 @@ const LabelWrapper = styled('div', {
   justifyContent: 'center',
 });
 
-const FormWrapper = styled('form', {
+const ContentWrapper = styled('div', {
   flex: 5,
-
-  '& > * + * ': {
-    marginTop: '1rem',
-  },
-});
-
-const InlineInputWrapper = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-
   '& > * + *': {
-    marginLeft: '1rem',
-  },
-});
-
-const FooterWrapper = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-
-  '& > * + *': {
-    marginLeft: '0.5rem',
+    marginTop: '0.5rem',
   },
 });

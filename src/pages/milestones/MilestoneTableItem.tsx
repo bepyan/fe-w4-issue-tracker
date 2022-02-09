@@ -1,28 +1,24 @@
 import { DeleteButton, Icon, Prograss, TextButton } from '@components';
 import { styled } from '@styles';
 import { MilestoneDTO } from '@types';
-import { useMemo } from 'react';
+import { MilestoneEditForm } from './MilestoneEditForm';
+import { useMilestoneItem } from './_hooks';
 
 interface Props {
   milestone: MilestoneDTO;
+  onDeleteMilestone: (milestoneId: string) => void;
+  onToggleMilestoneStatus: (milestoneId: string) => void;
 }
 
-export const MilestoneTableItem = ({ milestone }: Props) => {
-  const [openCnt, closeCnt] = useMemo(() => {
-    return milestone.issues.reduce(
-      ([openCnt, closeCnt], issue) => {
-        if (issue.status === 'open') return [openCnt + 1, closeCnt];
-        return [openCnt, closeCnt + 1];
-      },
-      [0, 0],
-    );
-  }, [milestone]);
+export const MilestoneTableItem = ({ milestone, ...props }: Props) => {
+  const { isEdit, openCnt, closeCnt, percentage, openEdit, closeEdit } =
+    useMilestoneItem(milestone);
 
-  const percentage = useMemo(() => {
-    if (openCnt + closeCnt === 0) return 0;
+  if (isEdit)
+    return <MilestoneEditForm milestone={milestone} onClose={closeEdit} />;
 
-    return Math.floor((closeCnt * 100) / (openCnt + closeCnt));
-  }, [openCnt, closeCnt]);
+  const onToggleStatus = () => props.onToggleMilestoneStatus(milestone.id);
+  const onDelete = () => props.onDeleteMilestone(milestone.id);
 
   return (
     <Wrapper>
@@ -46,13 +42,14 @@ export const MilestoneTableItem = ({ milestone }: Props) => {
 
       <ActionWrapper>
         <ActionButtonWrapper>
-          <TextButton>
-            <Icon name="archive" /> 닫기
+          <TextButton onClick={onToggleStatus}>
+            <Icon name="archive" />
+            {milestone.status === 'open' ? '닫기' : '열기'}
           </TextButton>
-          <TextButton>
+          <TextButton onClick={openEdit}>
             <Icon name="edit" /> 편집
           </TextButton>
-          <DeleteButton>삭제</DeleteButton>
+          <DeleteButton onClick={onDelete}>삭제</DeleteButton>
         </ActionButtonWrapper>
 
         <PrograssIndicator>

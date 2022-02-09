@@ -42,6 +42,13 @@ export const update_milestone = (
   });
 };
 
+export const update_milestone_status = (milestoneId: string) => {
+  return _axios<MilestoneDTO>({
+    url: `${baseRoute}/${milestoneId}/status`,
+    method: 'PATCH',
+  });
+};
+
 // DELETE
 
 export const delete_milestone = (milestoneId: string) => {
