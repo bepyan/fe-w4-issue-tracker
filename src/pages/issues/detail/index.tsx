@@ -35,13 +35,27 @@ export const IssuesDetail = () => {
     },
   );
 
+  const statusMutaion = useMutation(
+    async () => {
+      if (!issue) return;
+
+      await API.update_issue_status(issue.id);
+    },
+    {
+      onSuccess: () => queryClient.invalidateQueries('read_issue_by_id'),
+    },
+  );
+
   if (!issue) {
     return <>로딩중...</>;
   }
 
   return (
     <>
-      <IssueDetailHeader issue={issue} />
+      <IssueDetailHeader
+        issue={issue}
+        onToggleIssueStatus={statusMutaion.mutate}
+      />
 
       <Content>
         <CommentContainer>
@@ -58,8 +72,8 @@ export const IssuesDetail = () => {
           </CommentWrapper>
 
           <Button
-            css={{ marginLeft: 'auto' }}
             size="small"
+            css={{ marginLeft: 'auto' }}
             onClick={() => commentMutaion.mutate()}
           >
             <Icon name="plus" /> 코멘트 작성

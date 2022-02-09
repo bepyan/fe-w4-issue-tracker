@@ -1,13 +1,17 @@
-import { Button, Icon, IssueLabel } from '@components';
+import { Button, Icon, IssueLabel, IssueToggleButton } from '@components';
 import { styled } from '@styles';
 import { IssueDTO } from '@types';
 import { toTimeDuration } from '@utils';
 
 export interface IssueDetailHeaderProps {
   issue: IssueDTO;
+  onToggleIssueStatus: () => void;
 }
 
-export const IssueDetailHeader = ({ issue }: IssueDetailHeaderProps) => {
+export const IssueDetailHeader = ({
+  issue,
+  onToggleIssueStatus,
+}: IssueDetailHeaderProps) => {
   return (
     <Header>
       <HeaderTitle>
@@ -19,9 +23,11 @@ export const IssueDetailHeader = ({ issue }: IssueDetailHeaderProps) => {
           <Button kind="secondary" size="small">
             <Icon name="edit" /> 제목 편집
           </Button>
-          <Button kind="secondary" size="small">
-            <Icon name="archive" /> 이슈 닫기
-          </Button>
+
+          <IssueToggleButton
+            status={issue.status}
+            onToggle={onToggleIssueStatus}
+          />
         </div>
       </HeaderTitle>
 
