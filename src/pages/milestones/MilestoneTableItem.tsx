@@ -1,4 +1,5 @@
 import { DeleteButton, Icon, Prograss, TextButton } from '@components';
+import { useToggle } from '@hooks';
 import { styled } from '@styles';
 import { MilestoneDTO } from '@types';
 import { MilestoneEditForm } from './MilestoneEditForm';
@@ -11,8 +12,8 @@ interface Props {
 }
 
 export const MilestoneTableItem = ({ milestone, ...props }: Props) => {
-  const { isEdit, openCnt, closeCnt, percentage, openEdit, closeEdit } =
-    useMilestoneItem(milestone);
+  const { toggle: isEdit, open: openEdit, close: closeEdit } = useToggle();
+  const { openCnt, closeCnt, percentage } = useMilestoneItem(milestone);
 
   if (isEdit)
     return <MilestoneEditForm milestone={milestone} onClose={closeEdit} />;

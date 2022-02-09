@@ -1,8 +1,8 @@
 import { DeleteButton, Icon, Label, TextButton } from '@components';
+import { useToggle } from '@hooks';
 import { useLabelQuery } from '@stores';
 import { styled } from '@styles';
 import { LabelDTO } from '@types';
-import { useState } from 'react';
 import { LabelEditForm } from './LabelEditForm';
 
 export interface LabelTableItemProps {
@@ -10,9 +10,7 @@ export interface LabelTableItemProps {
 }
 
 export const LabelTableItem = ({ label }: LabelTableItemProps) => {
-  const [isEdit, setIsEdit] = useState(false);
-  const openEdit = () => setIsEdit(true);
-  const closeEdit = () => setIsEdit(false);
+  const { toggle: isEdit, open: openEdit, close: closeEdit } = useToggle();
 
   const { onEditLabel, onDeleteLabel } = useLabelQuery({
     labelId: label.id,

@@ -1,9 +1,7 @@
 import { MilestoneDTO } from '@types';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 export const useMilestoneItem = (milestone: MilestoneDTO) => {
-  const [isEdit, setIsEdit] = useState(false);
-
   const [openCnt, closeCnt] = useMemo(() => {
     return milestone.issues.reduce(
       ([openCnt, closeCnt], issue) => {
@@ -21,11 +19,8 @@ export const useMilestoneItem = (milestone: MilestoneDTO) => {
   }, [openCnt, closeCnt]);
 
   return {
-    isEdit,
     openCnt,
     closeCnt,
     percentage,
-    openEdit: () => setIsEdit(true),
-    closeEdit: () => setIsEdit(false),
   };
 };
