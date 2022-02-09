@@ -1,9 +1,5 @@
 type DateValue = string | number | Date;
 
-export const toPassTime = (time: string) => {
-  new Date(time);
-};
-
 /**
  * 동적으로 변하는 new Date()는 인수로 받아오는게 바람직하다.
  * @param target string | number | Date

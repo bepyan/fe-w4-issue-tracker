@@ -1,12 +1,29 @@
 import { DeleteButton, Icon, Label, TextButton } from '@components';
+import { useLabelQuery } from '@stores';
 import { styled } from '@styles';
 import { LabelDTO } from '@types';
+import { useState } from 'react';
+import { LabelEditForm } from './LabelEditForm';
 
 export interface LabelTableItemProps {
   label: LabelDTO;
 }
 
 export const LabelTableItem = ({ label }: LabelTableItemProps) => {
+  const [isEdit, setIsEdit] = useState(false);
+  const openEdit = () => setIsEdit(true);
+  const closeEdit = () => setIsEdit(false);
+
+  const { onEditLabel, onDeleteLabel } = useLabelQuery({
+    labelId: label.id,
+    onSuccessEdit: closeEdit,
+  });
+
+  if (isEdit)
+    return (
+      <LabelEditForm label={label} onClose={closeEdit} onSubmit={onEditLabel} />
+    );
+
   return (
     <TableItem>
       <LabelWrapper>
@@ -16,11 +33,11 @@ export const LabelTableItem = ({ label }: LabelTableItemProps) => {
       <LabelDescText>{label.description}</LabelDescText>
 
       <LabelActionWrapper>
-        <TextButton>
+        <TextButton onClick={openEdit}>
           <Icon name="edit" /> 편집
         </TextButton>
 
-        <DeleteButton>삭제</DeleteButton>
+        <DeleteButton onClick={onDeleteLabel}>삭제</DeleteButton>
       </LabelActionWrapper>
     </TableItem>
   );

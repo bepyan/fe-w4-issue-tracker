@@ -13,8 +13,8 @@ export const IssueStatusFilter = ({
   getIssueStatusFilterProps,
 }: IssueStatusFilterProps) => {
   const { issueCnt: openCnt, ...openProps } = getIssueStatusFilterProps('open');
-  const { issueCnt: closeCnt, ...closeProps } =
-    getIssueStatusFilterProps('close');
+  // prettier-ignore
+  const { issueCnt: closeCnt, ...closeProps } = getIssueStatusFilterProps('close');
 
   return (
     <>

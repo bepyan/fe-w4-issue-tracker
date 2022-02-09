@@ -12,12 +12,14 @@ export const issueFilterStore = atom<{
   status: IssueStatus;
   assignee?: string;
   milstone?: string;
+  labels: string[];
 }>({
   key: 'issueFilterStore',
   default: {
     status: 'open',
     assignee: undefined,
     milstone: undefined,
+    labels: [],
   },
 });
 
