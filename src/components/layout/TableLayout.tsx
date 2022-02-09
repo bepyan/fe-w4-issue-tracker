@@ -7,9 +7,9 @@ export type TableLayoutProps = {
 
 export const TableLayout = ({ header, children }: TableLayoutProps) => {
   return (
-    <Wrapper>
-      <Header>{header}</Header>
-      <Content>{children}</Content>
+    <Wrapper className="table">
+      <Header className="table__header">{header}</Header>
+      <Content className="table__content">{children}</Content>
     </Wrapper>
   );
 };

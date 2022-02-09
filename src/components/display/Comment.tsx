@@ -1,7 +1,9 @@
-import { Icon, Label, TableLayout, TextButton } from '@components';
+import { Icon, Label, TextButton } from '@components';
 import { useAuthStore } from '@stores';
 import { styled } from '@styles';
 import { CommentDTO } from '@types';
+import { toTimeDuration } from '@utils';
+import { TableLayout } from '../layout/TableLayout';
 
 type Props = {
   comment: CommentDTO;
@@ -11,33 +13,82 @@ export const Comment = ({ comment }: Props) => {
   const { auth } = useAuthStore();
 
   return (
-    <TableLayout
-      header={
-        <Header>
-          <UserName>{comment.author}</UserName>
-          <TimeStamp>20분 전</TimeStamp>
+    <CommentWrapper status={comment.status}>
+      <TableLayout
+        header={
+          <Header>
+            <UserName>{comment.author}</UserName>
+            <TimeStamp>{toTimeDuration(comment.timestamp)}</TimeStamp>
 
-          <HeaderRightActionWrapper>
-            {comment.author === auth?.id && (
-              <>
-                <Label color="line" name="작성자" />
-                <TextButton>
-                  <Icon name="edit" /> 편집
-                </TextButton>
-              </>
-            )}
+            <HeaderRightActionWrapper>
+              {comment.author === auth?.id && (
+                <>
+                  <Label color="line" name="작성자" />
+                  <TextButton>
+                    <Icon name="edit" /> 편집
+                  </TextButton>
+                </>
+              )}
 
-            <TextButton>
-              <Icon name="smile" />
-            </TextButton>
-          </HeaderRightActionWrapper>
-        </Header>
-      }
-    >
-      <div>{comment.content}</div>
-    </TableLayout>
+              <TextButton>
+                <Icon name="smile" />
+              </TextButton>
+            </HeaderRightActionWrapper>
+          </Header>
+        }
+      >
+        <div>{comment.content}</div>
+      </TableLayout>
+    </CommentWrapper>
   );
 };
+
+const UserName = styled('span', {
+  color: '$title-active',
+});
+
+const CommentWrapper = styled('div', {
+  variants: {
+    status: {
+      initial: {},
+      closed: {
+        '.table': {
+          borderColor: '$secondary300',
+        },
+        '.table__header': {
+          backgroundColor: '$secondary100',
+
+          [`& ${UserName}`]: {
+            color: '$secondary500',
+          },
+        },
+        '.table__content': {
+          color: '$secondary500',
+        },
+        '.table__content > *': {
+          borderColor: '$secondary300',
+        },
+      },
+      reopen: {
+        '.table': {
+          borderColor: '$primary300',
+        },
+        '.table__header': {
+          backgroundColor: '$primary100',
+          [`& ${UserName}`]: {
+            color: '$primary500',
+          },
+        },
+        '.table__content': {
+          color: '$primary500',
+        },
+        '.table__content > *': {
+          borderColor: '$primary300',
+        },
+      },
+    },
+  },
+});
 
 const Header = styled('div', {
   flex: 1,
@@ -47,10 +98,6 @@ const Header = styled('div', {
   '& > * + *': {
     marginLeft: '0.5rem',
   },
-});
-
-const UserName = styled('span', {
-  color: '$title-active',
 });
 
 const TimeStamp = styled('span', {
