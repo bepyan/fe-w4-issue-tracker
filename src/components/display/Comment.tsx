@@ -1,8 +1,11 @@
-import { Icon, Label, TextButton } from '@components';
+import { FormLayout, Icon, Label, TextArea, TextButton } from '@components';
+import { useToggle } from '@hooks';
+import { API } from '@services';
 import { useAuthStore } from '@stores';
 import { styled } from '@styles';
 import { CommentDTO } from '@types';
 import { toTimeDuration } from '@utils';
+import { useMutation, useQueryClient } from 'react-query';
 import { TableLayout } from '../layout/TableLayout';
 
 type Props = {
@@ -11,8 +14,41 @@ type Props = {
 
 export const Comment = ({ comment }: Props) => {
   const { auth } = useAuthStore();
+  const queryClient = useQueryClient();
 
-  return (
+  const { toggle, open, close } = useToggle();
+  const editMutation = useMutation(
+    (content: string) => API.update_comment(comment.id, { content }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('read_issue_by_id');
+        close();
+      },
+    },
+  );
+
+  return toggle ? (
+    <FormWrapper>
+      <FormLayout
+        onCancel={close}
+        onSubmit={(e) => {
+          if (!e) return;
+
+          const { content } = e.target as typeof e.target & {
+            content: { value: string };
+          };
+          editMutation.mutate(content.value);
+        }}
+        form={
+          <TextArea
+            label="코멘트를 입력하세요"
+            defaultValue={comment.content}
+            name="content"
+          />
+        }
+      />
+    </FormWrapper>
+  ) : (
     <CommentWrapper status={comment.status}>
       <TableLayout
         header={
@@ -24,7 +60,7 @@ export const Comment = ({ comment }: Props) => {
               {comment.author === auth?.id && (
                 <>
                   <Label color="line" name="작성자" />
-                  <TextButton>
+                  <TextButton onClick={open}>
                     <Icon name="edit" /> 편집
                   </TextButton>
                 </>
@@ -37,7 +73,7 @@ export const Comment = ({ comment }: Props) => {
           </Header>
         }
       >
-        <div>{comment.content}</div>
+        <pre>{comment.content}</pre>
       </TableLayout>
     </CommentWrapper>
   );
@@ -111,5 +147,11 @@ const HeaderRightActionWrapper = styled('div', {
 
   '& > * + *': {
     marginLeft: '1.5rem',
+  },
+});
+
+const FormWrapper = styled('div', {
+  '& > div': {
+    padding: '0px',
   },
 });

@@ -9,7 +9,7 @@ export interface FormLayoutProps {
    * 사용시 Footer에 취소 버튼을 생성한다.
    */
   onCancel?: () => void;
-  onSubmit: () => void;
+  onSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export const FormLayout = ({
@@ -23,7 +23,7 @@ export const FormLayout = ({
     e.preventDefault();
     if (disableSubmit) return;
 
-    onSubmit();
+    onSubmit(e);
   };
 
   return (

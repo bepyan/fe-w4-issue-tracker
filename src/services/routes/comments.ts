@@ -5,7 +5,7 @@ const baseRoute = '/comments';
 
 // PATCH
 
-export const update_comment = (commentId: number, data: CommentRequestDTO) => {
+export const update_comment = (commentId: string, data: CommentRequestDTO) => {
   return _axios<void>({
     url: `${baseRoute}/${commentId}`,
     method: 'PATCH',
