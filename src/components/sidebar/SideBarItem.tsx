@@ -59,4 +59,7 @@ const Content = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
+  '& > * + *': {
+    marginTop: '0.25rem',
+  },
 });

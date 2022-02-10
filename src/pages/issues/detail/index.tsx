@@ -1,14 +1,14 @@
 import { Comment, Icon, IssueSideBar } from '@components';
-import { useIssueSideBar } from '@hooks';
 import { useIssueDetailStore } from '@stores';
 import { styled } from '@styles';
 import { IssueDetailHeader } from './IssueDetailHeader';
 import { IssueDetailCommentForm } from './IssueDetailCommentForm';
 import { IssueDetailDeleteButton } from './IssueDetailDeleteButton';
+import { useIssueDetailSideBar } from '@hooks';
 
 export const IssuesDetail = () => {
   const { issue } = useIssueDetailStore();
-  const issueSideBarProps = useIssueSideBar();
+  const issueSideBarProps = useIssueDetailSideBar(issue);
 
   if (!issue) {
     return <>로딩중...</>;

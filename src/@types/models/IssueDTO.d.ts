@@ -29,4 +29,10 @@ declare module '@types' {
     assignees: string[];
     milestone?: string | null;
   }
+
+  interface IssueUpdateDTO {
+    labels?: string[];
+    assignees?: string[];
+    milestone?: string | null;
+  }
 }

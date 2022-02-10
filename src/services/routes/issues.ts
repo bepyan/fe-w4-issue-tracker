@@ -4,6 +4,7 @@ import {
   IssueDTO,
   IssueRequestDTO,
   IssueStatus,
+  IssueUpdateDTO,
 } from '@types';
 
 const baseRoute = '/issues';
@@ -46,6 +47,14 @@ export const read_issue_by_id = (issueId: string) => {
 };
 
 // PATCH
+
+export const update_issue = (issueId: string, data: IssueUpdateDTO) => {
+  return _axios<void>({
+    url: `${baseRoute}/${issueId}`,
+    method: 'PATCH',
+    data,
+  });
+};
 
 export const update_issue_title = (
   issueId: string,

@@ -11,7 +11,7 @@ import { styled } from '@styles';
 import { LabelDTO, MilestoneDTO, UserDTO } from '@types';
 import { useMemo } from 'react';
 
-interface Props {
+export interface IssueSideBarProps {
   assignees: UserDTO[];
   labels: LabelDTO[];
   milestone?: MilestoneDTO;
@@ -27,7 +27,7 @@ export const IssueSideBar = ({
   setAssignees,
   setLabels,
   setMilestone,
-}: Props) => {
+}: IssueSideBarProps) => {
   const { userList } = useUserStore();
   const { labelList } = useLabelStore();
   const { milestoneList } = useMilestoneStore();
@@ -73,14 +73,17 @@ export const IssueSideBar = ({
         panelHeader="담당자 추가"
         dropdownChildren={
           <>
-            {userList.map((v, index) => (
-              <DropdownCheckbox
-                key={index}
-                onChange={(selected) => onChangeAssignees(selected, v)}
-              >
-                {v.id}
-              </DropdownCheckbox>
-            ))}
+            {userList.map((v, index) => {
+              return (
+                <DropdownCheckbox
+                  key={index}
+                  initSelected={assignees.some((e) => e.id === v.id)}
+                  onChange={(selected) => onChangeAssignees(selected, v)}
+                >
+                  {v.id}
+                </DropdownCheckbox>
+              );
+            })}
           </>
         }
       >
@@ -97,6 +100,7 @@ export const IssueSideBar = ({
             {labelList.map((v, index) => (
               <DropdownCheckbox
                 key={index}
+                initSelected={labels.some((e) => e.id === v.id)}
                 onChange={(selected) => onChangeLabels(selected, v)}
               >
                 {v.name}

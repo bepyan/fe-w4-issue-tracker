@@ -27,7 +27,9 @@ export const DropdownCheckbox = ({
     onClick?.();
   };
 
-  useEffect(() => setSelected(!!value), [value]);
+  useEffect(() => {
+    if (value !== undefined) setSelected(value);
+  }, [value]);
 
   return (
     <Wrapper onClick={onClickCheckbox}>
