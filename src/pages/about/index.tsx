@@ -138,6 +138,7 @@ export const AboutPage = () => {
         <FilterBar
           label="필터"
           title="이슈 필터"
+          value=""
           onSubmit={(v) => console.log(v)}
         >
           <DropdownCheckbox>열린 이슈</DropdownCheckbox>

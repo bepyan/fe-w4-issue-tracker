@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dropdown, Icon, Indicator } from '@components';
 import { styled } from '@styles';
 
@@ -6,34 +6,36 @@ type Props = {
   label: string;
   title: string;
   children: React.ReactNode;
+  value: string;
   onSubmit: (text: string) => void;
 };
 
-const INIT_PLACEHOLDER = 'is:issue is:open';
-const FOCUS_PlACEHOLDER = 'Search all issues';
+const INIT_PLACEHOLDER = 'Search all issues';
 
-export const FilterBar = ({ onSubmit, ...dropdownProps }: Props) => {
-  const [focused, setFocused] = useState(false);
+export const FilterBar = ({ onSubmit, value, ...dropdownProps }: Props) => {
+  const [text, setText] = useState(value);
 
-  const submitHandler = (ev: React.SyntheticEvent) => {
-    ev.preventDefault();
-    const target = ev.target as typeof ev.target & {
+  const submitHandler = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & {
       search: { value: string };
     };
     onSubmit(target.search.value);
   };
 
+  useEffect(() => setText(value), [value]);
+
   return (
-    <Wrapper focused={focused}>
+    <Wrapper>
       <Dropdown {...dropdownProps} label="필터" title="상태 변경"></Dropdown>
 
       <form onSubmit={submitHandler}>
         <Icon name="search" />
         <input
           id="search"
-          placeholder={focused ? FOCUS_PlACEHOLDER : INIT_PLACEHOLDER}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
+          placeholder={INIT_PLACEHOLDER}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         />
       </form>
     </Wrapper>
@@ -79,15 +81,11 @@ const Wrapper = styled('div', {
     },
   },
 
-  variants: {
-    focused: {
-      true: {
-        borderColor: '$title-active',
-        backgroundColor: '$off-white',
-        [`& ${Indicator}`]: {
-          backgroundColor: '$off-white',
-        },
-      },
+  '&:focus-within': {
+    borderColor: '$title-active',
+    backgroundColor: '$off-white',
+    [`& ${Indicator}`]: {
+      backgroundColor: '$off-white',
     },
   },
 });

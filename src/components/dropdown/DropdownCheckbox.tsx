@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@styles';
 import { Icon } from '@components';
 import { DropdownItemWrapper } from './DropdownItem';
@@ -6,21 +6,28 @@ import { DropdownItemWrapper } from './DropdownItem';
 type Props = {
   initSelected?: boolean;
   children: React.ReactNode;
+  value?: boolean;
   onChange?: (selected: boolean) => void;
+  onClick?: () => void;
 };
 
 export const DropdownCheckbox = ({
   initSelected,
+  value,
   children,
   onChange,
+  onClick,
 }: Props) => {
   const [selected, setSelected] = useState(!!initSelected);
 
   const onClickCheckbox = () => {
     const newSelected = !selected;
     setSelected(newSelected);
-    onChange && onChange(newSelected);
+    onChange?.(newSelected);
+    onClick?.();
   };
+
+  useEffect(() => setSelected(!!value), [value]);
 
   return (
     <Wrapper onClick={onClickCheckbox}>

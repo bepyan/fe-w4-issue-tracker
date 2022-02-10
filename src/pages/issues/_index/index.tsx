@@ -1,26 +1,24 @@
 import { TableLayout } from '@components';
 import { styled } from '@styles';
-import { useIssueStore } from '@stores';
+import { useIssueFilterStore, useIssueStore } from '@stores';
 import { IssueToolbar } from './IssueToolbar';
-import { IssueTableItem } from './IssueTableItem';
 import { IssueTableHeader } from './IssueTableHeader';
-import { IssueTableEmptyView } from './IssueTableEmptyView';
+import { IssueTableList } from './IssueTableList';
 
 export const Issues = () => {
   const { filterdIssueList } = useIssueStore();
+  const { issueFilter } = useIssueFilterStore();
 
   return (
     <Wrapper>
       <IssueToolbar />
 
       <TableLayout header={<IssueTableHeader />}>
-        {filterdIssueList.length ? (
-          filterdIssueList.map((item, index) => (
-            <IssueTableItem key={index} issue={item} />
-          ))
-        ) : (
-          <IssueTableEmptyView />
-        )}
+        <IssueTableList
+          issueList={filterdIssueList.filter(
+            (v) => v.status === issueFilter.status,
+          )}
+        />
       </TableLayout>
     </Wrapper>
   );

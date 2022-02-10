@@ -8,6 +8,7 @@ import {
 } from '@components';
 import {
   useCheckedIssueHeader,
+  useIssueFilterStore,
   useIssueStore,
   useLabelStore,
   useMilestoneStore,
@@ -20,7 +21,9 @@ import { IssueStatusFilter, IssueStatusFilterProps } from './IssueStatusFilter';
 type Props = {};
 
 export const IssueTableHeader = ({}: Props) => {
-  const { issueList, issueFilter, setIssueFilter } = useIssueStore();
+  const { issueList, filterdIssueList } = useIssueStore();
+  const { issueFilter, setIssueFilter } = useIssueFilterStore();
+
   const {
     checkedIssueList,
     headerToggleStatus,
@@ -37,15 +40,18 @@ export const IssueTableHeader = ({}: Props) => {
     return Array.from(userSet);
   }, [issueList]);
 
-  const issueStatusFilterProps: IssueStatusFilterProps = {
-    getIssueStatusFilterProps: (status: IssueStatus) => {
-      return {
-        issueCnt: issueList.filter((v) => v.status === status).length,
-        selected: issueFilter.status === status,
-        onClick: () => setIssueFilter((state) => ({ ...state, status })),
-      };
-    },
-  };
+  const issueStatusFilterProps: IssueStatusFilterProps = useMemo(
+    () => ({
+      getIssueStatusFilterProps: (status: IssueStatus) => {
+        return {
+          issueCnt: filterdIssueList.filter((v) => v.status === status).length,
+          selected: issueFilter.status === status,
+          onClick: () => setIssueFilter((state) => ({ ...state, status })),
+        };
+      },
+    }),
+    [filterdIssueList, issueFilter],
+  );
 
   return (
     <Wrapper>
@@ -69,32 +75,88 @@ export const IssueTableHeader = ({}: Props) => {
         <VisibleWrapper visible={!checkedIssueList.length}>
           <Dropdown label="담당자" title="담당자 필터" position="right">
             <DropdownCheckbox>담당자가 없는 이슈</DropdownCheckbox>
-            {userList.map((user, index) => (
-              <DropdownCheckbox key={index}>{user.name}</DropdownCheckbox>
-            ))}
+            {userList.map((user, index) => {
+              const value = issueFilter.assignee === user.id;
+              return (
+                <DropdownCheckbox
+                  key={index}
+                  value={value}
+                  onClick={() =>
+                    setIssueFilter((v) => ({
+                      ...v,
+                      assignee: value ? undefined : user.id,
+                    }))
+                  }
+                >
+                  {user.name}
+                </DropdownCheckbox>
+              );
+            })}
           </Dropdown>
 
           <Dropdown label="레이블" title="레이블 필터" position="right">
             <DropdownCheckbox>레이블이 없는 이슈</DropdownCheckbox>
-            {labelList.map((label, index) => (
-              <DropdownCheckbox key={index}>{label.name}</DropdownCheckbox>
-            ))}
+            {labelList.map((label, index) => {
+              const value = issueFilter.labels.some((v) => v.id === label.id);
+              return (
+                <DropdownCheckbox
+                  key={index}
+                  value={value}
+                  onClick={() =>
+                    setIssueFilter((v) => ({
+                      ...v,
+                      labels: value
+                        ? v.labels.filter((e) => e.id !== label.id)
+                        : [...v.labels, label],
+                    }))
+                  }
+                >
+                  {label.name}
+                </DropdownCheckbox>
+              );
+            })}
           </Dropdown>
 
           <Dropdown label="마일스톤" title="마일스톤 필터" position="right">
             <DropdownCheckbox>마일스톤이 없는 이슈</DropdownCheckbox>
-            {milestoneList.map((milesone, index) => (
-              <DropdownCheckbox key={index}>{milesone.title}</DropdownCheckbox>
-            ))}
+            {milestoneList.map((milestone, index) => {
+              const value = issueFilter.milestone?.id === milestone?.id;
+              return (
+                <DropdownCheckbox
+                  key={index}
+                  value={value}
+                  onClick={() =>
+                    setIssueFilter((v) => ({
+                      ...v,
+                      milestone: value ? undefined : milestone,
+                    }))
+                  }
+                >
+                  {milestone.title}
+                </DropdownCheckbox>
+              );
+            })}
           </Dropdown>
 
           <Dropdown label="작성자" title="작성자 필터" position="right">
-            {writerList.map((writer, index) => (
-              <DropdownCheckbox key={index}>
-                <Icon name="user_image_small" />
-                <span>{writer}</span>
-              </DropdownCheckbox>
-            ))}
+            {writerList.map((writer, index) => {
+              const value = issueFilter.author === writer;
+              return (
+                <DropdownCheckbox
+                  key={index}
+                  value={value}
+                  onClick={() =>
+                    setIssueFilter((v) => ({
+                      ...v,
+                      author: value ? undefined : writer,
+                    }))
+                  }
+                >
+                  <Icon name="user_image_small" />
+                  <span>{writer}</span>
+                </DropdownCheckbox>
+              );
+            })}
           </Dropdown>
         </VisibleWrapper>
       </div>
