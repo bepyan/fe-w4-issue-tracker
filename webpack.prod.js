@@ -1,10 +1,8 @@
-const webpack = require('webpack');
+// @ts-nocheck
 const { merge } = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const common = require('./webpack.common.js');
-
-const HTML_TEMPLATE = 'assets/production.html';
 
 module.exports = merge(common, {
   mode: 'production',
@@ -17,11 +15,5 @@ module.exports = merge(common, {
       chunks: 'all',
     },
   },
-  plugins: [
-    new Dotenv({ path: '.env.production' }),
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'production',
-      DEBUG: false,
-    }),
-  ],
+  plugins: [new Dotenv({ path: '.env.production' })],
 });

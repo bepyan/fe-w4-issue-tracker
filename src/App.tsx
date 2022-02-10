@@ -11,7 +11,7 @@ const App = () => {
   if (isLoading) return <h1>로딩중...</h1>;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/fe-w4-issue-tracker">
       <Routes>
         <Route element={<AuthRequired />}>
           <Route index element={<Navigate to="/issues" />} />

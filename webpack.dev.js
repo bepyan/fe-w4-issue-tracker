@@ -1,12 +1,14 @@
+// @ts-nocheck
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
 const common = require('./webpack.common.js');
 
-const HTML_TEMPLATE = 'public/index.html';
-
 module.exports = merge(common, {
   mode: 'development',
+  output: {
+    publicPath: '/',
+  },
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',
