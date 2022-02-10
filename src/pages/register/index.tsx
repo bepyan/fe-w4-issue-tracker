@@ -4,14 +4,19 @@ import { useMutation } from 'react-query';
 import { API } from '@services';
 import { useAuthStore } from '@stores';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export const Register = () => {
   const nav = useNavigate();
   const { signin } = useAuthStore();
+  const [error, setError] = useState('');
 
   const registerMutation = useMutation(API.register_user, {
     onSuccess: ({ data }) => {
-      // signin(data);
+      signin(data);
+    },
+    onError: ({ message }) => {
+      setError(message);
     },
   });
 
@@ -35,9 +40,15 @@ export const Register = () => {
       <Logo size="large" />
 
       <Form onSubmit={onSubmitRegister}>
-        <TextInput id="id" label="아이디" />
-        <TextInput id="name" label="이름" />
-        <TextInput id="pw" label="비밀번호" type="password" />
+        <TextInput
+          id="id"
+          name="id"
+          label="아이디"
+          status={error ? 'error' : undefined}
+          statusText={error}
+        />
+        <TextInput id="name" name="name" label="이름" />
+        <TextInput id="pw" name="pw" label="비밀번호" type="password" />
 
         <Button
           size="large"

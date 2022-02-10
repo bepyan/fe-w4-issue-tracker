@@ -6,7 +6,7 @@ const baseRoute = '/users';
 // POST
 
 export const register_user = (data: UserRegistDTO) => {
-  return _axios<UserDTO>({
+  return _axios<AuthDTO>({
     url: `${baseRoute}/register`,
     method: 'POST',
     data,
