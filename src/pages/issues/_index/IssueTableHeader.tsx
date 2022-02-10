@@ -74,7 +74,18 @@ export const IssueTableHeader = ({}: Props) => {
 
         <VisibleWrapper visible={!checkedIssueList.length}>
           <Dropdown label="담당자" title="담당자 필터" position="right">
-            <DropdownCheckbox>담당자가 없는 이슈</DropdownCheckbox>
+            <DropdownCheckbox
+              value={issueFilter.assignee === 'none'}
+              onClick={() =>
+                setIssueFilter((v) => ({
+                  ...v,
+                  assignee:
+                    issueFilter.assignee === 'none' ? undefined : 'none',
+                }))
+              }
+            >
+              담당자가 없는 이슈
+            </DropdownCheckbox>
             {userList.map((user, index) => {
               const value = issueFilter.assignee === user.id;
               return (
@@ -95,9 +106,21 @@ export const IssueTableHeader = ({}: Props) => {
           </Dropdown>
 
           <Dropdown label="레이블" title="레이블 필터" position="right">
-            <DropdownCheckbox>레이블이 없는 이슈</DropdownCheckbox>
+            <DropdownCheckbox
+              value={issueFilter.labels === 'none'}
+              onClick={() =>
+                setIssueFilter((v) => ({
+                  ...v,
+                  labels: issueFilter.labels === 'none' ? [] : 'none',
+                }))
+              }
+            >
+              레이블이 없는 이슈
+            </DropdownCheckbox>
             {labelList.map((label, index) => {
-              const value = issueFilter.labels.some((v) => v.id === label.id);
+              const value =
+                issueFilter.labels !== 'none' &&
+                issueFilter.labels.some((v) => v.id === label.id);
               return (
                 <DropdownCheckbox
                   key={index}
@@ -105,9 +128,12 @@ export const IssueTableHeader = ({}: Props) => {
                   onClick={() =>
                     setIssueFilter((v) => ({
                       ...v,
-                      labels: value
-                        ? v.labels.filter((e) => e.id !== label.id)
-                        : [...v.labels, label],
+                      labels:
+                        v.labels === 'none'
+                          ? [label]
+                          : value
+                          ? v.labels.filter((e) => e.id !== label.id)
+                          : [...v.labels, label],
                     }))
                   }
                 >
@@ -118,9 +144,22 @@ export const IssueTableHeader = ({}: Props) => {
           </Dropdown>
 
           <Dropdown label="마일스톤" title="마일스톤 필터" position="right">
-            <DropdownCheckbox>마일스톤이 없는 이슈</DropdownCheckbox>
+            <DropdownCheckbox
+              value={issueFilter.milestone === 'none'}
+              onClick={() =>
+                setIssueFilter((v) => ({
+                  ...v,
+                  milestone:
+                    issueFilter.milestone === 'none' ? undefined : 'none',
+                }))
+              }
+            >
+              마일스톤이 없는 이슈
+            </DropdownCheckbox>
             {milestoneList.map((milestone, index) => {
-              const value = issueFilter.milestone?.id === milestone?.id;
+              const value =
+                issueFilter.milestone !== 'none' &&
+                issueFilter.milestone?.id === milestone?.id;
               return (
                 <DropdownCheckbox
                   key={index}

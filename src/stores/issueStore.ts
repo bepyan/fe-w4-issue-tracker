@@ -25,10 +25,10 @@ export const issueStore = atom<IssueDTO[]>({
 export const issueFilterStore = atom<{
   status: IssueStatus;
   author?: string;
-  assignee?: string;
-  milestone?: MilestoneDTO;
+  assignee?: string | 'none';
+  milestone?: MilestoneDTO | 'none';
+  labels: LabelDTO[] | 'none';
   hasMyComment?: boolean;
-  labels: LabelDTO[];
 }>({
   key: 'issueFilterStore',
   default: {
@@ -36,8 +36,8 @@ export const issueFilterStore = atom<{
     author: undefined,
     assignee: undefined,
     milestone: undefined,
-    hasMyComment: undefined,
     labels: [],
+    hasMyComment: undefined,
   },
 });
 
@@ -64,16 +64,26 @@ export const filterdIssueStore = selector({
       ) {
         return false;
       }
-      if (filter.milestone && issue.milestone?.id !== filter.milestone.id) {
+
+      if (filter.milestone === 'none') {
+        if (issue.milestone) return;
+      } else if (
+        filter.milestone &&
+        issue.milestone?.id !== filter.milestone.id
+      ) {
         return false;
       }
+
       if (
         filter.hasMyComment &&
         issue.comments.some((v) => v.author !== auth?.id)
       ) {
         return false;
       }
-      if (
+
+      if (filter.labels === 'none') {
+        if (issue.labels.length) return false;
+      } else if (
         filter.labels.length &&
         filter.labels.every((v) => issue.labels.every((e) => e.id !== v.id))
       )
@@ -100,9 +110,23 @@ export const useIssueSearchBar = () => {
       if (issueFilter[key]) filterList.push(`${key}:${issueFilter[key]}`);
     });
     if (issueFilter.milestone)
-      filterList.push(`milestone:"${issueFilter.milestone.title}"`);
-    issueFilter.labels.forEach((v) => filterList.push(`label:"${v.name}"`));
-    if (issueFilter.hasMyComment) filterList.push(`comment:@me`);
+      filterList.push(
+        `milestone:${
+          issueFilter.milestone === 'none'
+            ? 'none'
+            : `"${issueFilter.milestone.title}"`
+        }`,
+      );
+
+    if (issueFilter.labels === 'none') {
+      filterList.push(`label:none`);
+    } else {
+      issueFilter.labels.forEach((v) => filterList.push(`label:"${v.name}"`));
+    }
+
+    if (issueFilter.hasMyComment) {
+      filterList.push(`comment:@me`);
+    }
 
     return filterList.join(' ');
   }, [issueFilter]);
