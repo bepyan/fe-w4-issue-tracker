@@ -1,12 +1,12 @@
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Icon, Logo } from '@components';
+import { Icon, Logo, TextButton } from '@components';
 import { styled } from '@styles';
 import { useAuthStore } from '@stores';
 
 export const MainLayout = () => {
   const nav = useNavigate();
-  const { signout } = useAuthStore();
+  const { auth, signout } = useAuthStore();
 
   const navToLaddingPage = () => nav('/issues');
 
@@ -14,7 +14,13 @@ export const MainLayout = () => {
     <Wrapper>
       <Header>
         <HeaderLogo size="medium" onClick={navToLaddingPage} />
-        <Icon name="user_image_large" onClick={signout} />
+        <HeaderRightWrapper>
+          <Icon name="user_image_large" />
+          <span>{auth?.name}님 환영합니다.</span>
+          <TextButton size="medium" onClick={signout}>
+            로그아웃
+          </TextButton>
+        </HeaderRightWrapper>
       </Header>
 
       <Content>
@@ -36,15 +42,20 @@ const Header = styled('div', {
   display: 'flex',
   alignItems: 'center',
   padding: '1.75rem 5rem',
-
-  svg: {
-    cursor: 'pointer',
-    marginLeft: 'auto',
-  },
 });
 
 const HeaderLogo = styled(Logo, {
   cursor: 'pointer',
+});
+
+const HeaderRightWrapper = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  marginLeft: 'auto',
+
+  '& > * + *': {
+    marginLeft: '0.5rem',
+  },
 });
 
 const Content = styled('div', {
