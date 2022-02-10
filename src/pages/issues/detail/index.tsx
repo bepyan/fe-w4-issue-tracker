@@ -7,10 +7,10 @@ import { IssueDetailDeleteButton } from './IssueDetailDeleteButton';
 import { useIssueDetailSideBar } from '@hooks';
 
 export const IssuesDetail = () => {
-  const { issue } = useIssueDetailStore();
+  const { issue, isLoading } = useIssueDetailStore();
   const issueSideBarProps = useIssueDetailSideBar(issue);
 
-  if (!issue) {
+  if (!issue || isLoading) {
     return <>로딩중...</>;
   }
 

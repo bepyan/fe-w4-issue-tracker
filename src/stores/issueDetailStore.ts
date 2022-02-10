@@ -15,13 +15,17 @@ export const useIssueDetailStore = () => {
   const issueId = params.issueId as string;
   const [issue, setIssue] = useRecoilState(issueDetailStore);
 
-  useQuery(['read_issue_by_id', issueId], () => API.read_issue_by_id(issueId), {
-    onSuccess: ({ data }) => setIssue(data),
-    onError: () => {
-      alert('잘못된 이슈 접근입니다.');
-      nav('/issues');
+  const { isLoading } = useQuery(
+    ['read_issue_by_id', issueId],
+    () => API.read_issue_by_id(issueId),
+    {
+      onSuccess: ({ data }) => setIssue(data),
+      onError: () => {
+        alert('잘못된 이슈 접근입니다.');
+        nav('/issues');
+      },
     },
-  });
+  );
 
-  return { issue, setIssue };
+  return { issue, isLoading, setIssue };
 };
