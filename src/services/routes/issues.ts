@@ -1,5 +1,10 @@
 import { _axios } from '@services';
-import { CommentRequestDTO, IssueDTO, IssueRequestDTO } from '@types';
+import {
+  CommentRequestDTO,
+  IssueDTO,
+  IssueRequestDTO,
+  IssueStatus,
+} from '@types';
 
 const baseRoute = '/issues';
 
@@ -53,10 +58,11 @@ export const update_issue_title = (
   });
 };
 
-export const update_issue_status = (issueId: string) => {
+export const update_issue_status = (issueId: string, status?: IssueStatus) => {
   return _axios<IssueDTO>({
     url: `${baseRoute}/${issueId}/status`,
     method: 'PATCH',
+    data: { status },
   });
 };
 

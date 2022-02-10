@@ -1,7 +1,8 @@
 import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
-import { IssueDTO, IssueStatus } from '@types';
-import { useQuery } from 'react-query';
+import { CheckboxStatus, IssueDTO, IssueStatus } from '@types';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { API } from '@services';
+import { useEffect, useMemo } from 'react';
 
 export const issueStore = atom<IssueDTO[]>({
   key: 'issueStore',
@@ -65,5 +66,76 @@ export const useIssueStore = () => {
     issueFilter,
     setIssueList,
     setIssueFilter,
+  };
+};
+
+export const checkedIssueStore = atom<IssueDTO[]>({
+  key: 'checkedIssueStore',
+  default: [],
+});
+
+export const useCheckedIssueItem = () => {
+  const [checkedIssueList, setCheckedIssueList] =
+    useRecoilState(checkedIssueStore);
+
+  return {
+    getIssueToggleStatus: (issue: IssueDTO): CheckboxStatus =>
+      checkedIssueList.some((v) => v.id === issue.id) ? 'checked' : 'unchecked',
+    onToggleIssue: (issue: IssueDTO) => {
+      const isChecked = checkedIssueList.some((v) => v.id === issue.id);
+      if (isChecked) {
+        setCheckedIssueList(checkedIssueList.filter((v) => v.id !== issue.id));
+      } else {
+        setCheckedIssueList([...checkedIssueList, issue]);
+      }
+    },
+  };
+};
+
+export const useCheckedIssueHeader = () => {
+  const queryClient = useQueryClient();
+  const filterdIssueList = useRecoilValue(filterdIssueStore);
+  const [checkedIssueList, setCheckedIssueList] =
+    useRecoilState(checkedIssueStore);
+
+  const headerToggleStatus: CheckboxStatus = useMemo(() => {
+    if (!checkedIssueList.length) return 'unchecked';
+    if (checkedIssueList.length === filterdIssueList.length) return 'checked';
+
+    return 'half';
+  }, [checkedIssueList]);
+
+  useEffect(() => {
+    setCheckedIssueList(
+      checkedIssueList.filter((v) =>
+        filterdIssueList.some((e) => e.id === v.id),
+      ),
+    );
+  }, [filterdIssueList]);
+
+  const toggleStatusMutation = useMutation(
+    (status: IssueStatus) =>
+      Promise.all(
+        checkedIssueList.map((v) => API.update_issue_status(v.id, status)),
+      ),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('read_all_issues');
+      },
+    },
+  );
+
+  return {
+    checkedIssueList,
+    headerToggleStatus,
+    toggleHeader: () => {
+      if (checkedIssueList.length === filterdIssueList.length) {
+        setCheckedIssueList([]);
+      } else {
+        setCheckedIssueList(filterdIssueList);
+      }
+    },
+    openCheckedIssueStatus: () => toggleStatusMutation.mutate('open'),
+    closeChekdedIssueStatus: () => toggleStatusMutation.mutate('close'),
   };
 };
