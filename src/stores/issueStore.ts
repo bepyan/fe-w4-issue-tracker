@@ -16,20 +16,24 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { API } from '@services';
 import { useEffect, useMemo } from 'react';
 import { authStore } from './authStore';
+import { useSearchLabel } from './labelStore';
+import { useSearchMilestone } from './milestoneStore';
 
 export const issueStore = atom<IssueDTO[]>({
   key: 'issueStore',
   default: [],
 });
 
-export const issueFilterStore = atom<{
+type issueFilterType = {
   status: IssueStatus;
   author?: string;
   assignee?: string | 'none';
   milestone?: MilestoneDTO | 'none';
   labels: LabelDTO[] | 'none';
   hasMyComment?: boolean;
-}>({
+};
+
+export const issueFilterStore = atom<issueFilterType>({
   key: 'issueFilterStore',
   default: {
     status: 'open',
@@ -147,7 +151,64 @@ export const useIssueFilterStore = () => {
     !!issueFilter.labels.length ||
     !!issueFilter.milestone;
 
-  return { isFiltered, issueFilter, setIssueFilter, resetIssueFilter };
+  const { searchLabelByName } = useSearchLabel();
+  const { searchMilestoneByName } = useSearchMilestone();
+  const onSearchFilterBar = (text: string) => {
+    const filterList = text.split(' ');
+
+    const newFilter: issueFilterType = {
+      status: 'open',
+      labels: [],
+    };
+
+    filterList.forEach((v) => {
+      const [key, value] = v.split(':') as [
+        keyof issueFilterType | 'is',
+        string,
+      ];
+
+      if (key === 'is') {
+        newFilter.status = value as never;
+        return;
+      }
+
+      if (key === 'labels') {
+        if (value === 'none') newFilter.labels = 'none';
+        else {
+          const label = searchLabelByName(value);
+          if (label) {
+            const preLabelList =
+              newFilter.labels === 'none' ? [] : newFilter.labels;
+            newFilter.labels = [...preLabelList, label];
+          }
+        }
+        return;
+      }
+
+      if (key === 'assignee') {
+        if (value === 'none') newFilter.milestone = 'none';
+        else {
+          const milestone = searchMilestoneByName(value);
+          if (milestone) {
+            newFilter.milestone = milestone;
+          }
+        }
+        return;
+      }
+
+      newFilter[key] = value as never;
+    });
+
+    setIssueFilter(newFilter);
+  };
+
+  return {
+    isFiltered,
+    issueFilter,
+    setIssueFilter,
+    resetIssueFilter,
+    onSearchFilterBar,
+  };
 };
 
 export const useIssueStore = () => {

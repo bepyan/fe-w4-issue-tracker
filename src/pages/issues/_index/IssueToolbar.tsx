@@ -14,8 +14,13 @@ export const IssueToolbar = () => {
   const nav = useNavigate();
   const { auth } = useAuthStore();
   const { filterText } = useIssueSearchBar();
-  const { isFiltered, issueFilter, setIssueFilter, resetIssueFilter } =
-    useIssueFilterStore();
+  const {
+    isFiltered,
+    issueFilter,
+    setIssueFilter,
+    resetIssueFilter,
+    onSearchFilterBar,
+  } = useIssueFilterStore();
 
   const navToIssueNew = () => nav('new');
 
@@ -27,7 +32,7 @@ export const IssueToolbar = () => {
             label="필터"
             title="이슈 필터"
             value={filterText}
-            onSubmit={(text) => console.log(text)}
+            onSubmit={onSearchFilterBar}
           >
             <DropdownCheckbox
               value={issueFilter.status === 'open'}

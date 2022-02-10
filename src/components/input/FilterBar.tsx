@@ -17,10 +17,10 @@ export const FilterBar = ({ onSubmit, value, ...dropdownProps }: Props) => {
 
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const target = e.target as typeof e.target & {
+    const { search } = e.target as typeof e.target & {
       search: { value: string };
     };
-    onSubmit(target.search.value);
+    onSubmit(search.value);
   };
 
   useEffect(() => setText(value), [value]);
@@ -33,6 +33,7 @@ export const FilterBar = ({ onSubmit, value, ...dropdownProps }: Props) => {
         <Icon name="search" />
         <input
           id="search"
+          name="search"
           placeholder={INIT_PLACEHOLDER}
           value={text}
           onChange={(e) => setText(e.target.value)}

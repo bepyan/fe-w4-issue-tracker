@@ -1,4 +1,4 @@
-import { atom, useRecoilState } from 'recoil';
+import { atom, useRecoilState, useRecoilValue } from 'recoil';
 import { LabelDTO, LabelRequestDTO } from '@types';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { API } from '@services';
@@ -16,6 +16,14 @@ export const useLabelStore = () => {
   });
 
   return { labelList, setLabelList };
+};
+
+export const useSearchLabel = () => {
+  const labelList = useRecoilValue(labelStore);
+
+  return {
+    searchLabelByName: (name: string) => labelList.find((v) => v.name === name),
+  };
 };
 
 export const useLabelQuery = ({

@@ -29,6 +29,15 @@ export const filteredMilestoneStore = selector({
   },
 });
 
+export const useSearchMilestone = () => {
+  const milestoneList = useRecoilValue(milestoneStore);
+
+  return {
+    searchMilestoneByName: (title: string) =>
+      milestoneList.find((v) => v.title === title),
+  };
+};
+
 export const useMilestoneStore = () => {
   const [milestoneList, setMilestoneList] = useRecoilState(milestoneStore);
   // prettier-ignore
